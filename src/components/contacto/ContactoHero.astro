@@ -1,5 +1,6 @@
 ---
 // CompanyHero.astro
+import { slide } from "astro:transitions";
 import { SITE_CONFIG } from "../../config/site";
 
 const contactDetails = [
@@ -9,20 +10,20 @@ const contactDetails = [
 ];
 ---
 
-<section class="py-5 bg-surface">
-  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<section class="py-12 bg-surface">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center overflow-hidden">
     
     <div class="flex flex-col gap-6">
-      <h1 class="text-5xl md:text-6xl font-bold text-main leading-tight">
+      <h1 data-aos="fade-up" data-aos-duration="500" class="text-5xl md:text-6xl font-bold text-main leading-tight">
         Contacta con nosotros para asesorarte <span class="tracking-tighter uppercase text-theme">HOY</span>
       </h1>
-      <p class="text-xl text-muted leading-relaxed">
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-xl text-muted leading-relaxed">
         Nuestro equipo de expertos está listo para brindarte la mejor atención personalizada. 
         Solicita información sobre nuestros equipos o soporte técnico.
       </p>
     </div>
 
-    <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10">
+    <div data-aos="flip-up" data-aos-duration="1000" data-aos-delay="600" class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10">
       <h3 class="text-2xl font-bold text-main mb-1">Formulario de Contacto</h3>
       <p class="text-sm text-gray-500 mb-6">Respondemos en menos de 24 horas hábiles.</p>
       
@@ -54,8 +55,8 @@ const contactDetails = [
     </div>
 
     <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8 pt-4 pb-2 border-t border-main/10">
-      {contactDetails.map(item => (
-        <a href={item.href} class="flex flex-col items-center text-center border border-transparent rounded-2xl hover:text-theme transition-colors hover:border-theme duration-500 active:scale-95">
+      {contactDetails.map((item, i)=> (
+        <a href={item.href} data-aos="fade-down" data-aos-duration="500" data-aos-delay={600 + i * 200} class="flex flex-col items-center text-center border border-transparent rounded-2xl hover:text-theme transition-colors hover:border-theme duration-500 active:scale-95">
           <span class="text-sm text-brand-gray uppercase tracking-widest mb-1">{item.label}</span>
           <span class="text-lg font-bold ">{item.value}</span>
         </a>

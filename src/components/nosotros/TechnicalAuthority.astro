@@ -19,19 +19,19 @@ const certs = [
 ];
 ---
 
-<section class="py-20 bg-surface">
+<section class="py-12 bg-surface">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mb-16">
-      <h2 class="text-3xl font-bold mb-6 text-[var(--color-main)]">Nuestra Responsabilidad Técnica</h2>
-      <p class="text-lg text-[var(--color-muted)]">
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl font-bold mb-6 text-[var(--color-main)]">Nuestra Responsabilidad Técnica</h2>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" class="text-lg text-[var(--color-muted)]">
         En SeAMeD, la tecnología es el medio, pero la tranquilidad del paciente es nuestro fin. 
         Garantizamos equipos certificados bajo normas internacionales.
       </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-      {certs.map(c => (
-        <div class="p-6 border-l-4 border-[var(--color-theme)] bg-[var(--color-surface)] hover:shadow-md transition-shadow duration-300">
+      {certs.map((c,i) => (
+        <div data-aos="fade-right" data-aos-duration="500" data-aos-delay={100 + i * 100} class="p-6 border-l-4 border-[var(--color-theme)] bg-[var(--color-surface)] hover:shadow-md transition-shadow duration-300">
           <div class="text-2xl mb-4">{c.icon}</div>
           <h3 class="font-bold text-[var(--color-main)] mb-2">{c.title}</h3>
           <p class="text-sm text-[var(--color-muted)] leading-relaxed">{c.desc}</p>

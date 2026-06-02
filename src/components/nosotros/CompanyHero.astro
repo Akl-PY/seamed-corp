@@ -1,66 +1,51 @@
 ---
 // CompanyHero.astro
 import Slide1 from "../../assets/slide1.jpeg";
-
 ---
 
-<section class="relative pt-12 bg-surface w-full min-h-[60vh]  overflow-hidden">
-  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-    <div class="flex flex-col gap-4">
-      <span class="text-theme py-2 font-bold tracking-widest uppercase text-sm">
+<section class="relative pt-12 pb-12 bg-surface w-full">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+    
+    <!-- Lado Izquierdo: Texto y Stats -->
+    <div class="flex flex-col gap-2 md:gap-6">
+      <span data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" class="text-theme font-bold tracking-widest uppercase text-sm">
         Trayectoria y Compromiso
       </span>
-      <h1 class="text-5xl md:text-6xl font-bold text-main leading-tight">
+      
+      <h1 data-aos="fade-up" data-aos-duration="500" class="text-4xl md:text-6xl font-bold text-main leading-tight">
         Líderes en asistencia médica <br />
         <span class="text-theme">domiciliaria en Córdoba</span>
       </h1>
-      <p class="text-xl text-[var(--color-muted)] leading-relaxed">
+      
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" class="text-lg md:text-xl text-[var(--color-muted)] leading-relaxed">
         Más de una década facilitando soluciones tecnológicas de alta
         complejidad para la recuperación y el bienestar del paciente en su
         hogar.
       </p>
 
-      <!-- Stats de Autoridad (Micro-data) -->
-      <div class="flex gap-12 mt-4">
+      <!-- Stats de Autoridad (Grid Responsive) -->
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-4">
         <div>
-          <div class="text-3xl font-bold text-main">
-            +<span id="years">0</span>
-          </div>
-          <div
-            class="text-sm text-brand-gray uppercase tracking-widest"
-          >
-            Años de experiencia
-          </div>
+          <div class="text-2xl md:text-3xl font-bold text-main">+<span id="years">0</span></div>
+          <div class="text-xs md:text-sm text-brand-gray uppercase tracking-widest">Años</div>
         </div>
         <div>
-          <div class="text-3xl font-bold text-main"><span id="certs">0</span>%</div>
-          <div
-            class="text-sm text-brand-gray uppercase tracking-widest"
-          >
-            Equipos certificados
-          </div>
+          <div class="text-2xl md:text-3xl font-bold text-main"><span id="certs">0</span>%</div>
+          <div class="text-xs md:text-sm text-brand-gray uppercase tracking-widest">Certificados</div>
         </div>
-        <div>
-          <div class="text-3xl font-bold text-main">
-            +<span id="patients">0</span>
-          </div>
-          <div
-            class="text-sm text-brand-gray uppercase tracking-widest"
-          >
-            Pacientes satisfechos
-          </div>
+        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="600" class="col-span-2 md:col-span-1">
+          <div class="text-2xl md:text-3xl font-bold text-main">+<span id="patients">0</span></div>
+          <div class="text-xs md:text-sm text-brand-gray uppercase tracking-widest">Pacientes</div>
         </div>
       </div>
     </div>
 
-    <!-- Bloque Visual de Autoridad -->
-    <div class="relative">
-      <div class="absolute inset-0 opacity-10 rounded-3xl transform rotate-3">
-      </div>
+    <!-- Bloque Visual -->
+    <div data-aos="fade-up" data-aos-duration="500" class="relative order-first md:order-last">
       <img
         src={Slide1.src}
         alt="Equipo técnico de SeAMeD S.A. en Córdoba"
-        class="relative rounded-2xl shadow-2xl w-full h-[500px] object-cover"
+        class="rounded-2xl shadow-2xl w-full h-[300px] md:h-[500px] object-cover"
         width="600"
         height="500"
         loading="eager"
@@ -68,40 +53,37 @@ import Slide1 from "../../assets/slide1.jpeg";
     </div>
   </div>
 </section>
+
 <script>
-  const yearsElement = document.getElementById("years");
-  // Calculamos el valor base: 2026 - 2010 = 16
-  const targetYears = new Date().getFullYear() - 2010;
-  const certsElement = document.getElementById("certs");
-  const targetCerts = 100; // Valor objetivo para los equipos certificados
-const patientsElement = document.getElementById("patients");
-const targetPatients = 1282;
+  // Tu lógica de JS permanece igual, pero asegúrate de envolverla en un 
+  // evento de carga para que no intente buscar elementos antes de que existan
+  document.addEventListener("astro:page-load", () => {
+    const yearsElement = document.getElementById("years");
+    const certsElement = document.getElementById("certs");
+    const patientsElement = document.getElementById("patients");
 
-  function animateCounter(element: HTMLElement, target: number) {
-    if (!element) return;
-    const duration = 2000;
-    const startTime = performance.now();
+    const targetYears = new Date().getFullYear() - 2010;
+    const targetCerts = 100;
+    const targetPatients = 1282;
 
-    function update(currentTime: number) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
+    function animateCounter(element: HTMLElement | null, target: number) {
+      if (!element) return;
+      const duration = 2000;
+      const startTime = performance.now();
 
-      // Easing: easeOutQuad para una terminación más natural
-      const easeProgress = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-      element.textContent = Math.floor(easeProgress * target).toString();
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        element.textContent = target.toString(); // Aseguramos el valor final
+      function update(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        element.textContent = Math.floor(easeProgress * target).toString();
+        if (progress < 1) requestAnimationFrame(update);
+        else element.textContent = target.toString();
       }
+      requestAnimationFrame(update);
     }
 
-    requestAnimationFrame(update);
-  }
-
-    animateCounter(yearsElement!, targetYears);
-    animateCounter(certsElement!, targetCerts);
-    animateCounter(patientsElement!, targetPatients);
+    animateCounter(yearsElement, targetYears);
+    animateCounter(certsElement, targetCerts);
+    animateCounter(patientsElement, targetPatients);
+  });
 </script>

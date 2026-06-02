@@ -8,14 +8,17 @@ const categorias = [
 ];
 ---
 
-<section class="py-16 bg-surface">
+<section class="py-12 overflow-hidden bg-surface">
   <div class="container mx-auto px-6">
-    <h2 class="text-3xl font-bold text-[var(--color-main)] mb-4">Categorias</h2>
-    <p class="text-muted">Conoce nuestras categorias</p>
+    <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl font-bold text-[var(--color-main)] mb-4">Categorias</h2>
+    <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted">Conoce nuestras categorias</p>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6  mt-8">
-      {categorias.map(cat => (
+      {categorias.map((cat, index) => (
         <a 
           href={cat.link} 
+          data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+          data-aos-duration="500"
+          data-aos-delay={100 + index * 100}
           class="group flex flex-col items-center justify-center p-8 bg-[var(--color-surface)] rounded-2xl border border-gray-100 transition-all hover:shadow-lg hover:border-[var(--color-theme)] hover:-translate-y-1"
         >
           <span class="text-4xl mb-4 transform transition-transform group-hover:scale-110">{cat.icon}</span>

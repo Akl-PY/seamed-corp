@@ -1,12 +1,13 @@
 ---
 import { Image } from "astro:assets";
+import {slide} from "astro:transitions";
 import SeamedLogo from "../assets/seamed.png";
 // Si tenés el SITE_CONFIG descentralizado, lo podés usar para las URLs dinámicas.
 // import { SITE_CONFIG } from '../../config/site';
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-brand-gray/15 bg-bg/90 backdrop-blur-md transition-all duration-300">
-  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+  <div  class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
     
     <div class="flex lg:flex-1">
       <a href="/" class="-m-1.5 p-1.5 focus-visible:outline-2 focus-visible:outline-theme" aria-label="SeAMeD S.A. - Volver al inicio">
@@ -63,7 +64,10 @@ import SeamedLogo from "../assets/seamed.png";
     </div>
   </div>
 
-<div id="mobile-menu" class="hidden overflow-hidden transition-all duration-500 ease-in-out border-t border-brand-gray/10 bg-bg px-4 shadow-xl">
+<div
+  id="mobile-menu"
+  class="hidden overflow-hidden border-t border-brand-gray/10 bg-bg px-4 shadow-xl"
+>
   <div class="space-y-4 py-6">
     <a href="/catalogo" class="mobile-link block rounded-lg px-3 py-2 text-base font-medium text-main hover:bg-surface">Equipamiento</a>
     <a href="/catalogo" class="mobile-link block rounded-lg px-3 py-2 text-base font-medium text-main hover:bg-surface">Insumos</a>
@@ -72,56 +76,41 @@ import SeamedLogo from "../assets/seamed.png";
     <a href="/contacto" class="mobile-link block text-center rounded-lg bg-theme px-3 py-3 text-base font-bold text-main">Cotizar Equipamiento</a>
   </div>
 </div>
+</div>
 </header>
 
 <script>
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-  if(!menuBtn || !mobileMenu) {
-    console.warn('Elementos del menú móvil no encontrados. Verificar IDs en el HTML.');
-  } else {
-  // Inicializar estado de altura para la transición
-  mobileMenu.style.maxHeight = "0px";
+document.addEventListener("astro:page-load", () => {
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-  function toggleMenu() {
-    const isExpanded = menuBtn?.getAttribute('aria-expanded') === 'true';
-    const newState = !isExpanded;
+  if (!menuBtn || !mobileMenu) return;
 
-    // 1. Cambiar estado de accesibilidad
-    menuBtn?.setAttribute('aria-expanded', newState.toString());
+  // Evitar listeners duplicados
+  if (menuBtn.dataset.initialized === "true") return;
+  menuBtn.dataset.initialized = "true";
 
-    // 2. Lógica de animación
-    if (newState) {
-      mobileMenu!.classList.remove('hidden');
-      // Usamos requestAnimationFrame para asegurar que el navegador detecte el cambio de display
-      requestAnimationFrame(() => {
-        mobileMenu!.style.maxHeight = mobileMenu!.scrollHeight + "px";
-        mobileMenu!.style.opacity = "1";
-      });
-    } else {
-      mobileMenu!.style.maxHeight = "0px";
-      mobileMenu!.style.opacity = "0";
-      // Ocultar tras terminar la animación (500ms = duración CSS)
-      setTimeout(() => mobileMenu!.classList.add('hidden'), 500);
-    }
+  const closeMenu = () => {
+    menuBtn.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.add("hidden");
+  };
 
-    // 3. Alternar iconos (basado en tu estructura original)
-    const openIcon = document.getElementById('open');
-    const closedIcon = document.getElementById('closed');
-    openIcon?.classList.toggle('hidden');
-    closedIcon?.classList.toggle('hidden');
-  }
-  
-  menuBtn?.addEventListener('click', toggleMenu);
+  const toggleMenu = () => {
+    const expanded =
+      menuBtn.getAttribute("aria-expanded") === "true";
 
-  // Cerrar al hacer clic en enlaces
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (menuBtn?.getAttribute('aria-expanded') === 'true') {
-        toggleMenu();
-      }
-    });
+    menuBtn.setAttribute(
+      "aria-expanded",
+      (!expanded).toString()
+    );
+
+    mobileMenu.classList.toggle("hidden");
+  };
+
+  menuBtn.addEventListener("click", toggleMenu);
+
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
   });
-}
+});
 </script>

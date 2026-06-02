@@ -20,15 +20,15 @@ const team = [
 ];
 ---
 
-<section class="py-20 bg-[var(--color-surface)]">
+<section class="py-12 overflow-hidden bg-[var(--color-surface)]">
   <div class="container mx-auto px-6">
-    <h2 class="text-3xl font-bold text-[var(--color-main)] mb-12">
+    <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl font-bold text-[var(--color-main)] mb-12">
       Nuestro Equipo
     </h2>
 
     <div class="grid md:grid-cols-2 gap-12">
-      {team.map((member) => (
-        <div class="flex gap-6 items-start p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+      {team.map((member, i) => (
+        <div data-aos={i % 2 === 0 ? "fade-right" : "fade-left"} data-aos-duration="500" data-aos-delay={100 + i * 100} class="flex gap-6 items-start p-6 bg-white rounded-xl shadow-sm border border-gray-100">
           <div class="size-24 shrink-0 rounded-full overflow-hidden bg-gray-100">
             <Image
               src={member.image}

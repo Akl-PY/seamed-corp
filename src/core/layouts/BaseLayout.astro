@@ -1,6 +1,7 @@
 ---
 import "../../styles/global.css";
 import Seo from "../components/Seo.astro";
+import { ClientRouter } from 'astro:transitions';
 // import 'aos/dist/aos.css'; 
 import type {PropsOP as SeoProps} from "../types/seo";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
@@ -26,10 +27,15 @@ const {seo, layoutConfig, config ={logo:false, footer:false, header:false}} = As
 
 const FooterComponent = layoutConfig?.footer
 const LogoComponent = layoutConfig?.logo
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 ---
 <!DOCTYPE html>
 <html lang="es">
 <head>
+        <ClientRouter />
     <meta charset="utf-8" />
     <link rel="icon"  sizes="32x32" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -77,4 +83,37 @@ const LogoComponent = layoutConfig?.logo
     <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1660047941566586&ev=PageView&noscript=1"
 /></noscript> -->
-</html>
+<script>
+// src/scripts/aos.ts
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+function initAOS() {
+  // Limpiar animaciones previas
+  document.querySelectorAll("[data-aos]").forEach((el) => {
+    el.classList.remove("aos-animate");
+  });
+
+  AOS.init({
+    duration: 400,
+    easing: "ease-out",
+    once: true,
+    mirror: false,
+    offset: 80,
+  });
+
+  AOS.refreshHard();
+}
+
+document.addEventListener("astro:page-load", initAOS);
+
+document.addEventListener("astro:after-swap", () => {
+  document.querySelectorAll("[data-aos]").forEach((el) => {
+    el.classList.remove("aos-animate");
+  });
+
+  AOS.refreshHard();
+});
+</script>
+</script></html>
