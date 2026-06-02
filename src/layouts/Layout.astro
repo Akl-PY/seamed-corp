@@ -1,0 +1,20 @@
+--- 
+interface Props{
+    seo?:PropsOP,
+    config?:ConfigProps
+}
+const {seo, config} = Astro.props
+import BaseLayout from '../core/layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import type { ConfigProps, LayoutConfigProps } from '../core/layouts/BaseLayout.astro';
+import type { PropsOP } from '../core/types/seo';
+
+const LayoutConfig:LayoutConfigProps={
+    header:Header,
+    footer:Footer
+}
+---
+<BaseLayout seo={seo ? seo : {}} config={{footer:true,header:true, ...config}} layoutConfig={LayoutConfig} >
+<slot />
+</BaseLayout>

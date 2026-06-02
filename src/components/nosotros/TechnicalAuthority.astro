@@ -1,0 +1,42 @@
+---
+// TechnicalAuthority.astro
+const certs = [
+  { 
+    title: "Protocolos de Bioseguridad", 
+    desc: "Cumplimiento estricto de normas de desinfección en cada equipo.",
+    icon: "🛡️" 
+  },
+  { 
+    title: "Mantenimiento Preventivo", 
+    desc: "Revisión técnica periódica con certificación de funcionamiento.",
+    icon: "⚙️" 
+  },
+  { 
+    title: "Soporte Clínico 24/7", 
+    desc: "Asistencia telefónica y técnica para emergencias.",
+    icon: "📞" 
+  }
+];
+---
+
+<section class="py-20 bg-surface">
+  <div class="container mx-auto px-6">
+    <div class="max-w-3xl mb-16">
+      <h2 class="text-3xl font-bold mb-6 text-[var(--color-main)]">Nuestra Responsabilidad Técnica</h2>
+      <p class="text-lg text-[var(--color-muted)]">
+        En SeAMeD, la tecnología es el medio, pero la tranquilidad del paciente es nuestro fin. 
+        Garantizamos equipos certificados bajo normas internacionales.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {certs.map(c => (
+        <div class="p-6 border-l-4 border-[var(--color-theme)] bg-[var(--color-surface)] hover:shadow-md transition-shadow duration-300">
+          <div class="text-2xl mb-4">{c.icon}</div>
+          <h3 class="font-bold text-[var(--color-main)] mb-2">{c.title}</h3>
+          <p class="text-sm text-[var(--color-muted)] leading-relaxed">{c.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

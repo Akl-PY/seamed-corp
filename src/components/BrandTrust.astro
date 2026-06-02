@@ -1,0 +1,39 @@
+---
+// BrandTrust.astro
+// Definimos los partners en un array para mantener el código limpio y escalable.
+import ResmedLogo from '../assets/resmed.png';
+import PhilipsLogo from '../assets/phillips.png';
+import DriveLogo from '../assets/drive.png';
+import WellelLogo from '../assets/wellel.png';
+import FisherLogo from '../assets/fisher.png';
+import { Image } from 'astro:assets';
+const brands = [
+  { name: "ResMed", logo: ResmedLogo },
+  { name: "Philips Respironics", logo: PhilipsLogo },
+  { name: "Apex Medical", logo: WellelLogo },
+  { name: "Drive DeVilbiss", logo: DriveLogo },
+  { name: "Fisher & Paykel", logo: FisherLogo }
+];
+---
+
+<section class="py-16 bg-surface">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-2xl font-bold uppercase tracking-widest text-brand-gray mb-10">
+      Somos distribuidores oficiales de marcas líderes
+    </h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-80">
+      {brands.map((brand) => (
+        <div class="flex justify-center grayscale border border-brand-gray h-30 items-center p-4 rounded-2xl hover:grayscale-0 transition-all duration-500">
+          <Image
+            src={brand.logo} 
+            alt={`Distribuidor oficial de ${brand.name} en Córdoba`}
+            class=" w-auto object-contain max-h-16"
+            loading="lazy"
+            fetchpriority="high"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

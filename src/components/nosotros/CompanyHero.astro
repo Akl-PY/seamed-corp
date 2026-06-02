@@ -1,0 +1,107 @@
+---
+// CompanyHero.astro
+import Slide1 from "../../assets/slide1.jpeg";
+
+---
+
+<section class="relative bg-surface w-full min-h-[80vh]  overflow-hidden">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+    <div class="flex flex-col gap-4">
+      <span class="text-theme py-2 font-bold tracking-widest uppercase text-sm">
+        Trayectoria y Compromiso
+      </span>
+      <h1 class="text-5xl md:text-6xl font-bold text-main leading-tight">
+        Líderes en asistencia médica <br />
+        <span class="text-theme">domiciliaria en Córdoba</span>
+      </h1>
+      <p class="text-xl text-[var(--color-muted)] leading-relaxed">
+        Más de una década facilitando soluciones tecnológicas de alta
+        complejidad para la recuperación y el bienestar del paciente en su
+        hogar.
+      </p>
+
+      <!-- Stats de Autoridad (Micro-data) -->
+      <div class="flex gap-12 mt-4">
+        <div>
+          <div class="text-3xl font-bold text-main">
+            +<span id="years">0</span>
+          </div>
+          <div
+            class="text-sm text-brand-gray uppercase tracking-widest"
+          >
+            Años de experiencia
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-main"><span id="certs">0</span>%</div>
+          <div
+            class="text-sm text-brand-gray uppercase tracking-widest"
+          >
+            Equipos certificados
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-main">
+            +<span id="patients">0</span>
+          </div>
+          <div
+            class="text-sm text-brand-gray uppercase tracking-widest"
+          >
+            Pacientes satisfechos
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloque Visual de Autoridad -->
+    <div class="relative">
+      <div class="absolute inset-0 opacity-10 rounded-3xl transform rotate-3">
+      </div>
+      <img
+        src={Slide1.src}
+        alt="Equipo técnico de SeAMeD S.A. en Córdoba"
+        class="relative rounded-2xl shadow-2xl w-full h-[500px] object-cover"
+        width="600"
+        height="500"
+        loading="eager"
+      />
+    </div>
+  </div>
+</section>
+<script>
+  const yearsElement = document.getElementById("years");
+  // Calculamos el valor base: 2026 - 2010 = 16
+  const targetYears = new Date().getFullYear() - 2010;
+  const certsElement = document.getElementById("certs");
+  const targetCerts = 100; // Valor objetivo para los equipos certificados
+const patientsElement = document.getElementById("patients");
+const targetPatients = 1282;
+
+  function animateCounter(element: HTMLElement, target: number) {
+    if (!element) return;
+    const duration = 2000;
+    const startTime = performance.now();
+
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing: easeOutQuad para una terminación más natural
+      const easeProgress = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      element.textContent = Math.floor(easeProgress * target).toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        element.textContent = target.toString(); // Aseguramos el valor final
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+    animateCounter(yearsElement!, targetYears);
+    animateCounter(certsElement!, targetCerts);
+    animateCounter(patientsElement!, targetPatients);
+</script>

@@ -1,0 +1,105 @@
+---
+import type { $brand } from 'astro:schema';
+import type { PropsOP } from '../types/seo';
+import { SITE_CONFIG } from '../../config/site';
+console.log(SITE_CONFIG.url)
+console.log(Astro.site)
+const {title, description, image , canonicalURL , icon, schemaData, json_ld, nofollow, noindex, type, colorTheme} = Astro.props as PropsOP
+
+const useTitle = title || `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`
+const useDescription = description || SITE_CONFIG.description
+const useImage = image || SITE_CONFIG.ogImage
+const url = new URL(Astro.url.pathname, Astro.site)
+const useCanonicalURL = canonicalURL || url.href
+const useIcon = icon || SITE_CONFIG.icon
+let jsonLd = []
+
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+
+const breadcrumbList = [
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Inicio",
+    "item": SITE_CONFIG.url
+  },
+  ...pathSegments.map((segment, index) => {
+    // Limpiamos el nombre (ej: "clases-adultos" -> "Clases Adultos")
+    const name = segment.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    // Construimos la URL acumulada para cada nivel
+    const item = `${SITE_CONFIG.url}/${pathSegments.slice(0, index + 1).join('/')}`;
+    
+    return {
+      "@type": "ListItem",
+      "position": index + 2,
+      "name": name,
+      "item": item
+    };
+  })
+];
+
+jsonLd.push({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbList
+});
+
+switch (type) {
+    case "article":
+        jsonLd.push({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            ...schemaData,
+        })
+        break;
+    case "service":
+        jsonLd.push({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": schemaData.serviceType,
+            ...schemaData,
+        })
+        break;
+    case "website":
+    default:
+        jsonLd.push({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": schemaData?.siteName || SITE_CONFIG.name,
+      "url": SITE_CONFIG.url,
+      // Si querés la barrita de búsqueda en Google:
+      // "potentialAction": {
+      //   "@type": "SearchAction",
+      //   "target": `${SITE_CONFIG.url}/buscar?q={search_term_string}`,
+      //   "query-input": "required name=search_term_string"
+      // }
+    });
+    jsonLd.push({
+      "@context": "https://schema.org",
+      ...SITE_CONFIG.organization,
+      ...json_ld,
+    });
+        break;
+}
+console.log(useIcon)
+---
+<title>{useTitle}</title>
+<meta name="title" content={useTitle} />
+
+<meta name="description" content={useDescription} />
+<meta name="theme-color" content={colorTheme || SITE_CONFIG.themeColor} />
+<link rel="canonical" href={useCanonicalURL} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={useTitle} />
+<meta property="og:description" content={useDescription} />		
+<meta property="og:image" content={useImage} />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={useTitle} />
+<meta property="twitter:description" content={useDescription} />
+<meta name="robots" content={`${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`} />
+<meta property="twitter:image" content={useImage} />
+{jsonLd.map(schema => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

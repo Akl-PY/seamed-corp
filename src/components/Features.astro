@@ -1,0 +1,72 @@
+---
+const features = [
+  {
+    title: "Soporte Técnico Especializado 24/7",
+    desc: "Guardia de ingeniería biomédica activa de forma permanente. Garantizamos calibración rápida y asistencia en planta para evitar tiempos de inactividad en quirófanos y terapias.",
+    iconSvg: `<svg class="h-6 w-6 text-theme" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.67 2.67 0 1113.5 17.25l-5.83-5.83m.002 0a2.67 2.67 0 11-3.75-3.75l5.83 5.83m0 0l5.83-5.83m0-0.002a2.67 2.67 0 113.75 3.75l-5.83 5.83M12 13.5V3" /></svg>`
+  },
+  {
+    title: "Homologación Sanitaria Estricta",
+    desc: "Todos los insumos y aparatología médica cuentan con trazabilidad completa, licencias vigentes de ANMAT y certificaciones internacionales de calidad bajo normas ISO 13485.",
+    iconSvg: `<svg class="h-6 w-6 text-theme" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`
+  },
+  {
+    title: "Logística Crítica Nacional",
+    desc: "Flota propia de distribución con control térmico y empaques de seguridad. Aseguramos el abastecimiento continuo y la entrega inmediata de insumos de alta rotación en todo el país.",
+    iconSvg: `<svg class="h-6 w-6 text-theme" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.75 18.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM4.5 5.25h16.5V15h-16.5V5.25zM2.25 9.75h2.25m15 0h2.25m-15 4.5h2.25m15 0h2.25" /></svg>`
+  }
+];
+---
+
+<section id="autoridad" class="bg-bg py-20 lg:py-28 border-t border-brand-gray/10" aria-labelledby="features-heading">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-x-8">
+      
+      <!-- Bloque de Encabezado de la Sección -->
+      <div class="lg:pr-4">
+        <h2 
+          id="features-heading" 
+          class="text-3xl font-extrabold tracking-tight text-main sm:text-4xl leading-tight"
+        >
+          Garantía operativa para entornos de alta complejidad
+        </h2>
+        <p class="mt-4 text-base text-muted leading-relaxed">
+          Comprender las demandas críticas del sector de la salud nos obliga a ofrecer soluciones que van más allá del suministro: protegemos la continuidad de tu servicio médico.
+        </p>
+        <div class="mt-6 hidden lg:block">
+          <div class="inline-flex items-center gap-x-2 text-xs font-bold text-brand-gray uppercase tracking-wider">
+            <span>Ecosistema Seguro</span>
+            <span class="h-1 w-1 rounded-full bg-theme"></span>
+            <span>AIM Audit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Diferenciales Técnicos -->
+      <div class="space-y-10 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 sm:space-y-0 lg:col-span-2 lg:grid-cols-1 lg:gap-y-8">
+        {features.map((feat) => (
+          <div class="group relative flex flex-col sm:flex-row gap-4 rounded-2xl border border-brand-gray/5 bg-surface p-6 transition-all duration-200 hover:border-theme/20 hover:shadow-xs">
+            
+            <!-- Contenedor del Icono optimizado en rendimiento (CSS Grid local) -->
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-theme/10 transition-colors duration-200 group-hover:bg-theme/15">
+              <!-- Inyección limpia de string HTML a SVG nativo -->
+              <Fragment set:html={feat.iconSvg} />
+            </div>
+
+            <div>
+              <h3 class="text-lg font-bold text-main tracking-tight">
+                {feat.title}
+              </h3>
+              <p class="mt-2 text-sm text-muted leading-relaxed">
+                {feat.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,86 @@
+---
+// Datos estructurados de las categorías para mantener limpio el HTML
+const categories = [
+  {
+    id: "equipamiento",
+    title: "Equipamiento de Alta Complejidad",
+    desc: "Sistemas de diagnóstico por imágenes, monitores de signos vitales, ventiladores mecánicos y aparatología crítica para quirófanos y terapias intensivas.",
+    link: "/productos/equipamiento",
+    tag: "Tecnología Médica",
+    gridClass: "lg:col-span-7", // Asimetría visual premium
+    image: "/images/cat-equipamiento.webp"
+  },
+  {
+    id: "insumos",
+    title: "Insumos Médicos Críticos",
+    desc: "Material descartable descartable, instrumental quirúrgico y consumibles de alta rotación con stock permanente garantizado.",
+    link: "/productos/insumos",
+    tag: "Logística y Stock",
+    gridClass: "lg:col-span-5",
+    image: "/images/cat-insumos.webp"
+  }
+];
+---
+
+<section id="lineas-negocio" class="bg-surface py-20 lg:py-28" aria-labelledby="categories-heading">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+    <!-- Encabezado de Sección (SEO Semantic Anchor) -->
+    <div class="max-w-3xl md:mx-auto md:text-center lg:mx-0 lg:text-left mb-16">
+      <h2 
+        id="categories-heading" 
+        class="text-3xl font-extrabold tracking-tight text-main sm:text-4xl"
+      >
+        Soluciones integrales para el sector sanitario
+      </h2>
+      <p class="mt-4 text-lg text-muted leading-relaxed">
+        Abastecemos a instituciones de salud con un catálogo diversificado que responde a las más altas exigencias de seguridad, precisión y normativas internacionales.
+      </p>
+    </div>
+
+    <!-- Bento Grid Asimétrico (Cero JS, Rendimiento Puro) -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      {categories.map((cat) => (
+        <div class={`flex flex-col justify-between overflow-hidden rounded-2xl border border-brand-gray/10 bg-bg p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-theme/30 ${cat.gridClass}`}>
+          <div>
+            <span class="inline-flex items-center rounded-md bg-surface px-2.5 py-0.5 text-xs font-semibold text-theme border border-theme/10 uppercase tracking-wide">
+              {cat.tag}
+            </span>
+            <h3 class="mt-4 text-2xl font-bold tracking-tight text-main">
+              {cat.title}
+            </h3>
+            <p class="mt-3 text-base text-muted leading-relaxed max-w-xl">
+              {cat.desc}
+            </p>
+          </div>
+
+          <!-- Contenedor de Imagen Optimizado contra CLS -->
+          <div class="mt-8 relative aspect-video w-full overflow-hidden rounded-xl bg-surface border border-brand-gray/5">
+            <img 
+              src={cat.image} 
+              alt={`Línea corporativa de ${cat.title} - SeAMeD S.A.`}
+              class="h-full w-full object-cover transition-transform duration-500 hover:scale-102"
+              width="640"
+              height="360"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="mt-6 flex justify-end">
+            <a 
+              href={cat.link} 
+              class="inline-flex items-center gap-x-2 text-sm font-bold text-theme hover:text-accent transition-colors duration-200 group focus-visible:outline-2 focus-visible:outline-theme"
+            >
+              Explorar Catálogo Técnico
+              <svg class="h-4 w-4 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
