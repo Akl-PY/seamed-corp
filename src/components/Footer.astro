@@ -1,4 +1,6 @@
 ---
+import { SITE_CONFIG } from "../config/site";
+
 // Footer.astro
 const currentYear = new Date().getFullYear();
 ---
@@ -11,11 +13,11 @@ const currentYear = new Date().getFullYear();
       <div class="flex flex-col gap-4">
         <h3 class="text-xl font-bold text-[var(--color-theme)]">SeAMeD S.A.</h3>
         <address class="not-italic text-[var(--color-brand-gray)] text-sm">
-          Alta Gracia, Córdoba<br>
+          {SITE_CONFIG.organization.address?.streetAddress}, {SITE_CONFIG.organization.address?.addressLocality}<br>
           Argentina
         </address>
-        <a href="tel:+54..." class="text-white hover:text-[var(--color-theme)] transition-colors">
-          +54 3547 XXX XXX
+        <a href={"tel:"+SITE_CONFIG.organization.contactPoint?.telephone} class="text-white hover:text-[var(--color-theme)] transition-colors">
+          +{SITE_CONFIG.organization.contactPoint?.telephone}
         </a>
       </div>
 
@@ -33,7 +35,7 @@ const currentYear = new Date().getFullYear();
       <div>
         <h4 class="font-bold mb-4 uppercase tracking-wider text-xs">Empresa</h4>
         <ul class="flex flex-col gap-2 text-[var(--color-brand-gray)] text-sm">
-          <li><a href="/sobre-nosotros" class="hover:text-white">Quiénes somos</a></li>
+          <li><a href="/nosotros" class="hover:text-white">Nosotros</a></li>
           <li><a href="/contacto" class="hover:text-white">Contacto</a></li>
           <li><a href="/politica-privacidad" class="hover:text-white">Privacidad</a></li>
         </ul>
@@ -52,7 +54,7 @@ const currentYear = new Date().getFullYear();
     <!-- Crédito Técnico -->
     <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-[var(--color-brand-gray)]">
       <p>© {currentYear} SeAMeD S.A. Todos los derechos reservados.</p>
-      <p>Desarrollo técnico por <a href="https://aim.com.ar" class="hover:text-white transition-colors">AIM - PROGRAMACION</a></p>
+      <p>Desarrollo por <a href="https://www.aim.com.ar" class="hover:text-white transition-colors">AIM</a></p>
     </div>
   </div>
 </footer>

@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import Insumo1 from "../../assets/catalog/insumo1.jpg";
+import Insumo2 from "../../assets/catalog/insumo2.jpg";
+import Insumo3 from "../../assets/catalog/insumo3.jpg";
+import Insumo4 from "../../assets/catalog/insumo4.jpg";
+// CompanyHero.astro
+import Slide1 from "../../assets/slide1.jpeg";
+const slideImages  = [
+    {
+        image: Insumo1,
+        alt: "Equipo técnico de SeAMeD S.A. en Córdoba"
+    },
+    {
+        image: Insumo2,
+        alt: "Equipo técnico de SeAMeD S.A. en Córdoba"
+    },
+    {
+        image: Insumo3,
+        alt: "Equipo técnico de SeAMeD S.A. en Córdoba"
+    },
+    {
+        image: Insumo4,
+        alt: "Equipo técnico de SeAMeD S.A. en Córdoba"
+    }
+]
+---
+
+<section class="relative pt-10 bg-surface w-full min-h-[80vh]  overflow-hidden">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+    <div class="flex flex-col gap-4">
+      <span class="text-theme py-2 font-bold tracking-widest uppercase text-sm">
+        Catalogo de Equipamiento Médico
+      </span>
+      <h1 class="text-5xl md:text-6xl font-bold text-main leading-tight">
+        Soluciones de alta tecnología <br />
+        <span class="text-theme">para la salud</span>
+      </h1>
+      <p class="text-xl text-[var(--color-muted)] leading-relaxed">
+        Equipamiento médico de última generación para la atención domiciliaria. 
+        Calidad, innovación y soporte técnico profesional en cada producto.
+      </p>
+    </div>
+    <!-- Bloque Visual de Autoridad -->
+    <div class="relative grid grid-cols-2 gap-4">
+      {slideImages.map((slide, index) => (
+    <div class="relative w-full h-[250px] rounded-2xl shadow-2xl group overflow-hidden group-hover:shadow-4xl transition-shadow duration-300">
+        <div class="absolute bg-radial from-transparent via-black/20 to-black/70 inset-0 z-10 group-hover:from-transparent group-hover:via-black/10 group-hover:to-black/50 transition-colors duration-300">
+        </div>
+
+        <Image
+            src={slide.image}
+            alt={slide.alt}
+            class="relative z-0 w-full h-[250px] group-hover:scale-105 transition-transform duration-300 object-cover"
+            width="600"
+            height="500"
+            loading="eager"
+            />
+    </div>
+      ))}
+    </div>
+  </div>
+</section>

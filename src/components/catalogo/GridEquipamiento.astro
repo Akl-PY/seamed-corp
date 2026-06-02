@@ -1,0 +1,56 @@
+---
+import { SITE_CONFIG } from "../../config/site";
+import ventMecanico from "../../assets/products/vent-mecanico.jpg";
+import concentrador from "../../assets/products/concentrador.webp";
+import bomba from "../../assets/products/bomba.png";
+import { Image } from "astro:assets";
+
+
+// GridEquipamiento.astro
+const equipment = [
+  { 
+    name: "Ventilador Mecánico V1", 
+    category: "Cuidados Críticos", 
+    description: "Ventilación invasiva y no invasiva con monitoreo avanzado.",
+    img: ventMecanico 
+  },
+  { 
+    name: "Concentrador de Oxígeno 5L", 
+    category: "Atención Domiciliaria", 
+    description: "Flujo continuo y silencioso, ideal para uso nocturno prolongado.",
+    img: concentrador
+  },
+    { 
+        name: "Bomba de Infusión B2", 
+        category: "Terapias Intravenosas", 
+        description: "Infusión precisa con múltiples modos de administración.",
+        img: bomba
+    }
+];
+---
+
+
+<section id="equipamiento" class="relative pt-10 bg-surface w-full min-h-[80vh]  overflow-hidden">
+<div class="container mx-auto px-6 gap-16 items-center">
+    <h2 class="text-2xl font-bold text-[var(--color-main)] mb-8">Equipamiento Destacado</h2>
+    <p>Hecha un vistazo a nuestro catalogo de equipamiento de alta tecnologia</p>
+  
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {equipment.map((item) => (
+      <div class="group bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-xl transition-all duration-300">
+        <div class="aspect-video bg-gray-100 rounded-xl mb-4 overflow-hidden">
+          <Image src={item.img} alt={item.name} class="w-full h-full object-cover  group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        
+        <span class="text-[var(--color-theme)] text-xs font-bold uppercase tracking-wider">{item.category}</span>
+        <h3 class="text-lg font-bold text-[var(--color-main)] mt-1 mb-2">{item.name}</h3>
+        <p class="text-sm text-[var(--color-muted)] mb-6 h-12">{item.description}</p>
+        
+        <a href={`${SITE_CONFIG.social.whatsapp}/?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20${item.name}`} class="w-full py-3 px-2 border border-[var(--color-main)] text-[var(--color-main)] font-bold rounded-lg hover:bg-[var(--color-main)] hover:text-white transition-colors cursor-pointer">
+          Consultar por WhatsApp
+        </a>
+      </div>
+    ))}
+  </div>
+</div>
+</section>

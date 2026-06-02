@@ -57,7 +57,7 @@ export const SITE_CONFIG: SiteConfig = {
         type: "image/svg+xml"
     },
     social: {
-        whatsapp: "https://wa.me/5491100000000", // Reemplazar con el número real del cliente
+        whatsapp: "https://wa.me/5493515226545", // Reemplazar con el número real del cliente
         instagram: "https://instagram.com/seamed.sa",
         linkedin: "https://linkedin.com/company/seamed-sa",
         facebook: "https://facebook.com/seamed.sa",
