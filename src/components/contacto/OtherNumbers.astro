@@ -9,7 +9,7 @@ const OtherContactDetails = [
 ];
 ---
 
-<section class="py-12 bg-surface">
+<section class="overflow-hidden py-12 bg-surface">
   <div class="container mx-auto px-6">
     <div class="text-center mb-12">
       <h2 data-aos="fade-up" data-aos-duration="500"  class="text-3xl font-bold text-[var(--color-main)] mb-4">Otros medios de contacto</h2>
@@ -18,14 +18,14 @@ const OtherContactDetails = [
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-5 justify-between gap-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-5  gap-6">
       {OtherContactDetails.map((detail, i) => (
-        <div data-aos={i % 2 === 0 ? "fade-right" : "fade-left"} data-aos-duration="500" data-aos-delay={100 + i * 200} class="p-6 bg-[var(--color-surface)] border border-gray-100 rounded-2xl  hover:border-[var(--color-theme)] transition-colors flex flex-col items-center text-center">
+        <div data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"} data-aos-duration="500" data-aos-delay={100 + i * 200} class="p-6 bg-surface border border-gray-100 rounded-2xl  hover:border-[var(--color-theme)] transition-colors flex flex-col items-center text-center">
           <span class="text-3xl mb-4">{detail.icon}</span>
           <h3 class="font-bold text-[var(--color-main)] mb-2">{detail.label}</h3>
           <a 
             href={`tel:${detail.value.split('/')[0].replace(/\s|-/g, '')}`} 
-            class="text-[var(--color-theme)] font-semibold hover:underline break-words rounded-xl "
+            class="text-[var(--color-theme)] font-semibold hover:underline  rounded-xl "
           >
             {detail.value}
           </a>
