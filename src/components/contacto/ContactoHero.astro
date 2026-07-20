@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { MessageSquare, Mail, Phone, Stethoscope } from "lucide-astro";
 import { SITE_CONFIG } from "../../config/site";
 import DoctorContactImg from "../../assets/catalog/insumo3.jpg"; // Reemplazá por la foto del médico/equipo
 
@@ -8,21 +9,21 @@ const contactOptions = [
     label: "Atención por WhatsApp", 
     value: "+54 9 351 52-26545", 
     href: "https://wa.me/5493515226545",
-    icon: "💬",
+    icon: MessageSquare,
     subtext: "Respuesta rápida para urgencias e insumos"
   },
   { 
     label: "Correo Electrónico", 
     value: "ventas@seamed.com.ar", 
     href: "mailto:ventas@seamed.com.ar",
-    icon: "✉️",
+    icon: Mail,
     subtext: "Administración, facturación y proveedores"
   },
   { 
     label: "Línea Directa", 
     value: SITE_CONFIG.organization.contactPoint?.telephone || "+54 9 351 52-26545", 
     href: `tel:${SITE_CONFIG.organization.contactPoint?.telephone || "5493515226545"}`,
-    icon: "📞",
+    icon: Phone,
     subtext: "Lunes a Viernes de 8:00 a 18:00 hs"
   }
 ];
@@ -50,22 +51,27 @@ const contactOptions = [
 
       <!-- Canales Directos de Contacto -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-        {contactOptions.map((opt, i) => (
-          <a 
-            href={opt.href} 
-            data-aos="fade-up" 
-            data-aos-duration="500" 
-            data-aos-delay={200 + i * 100}
-            class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-          >
-            <div>
-              <span class="text-2xl mb-2 block">{opt.icon}</span>
-              <span class="text-xs font-bold text-main/60 uppercase tracking-wider block mb-1">{opt.label}</span>
-              <span class="text-sm font-extrabold text-main group-hover:text-accent transition-colors block break-words">{opt.value}</span>
-            </div>
-            <p class="text-[11px] text-muted mt-3 pt-2 border-t border-brand-gray/10">{opt.subtext}</p>
-          </a>
-        ))}
+        {contactOptions.map((opt, i) => {
+          const IconComponent = opt.icon;
+          return (
+            <a 
+              href={opt.href} 
+              data-aos="fade-up" 
+              data-aos-duration="500" 
+              data-aos-delay={200 + i * 100}
+              class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <span class="mb-3 block text-accent group-hover:scale-110 transition-transform duration-300">
+                  <IconComponent class="w-6 h-6 stroke-[1.75]" />
+                </span>
+                <span class="text-xs font-bold text-main/60 uppercase tracking-wider block mb-1">{opt.label}</span>
+                <span class="text-sm font-extrabold text-main group-hover:text-accent transition-colors block break-words">{opt.value}</span>
+              </div>
+              <p class="text-[11px] text-muted mt-3 pt-2 border-t border-brand-gray/10">{opt.subtext}</p>
+            </a>
+          );
+        })}
       </div>
 
       <!-- Redirección a Cotización -->
@@ -99,8 +105,8 @@ const contactOptions = [
         <!-- Tarjeta Flotante Inferior (Glassmorphism) -->
         <div class="absolute -bottom-6 left-6 right-6 p-5 rounded-2xl bg-bg/90 backdrop-blur-md border border-brand-gray/20 shadow-xl flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center font-bold text-lg flex-shrink-0">
-              🩺
+            <div class="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center font-bold flex-shrink-0">
+              <Stethoscope class="w-5 h-5 stroke-[1.75]" />
             </div>
             <div>
               <p class="text-xs font-bold text-main">Soporte Médico & Técnico</p>
