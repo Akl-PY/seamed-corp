@@ -1,42 +1,46 @@
 ---
-// Values.astro
-const values = [
-  {
-    title: "Excelencia Clínica",
-    desc: "Nos comprometemos a entregar equipos de alta precisión, garantizando estándares médicos globales en cada unidad.",
-  },
-  {
-    title: "Innovación Sostenible",
-    desc: "Buscamos constantemente actualizar nuestro parque tecnológico con soluciones eficientes y amigables con el entorno.",
-  },
-  {
-    title: "Compromiso Humano",
-    desc: "Más allá de los equipos, nuestra prioridad es la seguridad y el bienestar de los pacientes y profesionales de la salud.",
-  }
-];
+import { Star, ExternalLink, MapPin } from "lucide-astro";
+
+const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/place/SeAMeD+S.A./@-31.4042608,-64.2222637,17z/data=!4m8!3m7!1s0x9432a2a6e80f294d:0x527eaa34ded1a60f!8m2!3d-31.4042608!4d-64.2222637!9m1!1b1!16s%2Fg%2F11b6s7b_91?entry=ttu";
 ---
 
-<section class="py-12 overflow-hidden bg-[var(--color-main)] text-white">
+<section class="py-16 overflow-hidden bg-theme text-white relative">
   <div class="container mx-auto px-6">
-    <div class="text-center max-w-2xl mx-auto mb-16">
-      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl font-bold mb-4">Nuestro Propósito</h2>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-blue-100">
-        Combinamos tecnología de vanguardia con un enfoque humano para transformar la experiencia en cuidados críticos.
-      </p>
-    </div>
+    <div class="max-w-3xl mx-auto text-center flex flex-col items-center gap-6">
+      
+      <!-- Badge Google -->
+      <div data-aos="fade-down" data-aos-duration="500" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-xs font-semibold border border-white/10">
+        <span class="text-yellow-400 flex items-center gap-1">
+          <Star class="w-4 h-4 fill-yellow-400 text-yellow-400" />
+          <span class="font-bold text-white">Google Reviews</span>
+        </span>
+        <span class="text-white/40">•</span>
+        <span class="text-white/80">Opiniones de la Comunidad</span>
+      </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      {values.map((v, i) => (
-        <div data-aos={i % 2 === 0 ? "fade-up" : "fade-down"} data-aos-duration="500" data-aos-delay={100 + i * 100} class="p-8 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="w-12 h-12 mb-6 rounded-full bg-[var(--color-theme)] flex items-center justify-center">
-            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3">{v.title}</h3>
-          <p class="text-blue-100 text-sm leading-relaxed">{v.desc}</p>
-        </div>
-      ))}
+      <!-- Título -->
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl md:text-4xl font-bold leading-tight">
+        Conocé la experiencia de nuestros clientes en Google Maps
+      </h2>
+
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-blue-100 text-sm sm:text-base leading-relaxed max-w-xl">
+        La confianza de las familias y profesionales de la salud es nuestro mayor respaldo. Podés consultar todas las opiniones reales o compartir tu experiencia.
+      </p>
+
+      <!-- Botón de acceso directo a las reseñas -->
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" class="pt-2">
+        <a 
+          href={GOOGLE_REVIEWS_URL} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-8 py-4 bg-[var(--color-accent)] text-white font-bold rounded-xl hover:brightness-110 transition-all shadow-lg shadow-[var(--color-accent)]/20 active:scale-95 text-sm"
+        >
+          <MapPin class="w-4 h-4" />
+          <span class="text-white">Ver opiniones de SeAMeD S.A.</span>
+          <ExternalLink class="w-4 h-4 opacity-70" />
+        </a>
+      </div>
+
     </div>
   </div>
 </section>

@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import Insumo1 from "../../assets/catalog/insumo1.jpg";
+import Insumo2 from "../../assets/catalog/insumo2.jpg";
+import Insumo3 from "../../assets/catalog/insumo3.jpg";
+import Insumo4 from "../../assets/catalog/insumo4.jpg";
+
+const slideImages = [
+  { image: Insumo1, alt: "Servicio de asistencia respiratoria SeAMeD S.A." },
+  { image: Insumo2, alt: "Equipamiento de oxigenoterapia y CPAP" },
+  { image: Insumo3, alt: "Soporte técnico y atención domiciliaria" },
+  { image: Insumo4, alt: "Ventilación mecánica e insumos médicos" }
+];
+---
+
+<section class="relative pt-12 pb-12 bg-surface w-full overflow-hidden border-b border-brand-gray/10">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    
+    <div class="flex flex-col gap-4">
+      <span data-aos="fade-down" data-aos-duration="500" data-aos-delay="400" class="text-accent py-1 font-bold tracking-widest uppercase text-sm">
+        Servicios Médicos Domiciliarios
+      </span>
+      <h1 data-aos="fade-up" data-aos-duration="500" class="text-4xl md:text-5xl lg:text-6xl font-bold text-main leading-tight">
+        Atención integral y <br />
+        <span class="text-accent">soporte respiratorio</span>
+      </h1>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="600" class="text-lg md:text-xl text-[var(--color-muted)] leading-relaxed">
+        Ofrecemos provisión, instalación y seguimiento técnico profesional de equipamiento médico para tratamientos de alta y media complejidad en el hogar.
+      </p>
+    </div>
+
+    <!-- Mosaico de Imágenes -->
+    <div class="relative grid grid-cols-2 gap-4">
+      {slideImages.map((slide, index) => (
+        <div 
+          data-aos={index % 2 === 0 ? "fade-right" : "fade-left"} 
+          data-aos-duration="500" 
+          data-aos-delay={100 + index * 100} 
+          class="relative w-full h-[200px] sm:h-[240px] rounded-2xl shadow-xl group overflow-hidden transition-shadow duration-300"
+        >
+          <div class="absolute bg-radial from-transparent via-black/20 to-black/60 inset-0 z-10 group-hover:via-black/10 transition-colors duration-300"></div>
+          <Image
+            src={slide.image}
+            alt={slide.alt}
+            class="relative z-0 w-full h-full group-hover:scale-105 transition-transform duration-300 object-cover"
+            width="600"
+            height="500"
+            loading="eager"
+          />
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

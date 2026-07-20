@@ -1,0 +1,211 @@
+---
+import { Image } from "astro:assets";
+import servicios from "../../data/servicios";
+---
+
+<section id="servicios" class="py-16 overflow-hidden bg-surface">
+  <div class="container mx-auto px-6">
+    
+    <!-- Encabezado de la Sección -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl sm:text-4xl font-bold text-main">Especialidades Tratadas</h2>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted mt-2 text-sm sm:text-base">Soluciones adaptadas a las necesidades clínicas de cada paciente</p>
+    </div>
+
+    <!-- Grilla de Tarjetas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {servicios.map((srv, index) => (
+        <a 
+          href={`#${srv.id}`} 
+          data-service-id={srv.id}
+          data-aos="fade-up"
+          data-aos-duration="500"
+          data-aos-delay={100 + index * 100}
+          class="service-card group flex flex-col justify-between overflow-hidden bg-bg rounded-2xl border border-brand-gray/15 transition-all duration-300 hover:shadow-2xl hover:border-accent hover:-translate-y-1.5 cursor-pointer"
+        >
+          <div>
+            <!-- Imagen -->
+            <div class="relative w-full h-52 overflow-hidden bg-surface">
+              <Image 
+                src={srv.image} 
+                alt={srv.alt}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                width={400}
+                height={300}
+              />
+              <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
+            </div>
+
+            <!-- Contenido Breve -->
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-main mb-2.5 group-hover:text-accent transition-colors duration-200">{srv.title}</h3>
+              <p class="text-xs text-muted leading-relaxed line-clamp-3">{srv.description}</p>
+            </div>
+          </div>
+
+          <!-- Acción -->
+          <div class="px-6 pb-6 pt-1">
+            <span class="text-xs text-accent font-bold flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200">
+              Ver detalle del servicio 
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+
+  <!-- MODAL PROFESIONAL -->
+  <div id="modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" tabindex="-1">
+    <!-- Overlay con Blur -->
+    <div id="overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300"></div>
+    
+    <!-- Contenedor Centrado -->
+    <div class="flex min-h-full items-center justify-center p-4 sm:p-6 md:p-10 text-left pointer-events-none">
+      <div 
+        id="selectedService" 
+        class="relative transform overflow-hidden rounded-3xl bg-bg border border-brand-gray/20 shadow-2xl transition-all w-full max-w-4xl my-auto z-10 max-h-[90vh] flex flex-col md:flex-row pointer-events-auto"
+      >
+        <!-- Botón de Cerrar (X) -->
+        <button 
+          id="closeModalBtn" 
+          type="button" 
+          class="absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-accent hover:text-main transition-all duration-200 focus:outline-none shadow-lg cursor-pointer"
+          aria-label="Cerrar modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <!-- Columna Imagen -->
+        <div class="relative w-full md:w-5/12 h-64 md:h-auto min-h-[250px] bg-surface flex-shrink-0">
+          <img 
+            id="selectedImage"
+            src="" 
+            alt=""
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent md:hidden"></div>
+        </div>
+
+        <!-- Columna Contenido -->
+        <div class="p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto w-full md:w-7/12">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-wider text-accent bg-accent/10 uppercase mb-4">
+              Servicio Médico Especializado
+            </span>
+
+            <h3 id="selectedTitle" class="text-2xl sm:text-3xl font-bold text-main mb-4 leading-tight"></h3>
+            
+            <p id="selectedDescription" class="text-sm font-semibold text-main/80 mb-5 pb-4 border-b border-brand-gray/15 leading-relaxed"></p>
+            
+            <p id="selectedLargeDescription" class="text-xs sm:text-sm text-muted leading-relaxed space-y-3 mb-8"></p>
+          </div>
+
+          <!-- Botón de Acción -->
+          <div class="pt-5 border-t border-brand-gray/15 mt-auto">
+            <a 
+              id="modalActionBtn" 
+              href="#cotizar" 
+              class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-xs sm:text-sm font-bold text-main shadow-lg hover:bg-accent transition-all duration-200 active:scale-98"
+            >
+              <span id="selectedButtonText">Solicitar Asesoramiento</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ servicios }}>
+  function initServiciosModal() {
+    const modal = document.getElementById("modal");
+    const overlay = document.getElementById("overlay");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modalActionBtn = document.getElementById("modalActionBtn");
+
+    if (!modal) return;
+
+    const selectedImage = document.getElementById("selectedImage");
+    const selectedTitle = document.getElementById("selectedTitle");
+    const selectedDescription = document.getElementById("selectedDescription");
+    const selectedLargeDescription = document.getElementById("selectedLargeDescription");
+    const selectedButtonText = document.getElementById("selectedButtonText");
+
+    let isModalOpen = false;
+
+    function openModalWithService(srv) {
+      if (!srv) return;
+      
+      selectedImage.src = srv.image.src;
+      selectedImage.alt = srv.alt || srv.title;
+      selectedTitle.textContent = srv.title;
+      selectedDescription.textContent = srv.description;
+      selectedLargeDescription.textContent = srv.largeDescription;
+      selectedButtonText.textContent = srv.text || "Solicitar Asesoramiento";
+
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+      isModalOpen = true;
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+      isModalOpen = false;
+
+      // Limpia el hash sin recargar ni alterar la pila de historial bruscamente
+      if (window.location.hash && window.location.hash !== "#cotizar" && window.location.hash !== "#servicios") {
+        history.pushState(null, "", window.location.pathname + window.location.search);
+      }
+    }
+
+    function checkHash() {
+      const rawHash = window.location.hash.replace("#", "");
+      if (!rawHash) {
+        closeModal();
+        return;
+      }
+
+      const srv = servicios.find(s => s.id === rawHash || s.link === `#${rawHash}`);
+      if (srv) {
+        openModalWithService(srv);
+      } else if (rawHash !== "cotizar" && rawHash !== "servicios") {
+        closeModal();
+      }
+    }
+
+    // 1. Manejo de Clics en Cards (Intercepción directa para compatibilidad con ViewTransitions)
+    document.querySelectorAll(".service-card").forEach(card => {
+      card.addEventListener("click", (e) => {
+        e.preventDefault();
+        const serviceId = card.getAttribute("data-service-id");
+        const srv = servicios.find(s => s.id === serviceId);
+        
+        if (srv) {
+          history.pushState(null, "", `#${srv.id}`);
+          openModalWithService(srv);
+        }
+      });
+    });
+
+    // 2. Listeners de cierre
+    overlay?.addEventListener("click", closeModal);
+    closeModalBtn?.addEventListener("click", closeModal);
+    modalActionBtn?.addEventListener("click", closeModal);
+
+    // 3. Soporte para el botón 'Atrás / Adelante' del navegador
+    window.addEventListener("popstate", checkHash);
+    window.addEventListener("hashchange", checkHash);
+
+    // 4. Verificación inicial de Hash al cargar la página
+    checkHash();
+  }
+
+  // Se ejecuta en la carga inicial y tras cada navegación con Astro Client Router / View Transitions
+  document.addEventListener("astro:page-load", initServiciosModal);
+</script>

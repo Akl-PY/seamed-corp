@@ -1,36 +1,68 @@
 ---
-// OtherNumbers.astro
+import { Building2, Package, CreditCard, RotateCcw, Wrench, PhoneCall } from "lucide-astro";
+
 const OtherContactDetails = [
-  { label: "Oficina", value: "351 89-80-811", icon: "🏢" },
-  { label: "Ventas y Alquiler", value: "351-5-226545", icon: "📦" },
-  { label: "Pagos", value: "351-5-226190", icon: "💳" },
-  { label: "Devoluciones", value: "351-6-236256", icon: "↩️" },
-  { label: "Soporte Técnico", value: "351-5-226545 / 351-5-226313 / 351-6-772000", icon: "🛠️" },
+  { label: "Oficina", value: "351 89-80-811", icon: Building2 },
+  { label: "Ventas y Alquiler", value: "351-5-226545", icon: Package },
+  { label: "Pagos", value: "351-5-226190", icon: CreditCard },
+  { label: "Devoluciones", value: "351-6-236256", icon: RotateCcw },
+  { label: "Soporte Técnico", value: "351-5-226545 / 351-5-226313 / 351-6-772000", icon: Wrench },
 ];
 ---
 
 <section class="overflow-hidden py-12 bg-surface">
   <div class="container mx-auto px-6">
     <div class="text-center mb-12">
-      <h2 data-aos="fade-up" data-aos-duration="500"  class="text-3xl font-bold text-[var(--color-main)] mb-4">Otros medios de contacto</h2>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-[var(--color-muted)] max-w-xl mx-auto">
-        Además de nuestro formulario de contacto, puedes comunicarte con nosotros a través de los siguientes números para consultas específicas o asistencia inmediata.
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl font-bold text-[var(--color-main)] mb-4">
+        Otros medios de contacto
+      </h2>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-[var(--color-muted)] max-w-xl mx-auto text-sm sm:text-base">
+        Podés comunicarte directamente a nuestras líneas específicas haciendo clic en cualquiera de los números.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-5  gap-6">
-      {OtherContactDetails.map((detail, i) => (
-        <div data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"} data-aos-duration="500" data-aos-delay={100 + i * 200} class="p-6 bg-surface border border-gray-100 rounded-2xl  hover:border-[var(--color-theme)] transition-colors flex flex-col items-center text-center">
-          <span class="text-3xl mb-4">{detail.icon}</span>
-          <h3 class="font-bold text-[var(--color-main)] mb-2">{detail.label}</h3>
-          <a 
-            href={`tel:${detail.value.split('/')[0].replace(/\s|-/g, '')}`} 
-            class="text-[var(--color-theme)] font-semibold hover:underline  rounded-xl "
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 items-start">
+      {OtherContactDetails.map((detail, i) => {
+        const IconComponent = detail.icon;
+        const numbers = detail.value.split('/').map(n => n.trim());
+
+        return (
+          <div 
+            data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"} 
+            data-aos-duration="500" 
+            data-aos-delay={100 + i * 200} 
+            class="p-6 bg-surface border border-gray-100 rounded-2xl hover:border-[var(--color-accent)] transition-all duration-300 flex flex-col items-center text-center shadow-xs hover:shadow-xl group"
           >
-            {detail.value}
-          </a>
-        </div>
-      ))}
+            <!-- Icono lucide-astro -->
+            <div class="w-12 h-12 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center mb-4 group-hover:bg-[var(--color-accent)] group-hover:text-white transition-colors duration-300">
+              <IconComponent class="w-6 h-6" />
+            </div>
+
+            <h3 class="font-bold text-[var(--color-main)] mb-3">{detail.label}</h3>
+            
+            <!-- Contenedor compacto para los números -->
+            <div class="flex flex-col gap-2 w-full">
+              {numbers.map((num) => {
+                const cleanNumber = num.replace(/\s|-/g, '');
+                return (
+                  <a 
+                    href={`tel:${cleanNumber}`}
+                    title={`Llamar a ${detail.label}: ${num}`}
+                    class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-bg hover:bg-[var(--color-accent)]/10 border border-transparent hover:border-[var(--color-accent)]/20 text-xs font-bold text-[var(--color-main)] hover:text-[var(--color-accent)] transition-all duration-200 cursor-pointer active:scale-95 group/link"
+                  >
+                    <PhoneCall class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover/link:animate-bounce" />
+                    <span>{num}</span>
+                  </a>
+                );
+              })}
+            </div>
+
+            <span class="text-[10px] text-[var(--color-muted)] font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Hacé clic para llamar
+            </span>
+          </div>
+        );
+      })}
     </div>
   </div>
 </section>

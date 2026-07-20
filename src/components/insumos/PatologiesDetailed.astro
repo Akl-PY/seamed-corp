@@ -1,0 +1,130 @@
+---
+import { Image } from "astro:assets";
+import Img1 from "../../assets/catalog/insumo1.jpg";
+import Img2 from "../../assets/catalog/insumo2.jpg";
+
+const rubrosDetallados = [
+  {
+    id: "diabetes",
+    title: "Diabetes y Monitoreo Glucémico",
+    badge: "Control e Infusión",
+    image: Img1,
+    description: "Proporcionamos todos los elementos necesarios para el autocontrol de la glucemia y la administración segura de insulina, priorizando el confort del paciente en su rutina diaria.",
+    products: [
+      { name: "Tiras Reactivas y Medidores", detail: "Sistemas de alta precisión con resultados en pocos segundos." },
+      { name: "Agujas para Lapicera de Insulina", detail: "Bisel ultrasuave para aplicaciones prácticamente indoloras." },
+      { name: "Monitoreo Continuo (CGM)", detail: "Sensores y accesorios para lectura sin pinchazos frecuentes." }
+    ],
+    otherProducts: [
+      "Lancetas y punzadores automáticos",
+      "Estuchería térmica para transporte de insulina",
+      "Jeringas graduadas de ultra-fina calibración",
+      "Soluciones de control y calibración glucémica",
+      "Sobres de gel frío reutilizables"
+    ]
+  },
+  {
+    id: "enteral",
+    title: "Alimentación Enteral y Soporte Nutricional",
+    badge: "Nutrición Especializada",
+    image: Img2,
+    description: "Insumos para administración de nutrición enteral por sonda en pacientes con incapacidad de ingesta oral. Garantizamos máxima higiene y compatibilidad con bombas de infusión.",
+    products: [
+      { name: "Sondas de Alimentación", detail: "Sondas nasoenterales K-108 de poliuretano y silicona de alta durabilidad." },
+      { name: "Guías de Infusión", detail: "Guías para bombas continuas y opciones por gravedad con conector en Y." },
+      { name: "Bolsas de Nutrición y Recipientes", detail: "Sistemas cerrados y abiertos para administración segura." }
+    ],
+    otherProducts: [
+      "Botones y sondas de gastrostomía (PEG / Mic-Key)",
+      "Jeringas Toomey / EnFit para lavado de sonda",
+      "Fijadores de nariz y parches de sujeción",
+      "Fórmulas nutricionales poliméricas e hiperproteicas",
+      "Bombas de infusión enteral portátil"
+    ]
+  },
+  {
+    id: "vascular",
+    title: "Acceso Vascular y Terapia de Infusión",
+    badge: "Cuidado de Vías",
+    image: Img1,
+    description: "Material para la fijación, curación y mantenimiento de accesos venosos periféricos y centrales, minimizando el riesgo de infecciones asociadas al catéter.",
+    products: [
+      { name: "Fijadores y Apósitos Transparentes", detail: "Con tecnología respirable y gluconato de clorhexidina integrados." },
+      { name: "Conectores Luer-Lock Libres de Aguja", detail: "Válvulas de acceso bi-direccionales de sistema cerrado." },
+      { name: "Prolongadores y Llaves de 3 Vías", detail: "Sistemas estériles sin látex para infusión simultánea." }
+    ],
+    otherProducts: [
+      "Catéteres intravenosos periféricos (Abocath)",
+      "Agujas tipo Huber para puerto Port-a-Cath",
+      "Solución fisiológica en ampollas / Heparina para sellado",
+      "Kits estériles de curación e higiene de vía central",
+      "Cintas y parches de fijación quirúrgica hipoalergénica"
+    ]
+  }
+];
+---
+
+<section class="py-16 bg-surface">
+  <div class="container mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold text-accent uppercase tracking-wider">Catálogo Especializado</span>
+      <h2 class="text-3xl font-bold text-main mt-1">Soluciones e Insumos por Patología</h2>
+    </div>
+
+    <div class="space-y-16">
+      {rubrosDetallados.map((rubro, index) => (
+        <div class={`grid md:grid-cols-12 gap-8 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+          
+          <!-- Imagen -->
+          <div class={`md:col-span-5 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
+            <div class="relative h-72 sm:h-80 md:h-full min-h-[300px] rounded-3xl overflow-hidden shadow-xl border border-brand-gray/15">
+              <Image src={rubro.image} alt={rubro.title} class="w-full h-full object-cover" width={600} height={500} />
+            </div>
+          </div>
+
+          <!-- Contenido -->
+          <div class={`md:col-span-7 ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
+            <span class="text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full uppercase tracking-wider">
+              {rubro.badge}
+            </span>
+            <h3 class="text-2xl font-bold text-main mt-3 mb-3">{rubro.title}</h3>
+            <p class="text-sm text-muted mb-6 leading-relaxed">{rubro.description}</p>
+
+            <!-- Grilla de productos destacados (Mini Cards) -->
+            <div class="grid sm:grid-cols-3 gap-3 mb-5">
+              {rubro.products.map((prod) => (
+                <div class="p-3.5 bg-bg rounded-xl border border-brand-gray/10">
+                  <p class="text-xs font-bold text-main mb-1">{prod.name}</p>
+                  <p class="text-[11px] text-muted leading-tight">{prod.detail}</p>
+                </div>
+              ))}
+            </div>
+
+            <!-- Lista de OTROS INSUMOS DISPONIBLES -->
+            {rubro.otherProducts && (
+              <div class="mb-6 p-4 rounded-xl bg-bg/60 border border-brand-gray/10">
+                <p class="text-xs font-bold text-main mb-2 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span class="text-accent">✦</span> Otros insumos disponibles en stock:
+                </p>
+                <ul class="grid sm:grid-cols-2 gap-y-1.5 gap-x-4">
+                  {rubro.otherProducts.map((item) => (
+                    <li class="text-xs text-muted flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <!-- Botón de Acción -->
+            <a href="#cotizar" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-main text-xs font-bold shadow-md hover:bg-accent transition-colors duration-200">
+              Solicitar Insumos de {rubro.title.split(' ')[0]} →
+            </a>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

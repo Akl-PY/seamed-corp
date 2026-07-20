@@ -1,60 +1,77 @@
 ---
 import { SITE_CONFIG } from "../config/site";
-
-// Footer.astro
+import { PhoneCall } from "lucide-astro";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-[var(--color-main)] text-white pt-16 pb-8">
+<footer class="bg-theme text-white pt-16 pb-8 border-t border-brand-gray/10">
   <div class="container mx-auto px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       
-      <!-- Brand & NAP -->
+      <!-- Brand & Datos de Contacto (NAP) -->
       <div class="flex flex-col gap-4">
-        <h3 class="text-xl font-bold text-[var(--color-theme)]">SeAMeD S.A.</h3>
-        <address class="not-italic text-[var(--color-brand-gray)] text-sm">
+        <h3 class="text-2xl font-bold text-white">SeAMeD S.A.</h3>
+        <address class="not-italic text-white/80 text-sm leading-relaxed">
           {SITE_CONFIG.organization.address?.streetAddress}, {SITE_CONFIG.organization.address?.addressLocality}<br>
           Argentina
         </address>
-        <a href={"tel:"+SITE_CONFIG.organization.contactPoint?.telephone} class="text-white hover:text-[var(--color-theme)] transition-colors">
-          +{SITE_CONFIG.organization.contactPoint?.telephone}
+        <a 
+          href={`tel:+${SITE_CONFIG.organization.contactPoint?.telephone}`} 
+          class="text-white hover:text-white/70 transition-colors font-medium text-sm flex items-center gap-2"
+        >
+          <PhoneCall class="w-4 h-4 shrink-0 text-white" /> +{SITE_CONFIG.organization.contactPoint?.telephone}
         </a>
       </div>
 
-      <!-- Silos de Navegación -->
+      <!-- Navegación Directa / Catálogo -->
       <div>
-        <h4 class="font-bold mb-4 uppercase tracking-wider text-xs">Catálogo</h4>
-        <ul class="flex flex-col gap-2 text-[var(--color-brand-gray)] text-sm">
-          <li><a href="/catalogo/oxigenoterapia" class="hover:text-white">Oxigenoterapia</a></li>
-          <li><a href="/catalogo/respiratorios" class="hover:text-white">Ventilación Mecánica</a></li>
-          <li><a href="/catalogo/insumos" class="hover:text-white">Insumos Médicos</a></li>
+        <h4 class="font-bold mb-4 uppercase tracking-wider text-xs text-white">Catálogo & Soluciones</h4>
+        <ul class="flex flex-col gap-2 text-white/80 text-sm">
+          <li><a href="/#equipamiento" class="hover:text-white transition-colors">Equipamiento Destacado</a></li>
+          <li><a href="/#insumos" class="hover:text-white transition-colors">Insumos y Repuestos</a></li>
+          <li><a href="/servicios" class="hover:text-white transition-colors">Servicios Técnicos</a></li>
         </ul>
       </div>
 
-      <!-- Empresa -->
+      <!-- Empresa & Institucional -->
       <div>
-        <h4 class="font-bold mb-4 uppercase tracking-wider text-xs">Empresa</h4>
-        <ul class="flex flex-col gap-2 text-[var(--color-brand-gray)] text-sm">
-          <li><a href="/nosotros" class="hover:text-white">Nosotros</a></li>
-          <li><a href="/contacto" class="hover:text-white">Contacto</a></li>
-          <li><a href="/politica-privacidad" class="hover:text-white">Privacidad</a></li>
+        <h4 class="font-bold mb-4 uppercase tracking-wider text-xs text-white">Empresa</h4>
+        <ul class="flex flex-col gap-2 text-white/80 text-sm">
+          <li><a href="/nosotros" class="hover:text-white transition-colors font-medium">Nosotros</a></li>
+          <li><a href="/contacto" class="hover:text-white transition-colors">Contacto</a></li>
+          <li><a href="/politica-privacidad" class="hover:text-white transition-colors">Política de Privacidad</a></li>
         </ul>
       </div>
 
-      <!-- CTA Rápido -->
+      <!-- CTA Cotización -->
       <div class="flex flex-col gap-4">
-        <h4 class="font-bold uppercase tracking-wider text-xs">Atención al Paciente</h4>
-        <p class="text-xs text-[var(--color-brand-gray)]">Soporte técnico y asesoramiento profesional las 24hs.</p>
-        <a href="/contacto" class="bg-[var(--color-theme)] text-white text-center py-2 rounded text-sm font-bold hover:bg-[var(--color-accent)] transition-all">
-          Solicitar Asesoramiento
+        <h4 class="font-bold uppercase tracking-wider text-xs text-white">Cotización</h4>
+        <p class="text-xs text-white/80 leading-relaxed">
+          Solicita un presupuesto formal para obra social o reintegro.
+        </p>
+        <a 
+          href="/cotizar" 
+          class="bg-accent text-white text-center py-2.5 px-4 rounded-xl text-sm font-bold hover:brightness-110 active:scale-98 transition-all duration-200 shadow-md"
+        >
+          Solicitar Cotización
         </a>
       </div>
     </div>
 
-    <!-- Crédito Técnico -->
-    <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-[var(--color-brand-gray)]">
+    <!-- Crédito Técnico & Copyright -->
+    <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/80 gap-4">
       <p>© {currentYear} SeAMeD S.A. Todos los derechos reservados.</p>
-      <p>Desarrollo por <a href="https://www.aim.com.ar" class="hover:text-white transition-colors">AIM</a></p>
+      <p>
+        Desarrollo por 
+        <a 
+          href="https://www.aim.com.ar" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="hover:text-white transition-colors font-medium underline underline-offset-4 decoration-white/40"
+        >
+          AIM
+        </a>
+      </p>
     </div>
   </div>
 </footer>

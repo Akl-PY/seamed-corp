@@ -1,66 +1,120 @@
 ---
-// CompanyHero.astro
-import { slide } from "astro:transitions";
+import { Image } from "astro:assets";
 import { SITE_CONFIG } from "../../config/site";
+import DoctorContactImg from "../../assets/catalog/insumo3.jpg"; // Reemplazá por la foto del médico/equipo
 
-const contactDetails = [
-  { label: "WhatsApp", value: "+54 9 351 52-26545", href: "https://wa.me/5493515226545" },
-  { label: "Email", value: "ventas@seamed.com.ar", href: "mailto:ventas@seamed.com.ar" },
-  { label: "Teléfono", value: SITE_CONFIG.organization.contactPoint?.telephone, href: `tel:${SITE_CONFIG.organization.contactPoint?.telephone}` },
+const contactOptions = [
+  { 
+    label: "Atención por WhatsApp", 
+    value: "+54 9 351 52-26545", 
+    href: "https://wa.me/5493515226545",
+    icon: "💬",
+    subtext: "Respuesta rápida para urgencias e insumos"
+  },
+  { 
+    label: "Correo Electrónico", 
+    value: "ventas@seamed.com.ar", 
+    href: "mailto:ventas@seamed.com.ar",
+    icon: "✉️",
+    subtext: "Administración, facturación y proveedores"
+  },
+  { 
+    label: "Línea Directa", 
+    value: SITE_CONFIG.organization.contactPoint?.telephone || "+54 9 351 52-26545", 
+    href: `tel:${SITE_CONFIG.organization.contactPoint?.telephone || "5493515226545"}`,
+    icon: "📞",
+    subtext: "Lunes a Viernes de 8:00 a 18:00 hs"
+  }
 ];
 ---
 
-<section class="py-12 bg-surface">
-  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center overflow-hidden">
+<section class="py-8 md:py-16 bg-surface overflow-hidden border-b border-brand-gray/10">
+  <div class="container mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
     
-    <div class="flex flex-col gap-6">
-      <h1 data-aos="fade-up" data-aos-duration="500" class="text-5xl md:text-6xl font-bold text-main leading-tight">
-        Contacta con nosotros para asesorarte <span class="tracking-tighter uppercase text-theme">HOY</span>
+    <!-- Lado Izquierdo: Información y Canales de Contacto (col-span-7) -->
+    <div class="lg:col-span-7 flex flex-col gap-6">
+      <!-- Badge superior -->
+      <div data-aos="fade-down" data-aos-duration="500" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 text-accent w-fit">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+        <span class="text-xs font-bold uppercase tracking-wider">Atención SeAMeD</span>
+      </div>
+
+      <!-- Título principal -->
+      <h1 data-aos="fade-up" data-aos-duration="500" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-main leading-tight">
+        Estamos para escucharte y <span class="text-accent">asesorarte</span>
       </h1>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-xl text-muted leading-relaxed">
-        Nuestro equipo de expertos está listo para brindarte la mejor atención personalizada. 
-        Solicita información sobre nuestros equipos o soporte técnico.
+
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-base sm:text-lg text-muted leading-relaxed max-w-2xl">
+        Ponete en contacto directo con nuestro equipo médico y comercial. Resolvemos tus dudas sobre soporte técnico, equipamiento domiciliario y gestiones administrativas.
       </p>
+
+      <!-- Canales Directos de Contacto -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+        {contactOptions.map((opt, i) => (
+          <a 
+            href={opt.href} 
+            data-aos="fade-up" 
+            data-aos-duration="500" 
+            data-aos-delay={200 + i * 100}
+            class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              <span class="text-2xl mb-2 block">{opt.icon}</span>
+              <span class="text-xs font-bold text-main/60 uppercase tracking-wider block mb-1">{opt.label}</span>
+              <span class="text-sm font-extrabold text-main group-hover:text-accent transition-colors block break-words">{opt.value}</span>
+            </div>
+            <p class="text-[11px] text-muted mt-3 pt-2 border-t border-brand-gray/10">{opt.subtext}</p>
+          </a>
+        ))}
+      </div>
+
+      <!-- Redirección a Cotización -->
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" class="pt-4">
+        <p class="text-xs sm:text-sm text-muted">
+          ¿Buscás un presupuesto formal para obra social o reintegro? 
+          <a href="/cotizar" class="font-bold text-accent hover:underline inline-flex items-center gap-1 transition-colors ml-1">
+            Ir al formulario de cotización →
+          </a>
+        </p>
+      </div>
     </div>
 
-    <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10">
-      <h3 class="text-2xl font-bold text-main mb-1">Formulario de Contacto</h3>
-      <p class="text-sm text-gray-500 mb-6">Respondemos en menos de 24 horas hábiles.</p>
-      
-      <form class="grid gap-5">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-           <input type="text" placeholder="Nombre completo" class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-theme/50 outline-none transition-all" required />
-           <input type="email" placeholder="Correo electrónico" class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-theme/50 outline-none transition-all" required />
-        </div>
+    <!-- Lado Derecho: Imagen del Médico con tarjeta flotante (col-span-5) -->
+    <div data-aos="fade-left" data-aos-duration="700" class="lg:col-span-5 relative flex justify-center">
+      <div class="relative w-full max-w-md lg:max-w-none">
         
-        <input type="text" placeholder="Asunto" class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-theme/50 outline-none transition-all" />
-        
-        <textarea placeholder="Tu mensaje..." class="w-full border border-main/20 p-3 rounded-lg min-h-[120px] resize-none focus:ring-2 focus:ring-theme/50 outline-none transition-all"></textarea>
-
-        <div class="flex flex-col gap-3">
-          <label class="flex items-center gap-3 cursor-pointer group">
-            <input type="checkbox" class="w-4 h-4 cursor-pointer accent-theme" />
-            <span class="text-sm text-main group-hover:text-theme transition-colors">Recibir copia del mensaje</span>
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer group">
-            <input type="checkbox" class="w-4 h-4 cursor-pointer accent-theme" required />
-            <span class="text-sm text-main group-hover:text-theme transition-colors">Acepto la política de privacidad</span>
-          </label>
+        <!-- Marco de Imagen Principal -->
+        <div class="relative h-[400px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-brand-gray/15">
+          <Image 
+            src={DoctorContactImg} 
+            alt="Atención médica especializada SeAMeD" 
+            class="w-full h-full object-cover object-center"
+            width={600}
+            height={700}
+            loading="eager"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-main/70 via-transparent to-transparent"></div>
         </div>
 
-        <button type="submit" class="w-full bg-theme text-white font-bold py-4 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-theme/20">
-          Enviar Mensaje
-        </button>
-      </form>
+        <!-- Tarjeta Flotante Inferior (Glassmorphism) -->
+        <div class="absolute -bottom-6 left-6 right-6 p-5 rounded-2xl bg-bg/90 backdrop-blur-md border border-brand-gray/20 shadow-xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center font-bold text-lg flex-shrink-0">
+              🩺
+            </div>
+            <div>
+              <p class="text-xs font-bold text-main">Soporte Médico & Técnico</p>
+              <p class="text-[11px] text-muted">Atención personalizada y profesional</p>
+            </div>
+          </div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold text-emerald-600 bg-emerald-500/10 border border-emerald-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Disponible
+          </span>
+        </div>
+
+      </div>
     </div>
 
-    <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8 pt-4 pb-2 border-t border-main/10">
-      {contactDetails.map((item, i)=> (
-        <a href={item.href} data-aos="fade-down" data-aos-duration="500" data-aos-delay={600 + i * 200} class="flex flex-col items-center text-center border border-transparent rounded-2xl hover:text-theme transition-colors hover:border-theme duration-500 active:scale-95">
-          <span class="text-sm text-brand-gray uppercase tracking-widest mb-1">{item.label}</span>
-          <span class="text-lg font-bold ">{item.value}</span>
-        </a>
-      ))}
-    </div>
   </div>
 </section>

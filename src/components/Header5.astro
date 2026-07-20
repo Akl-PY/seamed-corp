@@ -1,0 +1,125 @@
+---
+import { Image } from "astro:assets";
+import SeamedLogo from "../assets/seamed.png";
+
+const links = [
+  { name: "Servicios", href: "#servicios" },
+  { name: "Insumos médicos", href: "#insumos" },
+  { name: "Nosotros", href: "#nosotros" },
+  { name: "Contacto", href: "#contacto" },
+  { name: "Solicitar Cotización", href: "#cotizar" }
+];
+---
+
+<header id="main-header" class="w-full bg-bg">
+  <!-- 1. BLOQUE LOGO MOBILE (Flujo normal, scrollea y se oculta) -->
+  <div id="logo-mobile-container" class="flex justify-center items-center py-3 md:hidden border-b border-brand-gray/10 bg-bg transition-all">
+    <a href="/" class="p-1 focus-visible:outline-2 focus-visible:outline-theme" aria-label="SeAMeD S.A. - Volver al inicio">
+      <Image 
+        class="h-9 w-auto object-contain" 
+        src={SeamedLogo}
+        alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
+        width="200" 
+        height="35"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </a>
+  </div>
+
+  <!-- 2. BARRA DE NAVEGACIÓN (Se transforma en FIXED al bajar) -->
+  <div 
+    id="nav-bar" 
+    class="w-full bg-bg/95 backdrop-blur-md border-b border-brand-gray/15 transition-all duration-200 z-50"
+  >
+    <div class="mx-auto flex h-14 md:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      
+      <!-- Logo Desktop -->
+      <div class="hidden md:flex md:flex-1">
+        <a href="/" class="-m-1.5 p-1.5 focus-visible:outline-2 focus-visible:outline-theme" aria-label="SeAMeD S.A. - Volver al inicio">
+          <Image 
+            class="h-10 w-auto object-contain" 
+            src={SeamedLogo}
+            alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
+            width="250" 
+            height="40"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </a>
+      </div>
+
+      <!-- Links Mobile (Scroll horizontal) -->
+      <div class="flex md:hidden w-full overflow-x-auto no-scrollbar py-1 items-center space-x-3 text-xs font-semibold whitespace-nowrap">
+        {links.map((link) => (
+          <a 
+            href={link.href} 
+            class="px-2.5 py-1 text-main hover:text-theme transition-colors duration-200 rounded-md active:bg-surface"
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+
+      <!-- Links Desktop -->
+      <nav class="hidden md:flex text-center md:gap-x-8 lg:gap-x-10" aria-label="Navegación principal desktop">
+        {links.map((link) => (
+          <a href={link.href} class="text-sm font-semibold tracking-wide text-main hover:text-theme transition-colors duration-200">{link.name}</a>
+        ))}
+      </nav>
+
+      <!-- Botón Cotizar Desktop -->
+      <div class="hidden md:flex md:flex-1 md:justify-end">
+        <a 
+          href="/cotizar" 
+          class="inline-flex items-center justify-center rounded-lg bg-theme px-5 py-2.5 text-sm font-bold text-main shadow-xs hover:bg-accent transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme"
+        >
+          Solicitar Cotización
+        </a>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Spacer invisible para evitar el 'salto' cuando la nav pasa a fixed -->
+<div id="nav-spacer" class="hidden h-14 md:h-20"></div>
+
+<script>
+const setupFixedNav = () => {
+  const logoContainer = document.getElementById("logo-mobile-container");
+  const navBar = document.getElementById("nav-bar");
+  const spacer = document.getElementById("nav-spacer");
+
+  if (!navBar || !spacer) return;
+
+  const handleScroll = () => {
+
+    const logoHeight = logoContainer ? logoContainer.offsetHeight : 50;
+
+
+    if (window.scrollY > logoHeight) {
+      navBar.classList.add("fixed", "top-0", "left-0", "shadow-md");
+      spacer.classList.remove("hidden");
+    } else {
+      navBar.classList.remove("fixed", "top-0", "left-0", "shadow-md");
+      spacer.classList.add("hidden");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+};
+
+
+document.addEventListener("astro:page-load", setupFixedNav);
+</script>
+
+<style>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>

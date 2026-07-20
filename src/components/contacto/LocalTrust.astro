@@ -1,0 +1,110 @@
+---
+import { SITE_CONFIG } from "../../config/site";
+import { MapPin, Navigation } from "lucide-astro";
+
+// LocalTrust.astro
+// Integración de Local SEO con carga diferida de Google Maps/Reviews.
+const MAP_URL = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6810.716027764946!2d-64.2222637!3d-31.4042608!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a2a6e80f294d%3A0x527eaa34ded1a60f!2sSeAMeD%20S.A.!5e0!3m2!1ses-419!2sar!4v1780420464893!5m2!1ses-419!2sar";
+---
+
+<section class="py-12 bg-surface" id="ubicacion">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    
+    <div class="flex flex-col gap-6">
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl md:text-3xl font-bold text-main min-h-[2.5rem] flex items-center flex-wrap gap-2">
+        <span>Estamos en</span>
+        <span class="relative inline-block overflow-hidden h-9 w-64">
+          {["Córdoba", "Argentina", "Dean Funes 2870", "Todo el País"].map((line, i) => (
+            <span 
+              class={`text-accent font-bold absolute left-0 top-0 transition-opacity duration-500 uppercase tracking-tighter ${i === 0 ? "opacity-100" : "opacity-0"}`} 
+              data-class="line"
+            >
+              {line}
+            </span>
+          ))}
+        </span>
+      </h2>
+
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted leading-relaxed">
+        Atención personalizada en nuestro showroom y soporte técnico para toda la provincia de Córdoba. 
+        Coordiná tu visita o solicita asistencia inmediata.
+      </p>
+      
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" class="flex flex-col gap-4">
+        <address class="not-italic text-main font-semibold flex items-center gap-2">
+          <MapPin class="w-5 h-5 text-accent flex-shrink-0" />
+          <span>Dirección: {SITE_CONFIG.organization.address?.streetAddress}, Córdoba.</span>
+        </address>
+      </div>
+      
+      <a 
+        data-aos="fade-up" 
+        data-aos-duration="500" 
+        data-aos-delay={600} 
+        href={SITE_CONFIG.social.googleMaps} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3.5 bg-main text-white font-bold rounded-xl hover:bg-black transition-all w-fit shadow-md active:scale-95 text-sm"
+      >
+        <Navigation class="w-4 h-4 text-accent" />
+        <span>Cómo llegar (Google Maps)</span>
+      </a>
+    </div>
+
+    <!-- Bloque de Mapa Diferido -->
+    <div data-aos="flip-up" data-aos-duration="1000" data-aos-delay="600" class="relative w-full h-[380px] rounded-2xl overflow-hidden shadow-xl bg-gray-200" id="map-container">
+      <iframe
+        data-src={MAP_URL}
+        class="w-full h-full z-20 border-0 opacity-0 transition-opacity duration-700"
+        loading="lazy"
+        title="Ubicación de SeAMeD S.A. en Google Maps"
+        onload="this.style.opacity='1'"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<script>
+  let textInterval: any | undefined;
+
+  function initLocalTrust() {
+    // 1. Animación de texto rotativo
+    const lines = document.querySelectorAll<HTMLElement>('[data-class="line"]');
+    if (lines.length > 0) {
+      if (textInterval) clearInterval(textInterval);
+      let currentLine = 0;
+
+      textInterval = setInterval(() => {
+        lines.forEach(line => {
+          line.classList.remove('opacity-100');
+          line.classList.add('opacity-0');
+        });
+
+        currentLine = (currentLine + 1) % lines.length;
+        lines[currentLine].classList.remove('opacity-0');
+        lines[currentLine].classList.add('opacity-100');
+      }, 3000);
+    }
+
+    // 2. Observer diferido para el mapa
+    const mapContainer = document.getElementById('map-container');
+    if (mapContainer) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const iframe = entry.target.querySelector('iframe');
+            if (iframe && !iframe.src) {
+              iframe.src = iframe.dataset.src || '';
+            }
+            obs.unobserve(entry.target); // Dejamos de observar una vez cargado
+          }
+        });
+      }, { rootMargin: "100px" });
+
+      observer.observe(mapContainer);
+    }
+  }
+
+  // Ejecuta al cargar y en cada cambio de vista con Astro ViewTransitions
+  document.addEventListener('astro:page-load', initLocalTrust);
+</script>

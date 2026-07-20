@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import InsumoHeroImg from "../../assets/catalog/insumo1.jpg"; // Cambiá por tu imagen principal
+---
+
+<section class="relative pt-12 pb-16 bg-surface w-full overflow-hidden border-b border-brand-gray/10">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    
+    <!-- Lado Izquierdo: Textos y Propuesta de Valor -->
+    <div class="flex flex-col gap-5">
+      <div data-aos="fade-down" data-aos-duration="500" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent w-fit">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+        <span class="text-xs font-bold uppercase tracking-wider">Provisión e Insumos Médicos</span>
+      </div>
+
+      <h1 data-aos="fade-up" data-aos-duration="500" class="text-4xl md:text-5xl lg:text-6xl font-bold text-main leading-tight">
+        Insumos de alta calidad <br />
+        <span class="text-accent">para cada necesidad</span>
+      </h1>
+
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-base md:text-lg text-muted leading-relaxed">
+        Garantizamos el abastecimiento continuo de descartables y material médico de primer nivel para tratamientos domiciliarios e institucionales. Seguridad, trazabilidad y marcas certificadas.
+      </p>
+
+      <!-- Badges de confianza -->
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" class="grid grid-cols-3 gap-4 pt-4 border-t border-brand-gray/15">
+        <div>
+          <span class="block text-xl md:text-2xl font-extrabold text-main">+100</span>
+          <span class="text-xs text-muted font-medium">Productos en stock</span>
+        </div>
+        <div>
+          <span class="block text-xl md:text-2xl font-extrabold text-main">ANMAT</span>
+          <span class="text-xs text-muted font-medium">Calidad certificada</span>
+        </div>
+        <div>
+          <span class="block text-xl md:text-2xl font-extrabold text-main">24/48h</span>
+          <span class="text-xs text-muted font-medium">Envíos programados</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lado Derecho: Imagen destacada -->
+    <div data-aos="fade-left" data-aos-duration="600" class="relative">
+      <div class="relative w-full h-[350px] sm:h-[420px] rounded-3xl overflow-hidden shadow-2xl border border-brand-gray/15">
+        <Image 
+          src={InsumoHeroImg} 
+          alt="Insumos médicos de alta calidad SeAMeD" 
+          class="w-full h-full object-cover"
+          width={700}
+          height={500}
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6 text-white">
+          <p class="text-xs uppercase font-bold tracking-wider text-accent">Atención Domiciliaria e Institucional</p>
+          <p class="text-sm font-medium mt-1">Soluciones integrales para pacientes, clínicas y obras sociales.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets";
+import {slide} from "astro:transitions";
+import SeamedLogo from "../assets/seamed.png";
+
+const links = [
+  { name: "Servicios", href: "/nosotros" },
+  { name: "Insumos medicos", href: "/equipamiento" },
+  { name: "Nosotros", href: "/insumos" },
+  { name: "Contacto", href: "/contacto" },
+  { name:"Solicitar Cotización", href:"/cotizar"}
+]
+
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-brand-gray/15 bg-bg/90 backdrop-blur-md transition-all duration-300">
+  <div  class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex lg:flex-1">
+      <a href="/" class="-m-1.5 p-1.5 focus-visible:outline-2 focus-visible:outline-theme" aria-label="SeAMeD S.A. - Volver al inicio">
+        <Image 
+          class="h-10 w-auto object-contain" 
+          src={SeamedLogo}
+          alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
+          width="250" 
+          height="40"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </a>
+    </div>
+
+    <button 
+  type="button" 
+  id="mobile-menu-btn"
+  class="group md:hidden -m-2.5 p-2.5 rounded-md text-main focus-visible:outline-2 focus-visible:outline-theme"
+  aria-controls="mobile-menu"
+  aria-expanded="false"
+>
+  <div class="relative w-6 h-6 flex items-center justify-center">
+    
+    <div class="absolute inset-0 transition-all duration-300 ease-in-out group-aria-expanded:opacity-0 group-aria-expanded:rotate-90">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+      </svg>
+    </div>
+
+    <div class="absolute inset-0 transition-all duration-300 ease-in-out opacity-0 group-aria-expanded:opacity-100 group-aria-expanded:-rotate-90">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </div>
+    
+  </div>
+</button>
+
+    <nav class="hidden md:flex text-center md:gap-x-10" aria-label="Navegación principal desktop">
+      {links.map((link) => (
+        <a href={link.href} class="text-sm font-semibold tracking-wide text-main hover:text-theme transition-colors duration-200">{link.name}</a>
+      ))}
+    </nav>
+
+    <div class="hidden md:flex md:flex-1 md:justify-end">
+      <a 
+        href="/cotizar" 
+        class="inline-flex items-center justify-center rounded-lg bg-theme px-5 py-2.5 text-sm font-bold text-main shadow-xs hover:bg-accent transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-theme"
+      >
+        Solicitar Cotización
+      </a>
+    </div>
+  </div>
+
+<div
+  id="mobile-menu"
+  class="hidden overflow-hidden text-center border-t border-brand-gray/10 bg-bg px-4 shadow-xl"
+>
+  <div class="space-y-2 py-6">
+    {links.map((link) => (
+      <a href={link.href} class="mobile-link last:bg-theme last:text-main block rounded-lg px-3 py-1 text-base font-medium text-main hover:bg-surface">{link.name}</a>
+    ))}
+
+  </div>
+</div>
+</div>
+</header>
+
+<script>
+document.addEventListener("astro:page-load", () => {
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (!menuBtn || !mobileMenu) return;
+
+  // Evitar listeners duplicados
+  if (menuBtn.dataset.initialized === "true") return;
+  menuBtn.dataset.initialized = "true";
+
+  const closeMenu = () => {
+    menuBtn.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.add("hidden");
+  };
+
+  const toggleMenu = () => {
+    const expanded =
+      menuBtn.getAttribute("aria-expanded") === "true";
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      (!expanded).toString()
+    );
+
+    mobileMenu.classList.toggle("hidden");
+  };
+
+  menuBtn.addEventListener("click", toggleMenu);
+
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+});
+</script>
