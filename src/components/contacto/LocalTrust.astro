@@ -11,7 +11,7 @@ const MAP_URL = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6810.71602
   <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
     
     <div class="flex flex-col gap-6">
-      <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl md:text-3xl font-bold text-main min-h-[2.5rem] flex items-center flex-wrap gap-2">
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl md:text-3xl font-bold text-theme min-h-[2.5rem] flex items-center flex-wrap gap-2">
         <span>Estamos en</span>
         <span class="relative inline-block overflow-hidden h-9 w-64">
           {["Córdoba", "Argentina", "Dean Funes 2870", "Todo el País"].map((line, i) => (
@@ -25,8 +25,8 @@ const MAP_URL = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6810.71602
         </span>
       </h2>
 
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted leading-relaxed">
-        Atención personalizada en nuestro showroom y soporte técnico para toda la provincia de Córdoba. 
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted leading-relaxed text-sm sm:text-base">
+        Atención personalizada en nuestras oficinas en Córdoba. 
         Coordiná tu visita o solicita asistencia inmediata.
       </p>
       
@@ -44,7 +44,7 @@ const MAP_URL = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6810.71602
         href={SITE_CONFIG.social.googleMaps} 
         target="_blank" 
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 px-6 py-3.5 bg-main text-white font-bold rounded-xl hover:bg-black transition-all w-fit shadow-md active:scale-95 text-sm"
+        class="inline-flex items-center gap-2 px-6 py-3.5 bg-theme text-white font-bold rounded-xl hover:bg-black transition-all w-fit shadow-md active:scale-95 text-sm"
       >
         <Navigation class="w-4 h-4 text-accent" />
         <span>Cómo llegar (Google Maps)</span>
