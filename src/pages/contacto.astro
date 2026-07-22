@@ -3,9 +3,14 @@ import Layout from "../layouts/Layout.astro";
 import ContactoHero from "../components/contacto/ContactoHero.astro";
 import OtherNumbers from "../components/contacto/OtherNumbers.astro";
 import LocalTrust from "../components/contacto/LocalTrust.astro";
+import type { SEOProps } from "../core/types/seo";
+import titleGenerator from "../core/scripts/title-generator";
+const seo:SEOProps={
+    title: titleGenerator("Contacto"),
+}
 ---
 
-<Layout>
+<Layout seo={seo}>
   <ContactoHero />
   <OtherNumbers />
   <LocalTrust />

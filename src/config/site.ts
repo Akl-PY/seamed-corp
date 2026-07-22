@@ -44,13 +44,13 @@ interface SiteConfig extends SEOProps {
 }
 
 export const SITE_CONFIG: SiteConfig = {    
-    name: "Seamed S.A.",
-    tagline: "Innovación y Excelencia Médica",
+    name: "SeAMeD S.A.",
+    tagline: "Equipamiento e Insumos medicos",
     description: "Especialistas en soluciones integrales de salud y equipamiento médico de alta complejidad. Garantizamos máxima seguridad, tecnología avanzada y estándares internacionales.",
     url: "https://seamed.com.ar",
     domain: "seamed.com.ar",
     author: "Seamed S.A.",
-    themeColor: "#0055A5", // Azul clínico/corporativo premium de alta confianza
+    themeColor: "#0055A5", 
     ogImage: "seamed-og.jpeg",
     icon: {
         url: "/favicon.svg",
@@ -86,6 +86,6 @@ export const SITE_CONFIG: SiteConfig = {
     },
     // Propiedades extra declaradas al final de tu objeto original
     colorTheme: "#0055A5",
-    title: "Seamed S.A. | Innovación y Excelencia Médica",
+    title: "SeAMeD S.A. | Equipamiento e Insumos medicos",
     image: "seamed-og.jpeg"
 }

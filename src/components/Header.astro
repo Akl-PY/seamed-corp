@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import SeamedLogo from "../assets/seamed.png";
+import SeamedLogo from "../assets/SeamedLogoHor.png";
 
 const pathname = new URL(Astro.request.url).pathname;
 
@@ -20,7 +20,7 @@ const links = [
         class="h-20 w-auto object-contain" 
         src={SeamedLogo}
         alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
-        width="100" 
+        width="300" 
         height="100"
         loading="eager"
         fetchpriority="high"
@@ -37,11 +37,11 @@ const links = [
       <div class="hidden md:flex md:flex-1">
         <a href="/" class="-m-1.5 p-1.5 focus-visible:outline-2 focus-visible:outline-accent" aria-label="SeAMeD S.A. - Volver al inicio">
           <Image 
-            class="h-30 w-auto object-contain" 
+            class="h-20 w-auto object-contain" 
             src={SeamedLogo}
             alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
-            width="100" 
-            height="100"
+            width="600" 
+            height="200"
             loading="eager"
             fetchpriority="high"
           />

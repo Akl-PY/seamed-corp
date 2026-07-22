@@ -5,9 +5,14 @@ import BrandTrust from "../components/BrandTrust.astro";
 import Services from "../components/Services.astro";
 import GridEquipamiento from "../components/GridEquipamiento.astro";
 import Features from "../components/Features.astro";
+import type { SEOProps } from "../core/types/seo";
+import titleGenerator from "../core/scripts/title-generator"
+const seo:SEOProps={
+    title: titleGenerator("Inicio"),
+}
 ---
 
-<Layout>
+<Layout seo={seo}>
 <Hero/>
 <BrandTrust/>
 <Services/>
