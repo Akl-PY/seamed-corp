@@ -1,6 +1,5 @@
 ---
 import InsumosHero from "../components/insumos/InsumosHero.astro";
-import PatologiesCards from "../components/insumos/PatologiesCards.astro";
 import PatologiesDetailed from "../components/insumos/PatologiesDetailed.astro";
 import titleGenerator from "../core/scripts/title-generator";
 import type { SEOProps } from "../core/types/seo";
@@ -12,6 +11,6 @@ const seo:SEOProps={
 
 <Layout seo={seo}>
     <InsumosHero/>
-    <PatologiesCards/>
+
     <PatologiesDetailed/>
 </Layout>

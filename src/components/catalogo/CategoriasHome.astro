@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import servicios from "../../data/servicios";
+import Image from "astro/components/Image.astro";
 ---
 
 <section id="servicios" class="py-16 overflow-hidden bg-surface">
@@ -32,6 +33,8 @@ import servicios from "../../data/servicios";
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 width={400}
                 height={300}
+                loading="eager"
+                fetchpriority="high"
               />
               <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
             </div>
@@ -79,11 +82,13 @@ import servicios from "../../data/servicios";
 
         <!-- Columna Imagen -->
         <div class="relative w-full md:w-5/12 h-64 md:h-auto min-h-[250px] bg-surface flex-shrink-0">
-          <img 
-            id="selectedImage"
-            src="" 
-            alt=""
-            class="w-full h-full object-cover"
+          <Image
+           id="selectedImage"
+          src={servicios[0].image}
+          alt={servicios[0].alt}
+          class="w-full h-full object-cover"
+          loading={"eager"}
+          fetchpriority={"high"}
           />
           <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent md:hidden"></div>
         </div>
@@ -107,7 +112,7 @@ import servicios from "../../data/servicios";
             <a 
               id="modalActionBtn" 
               href="#cotizar" 
-              class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-xs sm:text-sm font-bold text-main shadow-lg hover:bg-accent transition-all duration-200 active:scale-98"
+              class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-accent transition-all duration-200 active:scale-98"
             >
               <span id="selectedButtonText">Solicitar Asesoramiento</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -179,7 +184,7 @@ import servicios from "../../data/servicios";
       }
     }
 
-    // 1. Manejo de Clics en Cards (Intercepción directa para compatibilidad con ViewTransitions)
+
     document.querySelectorAll(".service-card").forEach(card => {
       card.addEventListener("click", (e) => {
         e.preventDefault();
@@ -193,19 +198,15 @@ import servicios from "../../data/servicios";
       });
     });
 
-    // 2. Listeners de cierre
     overlay?.addEventListener("click", closeModal);
     closeModalBtn?.addEventListener("click", closeModal);
     modalActionBtn?.addEventListener("click", closeModal);
 
-    // 3. Soporte para el botón 'Atrás / Adelante' del navegador
     window.addEventListener("popstate", checkHash);
     window.addEventListener("hashchange", checkHash);
 
-    // 4. Verificación inicial de Hash al cargar la página
+
     checkHash();
   }
-
-  // Se ejecuta en la carga inicial y tras cada navegación con Astro Client Router / View Transitions
   document.addEventListener("astro:page-load", initServiciosModal);
 </script>

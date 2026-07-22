@@ -84,25 +84,33 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
 
             <!-- Estado Con Archivo Cargado -->
             <div
-              id="file-uploaded"
-              class="hidden items-center justify-between w-full p-3 rounded-lg bg-accent/10 text-accent font-medium text-sm transition-all z-10"
-            >
-              <div class="flex items-center gap-2 overflow-hidden pr-2">
-                <FileText class="w-5 h-5 flex-shrink-0 text-accent" />
-                <div class="flex flex-col min-w-0">
-                  <span id="file-name" class="truncate text-main font-semibold text-xs"></span>
-                  <span id="file-size" class="text-[10px] text-muted"></span>
-                </div>
-              </div>
-              <button
-                type="button"
-                id="remove-file"
-                class="p-1.5 rounded-full hover:bg-accent/20 text-main/60 hover:text-red-500 transition-colors z-20 cursor-pointer"
-                title="Eliminar archivo"
-              >
-                <X class="w-4 h-4" />
-              </button>
-            </div>
+  id="file-uploaded"
+  class="hidden grid-cols-[1fr_auto]  items-center gap-2 w-full p-3 rounded-lg bg-accent/10 text-accent font-medium text-sm transition-all z-10"
+>
+  <div class="flex flex-1 items-center gap-2 min-w-0 overflow-hidden">
+    <FileText class="w-5 h-5 shrink-0 text-accent" />
+
+    <div class="flex-1  overflow-hidden">
+      <span
+      id="file-name"
+      class="block max-w-[80%] flex-1 truncate text-main font-semibold text-xs"
+    ></span>
+
+      <span
+        id="file-size"
+        class="block w-fit text-[10px] text-muted"
+      ></span>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    id="remove-file"
+    class="shrink-0 p-1.5 rounded-full hover:bg-accent/20 text-main/60 hover:text-red-500 transition-colors"
+  >
+    <X class="w-4 h-4" />
+  </button>
+</div>
 
             <!-- Input File Oculto pero Funcional -->
             <input
@@ -251,7 +259,7 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       if (uploadPrompt) uploadPrompt.classList.add("hidden");
       if (fileUploaded) {
         fileUploaded.classList.remove("hidden");
-        fileUploaded.classList.add("flex");
+        fileUploaded.classList.add("grid");
       }
       
       // Ocultar interacción del input para no bloquear el botón de remover
