@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import Img1 from "../../assets/catalog/insumo1.jpg";
 import Img2 from "../../assets/catalog/insumo2.jpg";
+import Img3 from "../../assets/catalog/insumo3.jpg";
+import Img4 from "../../assets/catalog/insumo4.jpg";
 
 const rubrosDetallados = [
   {
@@ -46,7 +48,7 @@ const rubrosDetallados = [
     id: "vascular",
     title: "Acceso Vascular y Terapia de Infusión",
     badge: "Cuidado de Vías",
-    image: Img1,
+    image: Img3,
     description: "Material para la fijación, curación y mantenimiento de accesos venosos periféricos y centrales, minimizando el riesgo de infecciones asociadas al catéter.",
     products: [
       { name: "Fijadores y Apósitos Transparentes", detail: "Con tecnología respirable y gluconato de clorhexidina integrados." },
@@ -60,6 +62,44 @@ const rubrosDetallados = [
       "Kits estériles de curación e higiene de vía central",
       "Cintas y parches de fijación quirúrgica hipoalergénica"
     ]
+  },
+  {
+    id: "cirugia",
+    title: "Cirugía y Cuidado de Heridas",
+    badge: "Suturas y Curaciones",
+    image: Img4,
+    description: "Insumos e instrumental descartable especializado para procedimientos quirúrgicos, curación avanzada de heridas complejas y manejo de drenajes.",
+    products: [
+      { name: "Suturas Quirúrgicas", detail: "Seda, nylon, Vicryl y PDS con agujas de alta precisión." },
+      { name: "Apósitos de Curación Avanzada", detail: "Hidrocoloides, alginatos y espumas de poliuretano estériles." },
+      { name: "Sistemas de Drenaje", detail: "Drenajes Jackson-Pratt, Redon y frascos de aspiración estéril." }
+    ],
+    otherProducts: [
+      "Hojas y mangos de bisturí descartables estériles",
+      "Gasas, compresas y vendas quirúrgicas",
+      "Batas, camisolines y campos quirúrgicos impermeables",
+      "Guantes quirúrgicos estériles libres de talco",
+      "Soluciones antisépticas (Iodopovidona, Clorhexidina)"
+    ]
+  },
+  {
+    id: "respiratorio",
+    title: "Terapia Respiratoria y Oxigenoterapia",
+    badge: "Soporte Ventilatorio",
+    image: Img1,
+    description: "Equipamiento e insumos descartables para administración de oxígeno, humidificación, aeroterapia y manejo de vías aéreas en pacientes críticos y ambulatorios.",
+    products: [
+      { name: "Cánulas y Máscaras de O₂", detail: "Sistemas Venturi, con reservorio y cánulas nasales ultra suaves." },
+      { name: "Aerocámaras y Inhaloterapia", detail: "Espaciadores estáticos y portátiles para adultos y pediatría." },
+      { name: "Filtros y Humidificadores", detail: "Filtros HME antibacterianos/virales y vasos humidificadores." }
+    ],
+    otherProducts: [
+      "Sondas de aspiración traqueal con válvula de control",
+      "Tubos endotraqueales y cánulas de traqueostomía",
+      "Kits de nebulización a pistón y ultrasónicos",
+      "Líneas de extensión para oxígeno y conectores universales",
+      "Sensores de oximetría de pulso y oxímetros portátiles"
+    ]
   }
 ];
 ---
@@ -68,7 +108,7 @@ const rubrosDetallados = [
   <div class="container mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16">
       <span class="text-xs font-bold text-accent uppercase tracking-wider">Catálogo Especializado</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-theme mt-1">Insumos Medicos por Patologías</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-theme mt-1">Insumos Médicos por Patologías</h2>
     </div>
 
     <div class="space-y-16">

@@ -7,22 +7,27 @@ import DoctorContactImg from "../../assets/catalog/insumo3.jpg"; // Reemplazá p
 const contactOptions = [
   { 
     label: "Atención por WhatsApp", 
-    value: "+54 9 351 52-26545", 
-    href: "https://wa.me/5493515226545",
+    items: [
+      { value: "351 522-6545", href: "https://wa.me/5493515226545" },
+      { value: "351 677-2000", href: "https://wa.me/5493516772000" }
+    ],
     icon: MessageSquare,
     subtext: "Respuesta rápida para urgencias e insumos"
   },
   { 
     label: "Correo Electrónico", 
-    value: "ventas@seamed.com.ar", 
-    href: "mailto:ventas@seamed.com.ar",
+    items: [
+      { value: "ventas@seamed.com.ar", href: "mailto:ventas@seamed.com.ar" },
+      { value: "cotizaciones@seamed.com.ar", href: "mailto:cotizaciones@seamed.com.ar" }
+    ],
     icon: Mail,
-    subtext: "Administración, facturación y proveedores"
+    subtext: "Administración, presupuestos y proveedores"
   },
   { 
-    label: "Línea Directa", 
-    value: SITE_CONFIG.organization.contactPoint?.telephone || "+54 9 351 52-26545", 
-    href: `tel:${SITE_CONFIG.organization.contactPoint?.telephone || "5493515226545"}`,
+    label: "Línea Directa / Fijo", 
+    items: [
+      { value: "351 898-0811", href: "tel:03518980811" }
+    ],
     icon: Phone,
     subtext: "Lunes a Viernes de 8:00 a 18:00 hs"
   }
@@ -54,8 +59,7 @@ const contactOptions = [
         {contactOptions.map((opt, i) => {
           const IconComponent = opt.icon;
           return (
-            <a 
-              href={opt.href} 
+            <div 
               data-aos="fade-up" 
               data-aos-duration="500" 
               data-aos-delay={200 + i * 100}
@@ -65,11 +69,24 @@ const contactOptions = [
                 <span class="mb-3 block text-accent group-hover:scale-110 transition-transform duration-300">
                   <IconComponent class="w-6 h-6 stroke-[1.75]" />
                 </span>
-                <span class="text-xs font-bold text-main/60 uppercase tracking-wider block mb-1">{opt.label}</span>
-                <span class="text-sm font-extrabold text-main group-hover:text-accent transition-colors block break-words">{opt.value}</span>
+                <span class="text-xs  uppercase tracking-wider block mb-2">{opt.label}</span>
+                
+                <!-- Sub-lista de enlaces (Múltiples elementos por tarjeta) -->
+                <div class="flex flex-col gap-1">
+                  {opt.items.map((item) => (
+                    <a 
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : "_self"}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      class="text-sm text-muted transition-colors block break-words"
+                    >
+                      {item.value}
+                    </a>
+                  ))}
+                </div>
               </div>
               <p class="text-[11px] text-muted mt-3 pt-2 border-t border-brand-gray/10">{opt.subtext}</p>
-            </a>
+            </div>
           );
         })}
       </div>

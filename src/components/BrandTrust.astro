@@ -14,16 +14,16 @@ import YuwellLogo from '../assets/yuwell.jpeg';
 
 import { Image } from 'astro:assets';
 const brands = [
-  { name: "Abott", logo: AbottLogo },
-  { name: "BMC", logo: BmcLogo },
-  { name: "GCE", logo: GceLogo },
-  { name: "Lexel", logo: LexelLogo },
-  { name: "Medtronic", logo: MedtronicLogo },
-  { name: "Pari", logo: PariLogo },
-  { name: "Respironics", logo: RespironicsLogo },
-  { name: "Resmed", logo: ResmedLogo },
-  { name: "Silmag", logo: SilmagLogo },
-  { name: "Yuwell", logo: YuwellLogo }
+  { name: "Abott", logo: AbottLogo, isSvg: false },
+  { name: "BMC", logo: BmcLogo, isSvg: false },
+  { name: "GCE", logo: GceLogo, isSvg: false },
+  { name: "Lexel", logo: LexelLogo, isSvg: true },
+  { name: "Medtronic", logo: MedtronicLogo, isSvg: false },
+  { name: "Pari", logo: PariLogo, isSvg: false },
+  { name: "Respironics", logo: RespironicsLogo, isSvg: false },
+  { name: "Resmed", logo: ResmedLogo, isSvg: false },
+  { name: "Silmag", logo: SilmagLogo, isSvg: false },
+  { name: "Yuwell", logo: YuwellLogo, isSvg: false }
 ];
 ---
 
@@ -35,12 +35,12 @@ const brands = [
     
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-80">
       {brands.map((brand, i) => (
-        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay={i * 100} class={`flex justify-center grayscale border border-brand-gray h-30 items-center p-4 rounded-2xl hover:grayscale-0 transition-all duration-500 ${i === brands.length - 1 && brands.length % 2 === 1 ? 'col-span-2 md:col-span-1' : ''}`}>
+        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay={i * 100} class={`flex justify-center md:grayscale border border-brand-gray h-30 items-center p-4 rounded-2xl hover:md:grayscale-0 transition-all duration-500 ${i === brands.length - 1 && brands.length % 2 === 1 ? 'col-span-2 md:col-span-1' : ''}`}>
 
           <Image
             src={brand.logo} 
             alt={`Distribuidor oficial de ${brand.name} en Córdoba`}
-            class=" w-auto object-contain max-h-16"
+            class={` w-auto object-contain max-h-16 ${brand.isSvg ? 'text-main' : ''}`}
             loading="lazy"
             fetchpriority="high"
           />

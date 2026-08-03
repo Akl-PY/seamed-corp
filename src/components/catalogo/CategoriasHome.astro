@@ -1,6 +1,62 @@
 ---
 import { Image } from "astro:assets";
+import { ChevronDown, HelpCircle } from "lucide-astro";
 import servicios from "../../data/servicios";
+
+// Datos para las 3 columnas de Soporte y Educación (Terapia de Sueño / FAQ)
+const soporteEducacion = [
+  {
+    categoria: "Terapia de Sueño & CPAP",
+    preguntas: [
+      {
+        q: "¿Cómo debo limpiar mi máscara de CPAP?",
+        a: "Se recomienda lavar la almohadilla diariamente con agua tibia y jabón neutro. Evitá el uso de alcohol o detergentes abrasivos."
+      },
+      {
+        q: "¿Cada cuánto se cambian los filtros?",
+        a: "Los filtros desechables se reemplazan cada 30 días o al tornarse grises. Los filtros lavables se enjuagan semanalmente con agua."
+      },
+      {
+        q: "¿Qué hago si siento sequedad al dormir?",
+        a: "Aumentá progresivamente el nivel del humidificador térmico o consultá con nuestro equipo para ajustar la temperatura y humedad."
+      }
+    ]
+  },
+  {
+    categoria: "Uso y Mantenimiento",
+    preguntas: [
+      {
+        q: "¿Qué mantenimiento requiere el concentrador?",
+        a: "Lavar el filtro de aire externo una vez por semana con agua tibia y dejar secar por completo antes de volver a colocarlo."
+      },
+      {
+        q: "¿Qué hacer ante un corte de luz?",
+        a: "Conectar inmediatamente la cánula al tubo o cilindro de oxígeno de reserva provisto para situaciones de emergencia."
+      },
+      {
+        q: "¿Puedo viajar con los equipos?",
+        a: "Sí, los equipos portátiles cuentan con certificación FAA para uso en transporte aéreo. Consultanos previa salida."
+      }
+    ]
+  },
+  {
+    categoria: "Cobertura y Gestión",
+    preguntas: [
+      {
+        q: "¿Disponen de servicio de guardia?",
+        a: "Contamos con soporte técnico de guardia disponible para urgencias con equipamiento de soporte vital."
+      },
+      {
+        q: "¿Cómo presento el trámite a la Obra Social?",
+        a: "Emitimos la documentación técnica y presupuestos requeridos para la solicitud de cobertura ante prepagas u obras sociales."
+      },
+      {
+        q: "¿Realizan envíos de insumos a domicilio?",
+        a: "Sí, realizamos entregas y despachos programados de mascarillas, tubuladuras, filtros y accesorios directamente a tu domicilio."
+      }
+    ]
+  }
+];
 ---
 
 <section id="servicios" class="py-16 overflow-hidden bg-surface">
@@ -12,7 +68,7 @@ import servicios from "../../data/servicios";
       <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted mt-2 text-xs sm:text-sm">Soluciones adaptadas a las necesidades clínicas de cada paciente</p>
     </div>
 
-    <!-- Grilla de Tarjetas -->
+    <!-- Grilla de Tarjetas (Mapeo normal de las 8 especialidades) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {servicios.map((srv, index) => (
         <a 
@@ -56,6 +112,50 @@ import servicios from "../../data/servicios";
       ))}
     </div>
 
+    <!-- BLOQUE FUERA DEL MAP: SOPORTE Y EDUCACIÓN AL PACIENTE (3 COLUMNAS DESPLEGABLES) -->
+    <div class="mt-20 pt-12 border-t border-brand-gray/15">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme">
+          Soporte y Educación al Paciente
+        </h3>
+        <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-2">
+          Preguntas frecuentes y guía de uso para pacientes y familiares
+        </p>
+      </div>
+
+      <!-- Grid de 3 Columnas -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        {soporteEducacion.map((col, colIdx) => (
+          <div 
+            data-aos="fade-up"
+            data-aos-delay={100 + colIdx * 100}
+            class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+          >
+            <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+              <HelpCircle class="w-4 h-4 text-accent shrink-0" />
+              {col.categoria}
+            </h4>
+
+            <div class="flex flex-col gap-2">
+              {col.preguntas.map((item) => (
+                <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                  <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                    <span>{item.q}</span>
+                    <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                      <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                    </span>
+                  </summary>
+                  <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2">
+                    <p>{item.a}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
   </div>
 
   <!-- MODAL PROFESIONAL -->
@@ -82,12 +182,12 @@ import servicios from "../../data/servicios";
         <!-- Columna Imagen -->
         <div class="relative w-full md:w-5/12 h-64 md:h-auto min-h-[250px] bg-surface flex-shrink-0">
           <Image
-           id="selectedImage"
-          src={servicios[0].image}
-          alt={servicios[0].alt}
-          class="w-full h-full object-cover"
-          loading={"eager"}
-          fetchpriority={"high"}
+            id="selectedImage"
+            src={servicios[0].image}
+            alt={servicios[0].alt}
+            class="w-full h-full object-cover"
+            loading={"eager"}
+            fetchpriority={"high"}
           />
           <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent md:hidden"></div>
         </div>
@@ -95,10 +195,6 @@ import servicios from "../../data/servicios";
         <!-- Columna Contenido -->
         <div class="p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto w-full md:w-7/12">
           <div>
-            <!-- <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-wider text-accent bg-accent/10 uppercase mb-4">
-              Servicio Médico Especializado
-            </span> -->
-
             <h3 id="selectedTitle" class="text-2xl sm:text-3xl font-bold text-main mb-4 leading-tight"></h3>
             
             <p id="selectedDescription" class="text-sm font-semibold text-main/80 mb-5 pb-4 border-b border-brand-gray/15 leading-relaxed"></p>
@@ -162,7 +258,6 @@ import servicios from "../../data/servicios";
       document.body.style.overflow = "";
       isModalOpen = false;
 
-      // Limpia el hash sin recargar ni alterar la pila de historial bruscamente
       if (window.location.hash && window.location.hash !== "#cotizar" && window.location.hash !== "#servicios") {
         history.pushState(null, "", window.location.pathname + window.location.search);
       }
@@ -183,7 +278,6 @@ import servicios from "../../data/servicios";
       }
     }
 
-
     document.querySelectorAll(".service-card").forEach(card => {
       card.addEventListener("click", (e) => {
         e.preventDefault();
@@ -203,7 +297,6 @@ import servicios from "../../data/servicios";
 
     window.addEventListener("popstate", checkHash);
     window.addEventListener("hashchange", checkHash);
-
 
     checkHash();
   }

@@ -1,12 +1,31 @@
 ---
-import { Building2, Package, CreditCard, RotateCcw, Wrench, PhoneCall } from "lucide-astro";
+import { Building2, Package, CreditCard, RotateCcw, PhoneCall, Mail } from "lucide-astro";
 
 const OtherContactDetails = [
-  { label: "Oficina", value: "351 89-80-811", icon: Building2 },
-  { label: "Ventas y Alquiler", value: "351-5-226545", icon: Package },
-  { label: "Pagos", value: "351-5-226190", icon: CreditCard },
-  { label: "Devoluciones", value: "351-6-236256", icon: RotateCcw },
-  { label: "Soporte Técnico", value: "351-5-226545 / 351-5-226313 / 351-6-772000", icon: Wrench },
+  { 
+    label: "Ventas y Alquiler", 
+    phones: ["351 522-6545", "351 677-2000"],
+    emails: ["ventas@seamed.com.ar"],
+    icon: Package 
+  },
+  { 
+    label: "Pagos", 
+    phones: ["351 522-6190"],
+    emails: ["administracion@seamed.com.ar"],
+    icon: CreditCard 
+  },
+  { 
+    label: "Devoluciones", 
+    phones: ["351 623-6256"],
+    emails: ["seamed@seamed.com.ar"],
+    icon: RotateCcw 
+  },
+  { 
+    label: "Oficina", 
+    phones: ["351 898-0811"],
+    emails: ["info@seamed.com.ar"],
+    icon: Building2 
+  },
 ];
 ---
 
@@ -17,48 +36,64 @@ const OtherContactDetails = [
         Otros medios de contacto
       </h2>
       <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted max-w-xl mx-auto text-sm sm:text-base">
-        Podés comunicarte directamente a nuestras líneas específicas haciendo clic en cualquiera de los números.
+        Podés comunicarte directamente a nuestras líneas o correos específicos haciendo clic en cualquiera de ellos.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 items-start">
+    <!-- Grid ajustado a 4 columnas (lg:grid-cols-4) -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
       {OtherContactDetails.map((detail, i) => {
         const IconComponent = detail.icon;
-        const numbers = detail.value.split('/').map(n => n.trim());
 
         return (
           <div 
             data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"} 
             data-aos-duration="500" 
-            data-aos-delay={100 + i * 200} 
-            class="p-6 bg-surface border border-gray-100 rounded-2xl hover:border-[var(--color-accent)] transition-all duration-300 flex flex-col items-center text-center shadow-xs hover:shadow-xl group"
+            data-aos-delay={100 + i * 150} 
+            class="p-6 bg-surface border border-gray-100 rounded-2xl hover:border-[var(--color-accent)] transition-all duration-300 flex flex-col items-center justify-between text-center shadow-xs hover:shadow-xl group"
           >
-            <!-- Icono lucide-astro -->
-            <div class="w-12 h-12 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center mb-4 group-hover:bg-[var(--color-accent)] group-hover:text-white transition-colors duration-300">
-              <IconComponent class="w-6 h-6" />
-            </div>
+            <div class="flex flex-col items-center w-full">
+              <!-- Icono principal de la sección -->
+              <div class="w-12 h-12 rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center mb-4 group-hover:bg-[var(--color-accent)] group-hover:text-white transition-colors duration-300">
+                <IconComponent class="w-6 h-6" />
+              </div>
 
-            <h3 class="font-bold text-[var(--color-main)] mb-3">{detail.label}</h3>
-            
-            <!-- Contenedor compacto para los números -->
-            <div class="flex flex-col gap-2 w-full">
-              {numbers.map((num) => {
-                const cleanNumber = num.replace(/\s|-/g, '');
-                return (
+              <h3 class="font-bold text-[var(--color-main)] mb-4 text-base">{detail.label}</h3>
+              
+              <!-- Contenedor de Teléfonos -->
+              <div class="flex flex-col gap-2 w-full mb-3">
+                {detail.phones.map((num) => {
+                  const cleanNumber = num.replace(/\s|-/g, '');
+                  return (
+                    <a 
+                      href={`tel:${cleanNumber}`}
+                      title={`Llamar a ${detail.label}: ${num}`}
+                      class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-bg hover:bg-[var(--color-accent)]/10 border border-transparent hover:border-[var(--color-accent)]/20 text-xs font-bold text-[var(--color-main)] hover:text-[var(--color-accent)] transition-all duration-200 cursor-pointer active:scale-95 group/link"
+                    >
+                      <PhoneCall class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover/link:animate-bounce" />
+                      <span>{num}</span>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <!-- Contenedor de Correos Electrónicos -->
+              <div class="flex flex-col gap-2 w-full">
+                {detail.emails.map((email) => (
                   <a 
-                    href={`tel:${cleanNumber}`}
-                    title={`Llamar a ${detail.label}: ${num}`}
-                    class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-bg hover:bg-[var(--color-accent)]/10 border border-transparent hover:border-[var(--color-accent)]/20 text-xs font-bold text-[var(--color-main)] hover:text-[var(--color-accent)] transition-all duration-200 cursor-pointer active:scale-95 group/link"
+                    href={`mailto:${email}`}
+                    title={`Enviar correo a ${email}`}
+                    class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-bg hover:bg-[var(--color-accent)]/10 border border-transparent hover:border-[var(--color-accent)]/20 text-[11px] font-semibold text-[var(--color-main)]/80 hover:text-[var(--color-accent)] transition-all duration-200 cursor-pointer break-all"
                   >
-                    <PhoneCall class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover/link:animate-bounce" />
-                    <span>{num}</span>
+                    <Mail class="w-3.5 h-3.5 shrink-0 text-[var(--color-accent)]" />
+                    <span>{email}</span>
                   </a>
-                );
-              })}
+                ))}
+              </div>
             </div>
 
-            <span class="text-[10px] text-[var(--color-muted)] font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Hacé clic para llamar
+            <span class="text-[10px] text-[var(--color-muted)] font-medium mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Hacé clic para llamar o enviar mail
             </span>
           </div>
         );
