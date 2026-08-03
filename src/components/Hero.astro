@@ -1,21 +1,21 @@
 ---
-// Hero.astro - Estructura optimizada para SEO y Core Web Vital
+// Hero.astro - Estructura optimizada para SEO, Core Web Vitals y UX Visual
 import { Image } from "astro:assets";
 import Slide1 from "../assets/slide1.jpeg";
 import Slide2 from "../assets/slide2.jpeg";
 
 const carrouselItems = [
   {
-    title: "Oxigenoterapia Domiciliaria e Hospitalaria",
-    description: "Suministro integral y mantenimiento de concentradores de oxígeno, cilindros y mochilas ultralivianas. Soluciones seguras para el cuidado del paciente en el hogar e instituciones.",
+    title: "OXIGENOTERAPIA DOMICILIARIA Y AMBULATORIA",
+    description: "Suministro de concentradores de oxígeno domiciliarios, portátiles, tubos y mochilas ultralivianas para el cuidado del paciente en el hogar e instituciones.",
     image: Slide1,
-    alt: "Servicio de oxigenoterapia domiciliaria en Córdoba por SeAMeD S.A.",
+    alt: "Concentradores de oxígeno portátiles y domiciliarios para pacientes con insuficiencia respiratoria",
     button: "Solicitar Cotización",
     href: "/cotizar"
   },
   {
-    title: "Ventilación Mecánica & Tratamiento del Sueño",
-    description: "Alquiler y venta de equipos CPAP, AutoCPAP y BIPAP de última generación. Calibración técnica personalizada, máscaras e insumos para patologías respiratorias.",
+    title: "APNEA DEL SUEÑO",
+    description: "Alquiler y venta de equipos CPAP, AutoCpap y BIPAP e insumos de última generación. Asesoramiento personalizado para cada necesidad.",
     image: Slide2,
     alt: "Equipos CPAP y BIPAP para tratamiento del sueño y ventilación no invasiva",
     button: "Ver Equipamiento",
@@ -23,11 +23,20 @@ const carrouselItems = [
   },
   {
     title: "Garantía de Calidad y Respaldo Técnico",
-    description: "Todos nuestros equipos cumplen con estrictos protocolos de bioseguridad, mantenimiento preventivo y certificación técnica continua para garantizar un funcionamiento impecable.",
+    description: "Comprometidos en brindar soluciones medicas de calidad, para pacientes y profesionales de la salud.",
     image: Slide2,
     alt: "Mantenimiento y certificación técnica de equipos médicos SeAMeD S.A.",
-    button: "Conocer Servicios",
-    href: "/servicios"
+    // Se elimina 'button' común y se reemplaza por el contador y el botón de reseñas
+    extra: {
+      id: "certs",
+      targetValue: 100,
+      suffix: "%",
+      label: "Habilitaciones"
+    },
+    googleReviewButton: {
+      text: "Nuestras Reseñas",
+      href: "https://maps.google.com/?q=SeAMeD+SA", // Reemplazar por el enlace exacto a las reseñas de Google Maps
+    }
   }
 ];
 
@@ -36,75 +45,179 @@ const fade = {
   up: "fade-up",
   left: "fade-left",
   right: "fade-right",
-}
+};
 ---
 
-<section class="relative w-full h-[85vh] overflow-hidden bg-gray-900">
+<section class="relative w-full h-[85vh] min-h-[550px] overflow-hidden bg-gray-900 select-none">
   <div id="carousel-track" class="relative w-full h-full">
     {carrouselItems.map((item, index) => (
       <div 
-        class={`absolute inset-0 w-full h-full ${index === 0 ? "z-10" : "z-0"} transition-all duration-1000 ease-in-out ${index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-100'}`}
+        class={`carousel-slide absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out ${
+          index === 0 ? "z-10 opacity-100 scale-100 pointer-events-auto" : "z-0 opacity-0 scale-105 pointer-events-none"
+        }`}
+        data-index={index}
+        data-target-value={item.extra?.targetValue}
+        data-counter-id={item.extra?.id}
       >
         <Image 
-          class="h-full w-full object-cover" 
+          class="h-full w-full object-cover object-center transform transition-transform duration-10000 ease-out scale-105" 
           src={item.image}
           alt={item.alt}
           loading={index === 0 ? "eager" : "lazy"}
           fetchpriority={index === 0 ? "high" : "auto"}
         />
         
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+        <!-- Gradiente para lecturabilidad de texto -->
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/60 to-gray-950/30 backdrop-blur-[1px]"></div>
 
+        <!-- Contenido principal de la slide -->
         <div class="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-8 text-center text-white z-10">
-          <div data-aos={fade.up} class="max-w-4xl space-y-6">
+          <div data-aos={fade.up} class="max-w-4xl space-y-5 flex flex-col items-center">
             {index === 0 
-              ? <h1 data-aos={fade.up} data-aos-duration="400" class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-lg leading-tight">{item.title}</h1>
-              : <h2 data-aos={fade.up} data-aos-duration="400" class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-lg leading-tight">{item.title}</h2>
+              ? <h1 data-aos={fade.up} data-aos-duration="400" class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-md leading-tight text-balance">{item.title}</h1>
+              : <h2 data-aos={fade.up} data-aos-duration="400" class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-md leading-tight text-balance">{item.title}</h2>
             }
-            <p data-aos={fade.up} data-aos-duration="500" data-aos-delay="300" class="text-base sm:text-lg md:text-2xl mx-auto w-[90%] sm:w-[80%] text-white/90 font-medium leading-relaxed drop-shadow-md">
+            
+            <p data-aos={fade.up} data-aos-duration="500" data-aos-delay="300" class="text-base sm:text-lg md:text-2xl mx-auto w-[92%] sm:w-[85%] text-gray-200 font-medium leading-relaxed drop-shadow text-pretty">
               {item.description}
             </p>
-            <div>
-              <a 
-                href={item.href}
-                data-aos={fade.up} 
-                data-aos-duration="800" 
-                data-aos-delay="500" 
-                class="inline-block mt-4 px-8 py-3 cursor-pointer bg-accent rounded-2xl hover:bg-white hover:text-accent text-white font-bold transition-all duration-300 shadow-xl transform hover:-translate-y-1 active:scale-95"
-              >
-                {item.button}
-              </a>
+
+            <div class="flex flex-col items-center gap-4 pt-1">
+              
+              <!-- 1. Botón CTA Común (Sólo si está definido) -->
+              {item.button && item.href && (
+                <a 
+                  href={item.href}
+                  data-aos={fade.up} 
+                  data-aos-duration="800" 
+                  data-aos-delay="500" 
+                  class="inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white font-bold text-base sm:text-lg rounded-2xl hover:bg-white hover:text-accent transition-all duration-300 shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-accent/20 transform hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-accent/50"
+                >
+                  {item.button}
+                </a>
+              )}
+
+              <!-- 2. Contador (Ej: 100% Habilitaciones) -->
+              {item.extra && (
+                <div 
+                  data-aos={fade.up} 
+                  data-aos-duration="800" 
+                  data-aos-delay="500" 
+                  class="my-1 inline-flex flex-col items-center"
+                >
+                  <div class="text-3xl sm:text-4xl md:text-5xl font-black text-accent drop-shadow-md tracking-tight">
+                    <span id={item.extra.id}>0</span>{item.extra.suffix || "%"}
+                  </div>
+                  <div class="text-xs sm:text-sm text-gray-200 uppercase tracking-widest font-bold mt-0.5">
+                    {item.extra.label}
+                  </div>
+                </div>
+              )}
+
+              <!-- 3. Botón de Reseñas de Google Maps (Debajo del contador) -->
+              {item.googleReviewButton && (
+                <a 
+                  href={item.googleReviewButton.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-aos={fade.up} 
+                  data-aos-duration="800" 
+                  data-aos-delay="700" 
+                  class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-accent text-white font-bold text-base sm:text-lg rounded-2xl hover:bg-white hover:text-accent transition-all duration-300 shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-accent/20 transform hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-accent/50"
+                >
+                  <span>{item.googleReviewButton.text}</span>
+                  <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+              )}
+
             </div>
           </div>
         </div>
-
-        <div data-aos={fade.up} data-aos-duration="800" data-aos-delay="1400" class="absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between px-2 z-20">
-          <button data-direction="prev" class="carousel-btn bg-white/10 hover:bg-white/30 backdrop-blur-md text-white p-0.5 sm:p-3 md:p-4 rounded-full transition-all border border-white/20 active:scale-90" aria-label="Anterior slide">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button data-direction="next" class="carousel-btn bg-white/10 hover:bg-white/30 backdrop-blur-md text-white p-0.5 sm:p-3 md:p-4 rounded-full transition-all border border-white/20 active:scale-90" aria-label="Siguiente slide">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
       </div>
+    ))}
+  </div>
+
+  <!-- Botones de Navegación Lateral -->
+  <div data-aos={fade.up} data-aos-duration="800" data-aos-delay="1000" class="absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between px-2 sm:px-6 z-20 pointer-events-none">
+    <button data-direction="prev" class="carousel-btn pointer-events-auto bg-black/30 hover:bg-accent backdrop-blur-md text-white p-2.5 sm:p-3.5 rounded-full transition-all duration-300 border border-white/20 hover:border-accent active:scale-90 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-lg" aria-label="Anterior slide">
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button data-direction="next" class="carousel-btn pointer-events-auto bg-black/30 hover:bg-accent backdrop-blur-md text-white p-2.5 sm:p-3.5 rounded-full transition-all duration-300 border border-white/20 hover:border-accent active:scale-90 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-lg" aria-label="Siguiente slide">
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <!-- Indicadores de Paginación (Dots) -->
+  <div class="absolute bottom-5 inset-x-0 flex justify-center items-center gap-2.5 z-20">
+    {carrouselItems.map((_, i) => (
+      <button 
+        data-dot-index={i}
+        class={`carousel-dot h-2.5 rounded-full transition-all duration-500 ${i === 0 ? "w-8 bg-accent" : "w-2.5 bg-white/40 hover:bg-white/80"}`}
+        aria-label={`Ir al slide ${i + 1}`}
+      />
     ))}
   </div>
 </section>
 
 <script>
   let currentIndex = 0;
-  const slides = document.querySelectorAll('#carousel-track > div');
+  const slides = document.querySelectorAll<HTMLElement>('.carousel-slide');
+  const dots = document.querySelectorAll<HTMLElement>('.carousel-dot');
   const totalSlides = slides.length;
-  let interval: any;
+  let interval: ReturnType<typeof setInterval>;
+  let animatedCounters: Set<string> = new Set();
+
+  function animateCounter(elementId: string, targetValue: number) {
+    if (animatedCounters.has(elementId)) return;
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    animatedCounters.add(elementId);
+    let start = 0;
+    const duration = 1500;
+    const stepTime = 20;
+    const steps = duration / stepTime;
+    const increment = targetValue / steps;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= targetValue) {
+        el.textContent = targetValue.toString();
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(start).toString();
+      }
+    }, stepTime);
+  }
 
   function updateCarousel() {
     slides.forEach((slide, i) => {
-      if (i === currentIndex) {
-        slide.classList.remove('opacity-0');
-        slide.classList.add('opacity-100', 'z-10');
+      const isCurrent = i === currentIndex;
+      
+      if (isCurrent) {
+        slide.classList.remove('opacity-0', 'z-0', 'scale-105', 'pointer-events-none');
+        slide.classList.add('opacity-100', 'z-10', 'scale-100', 'pointer-events-auto');
+
+        const targetValStr = slide.getAttribute('data-target-value');
+        const counterId = slide.getAttribute('data-counter-id');
+        if (targetValStr && counterId) {
+          animateCounter(counterId, parseInt(targetValStr, 10));
+        }
       } else {
-        slide.classList.remove('opacity-100', 'z-10');
-        slide.classList.add('opacity-0');
+        slide.classList.remove('opacity-100', 'z-10', 'scale-100', 'pointer-events-auto');
+        slide.classList.add('opacity-0', 'z-0', 'scale-105', 'pointer-events-none');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === currentIndex) {
+        dot.classList.remove('w-2.5', 'bg-white/40');
+        dot.classList.add('w-8', 'bg-accent');
+      } else {
+        dot.classList.remove('w-8', 'bg-accent');
+        dot.classList.add('w-2.5', 'bg-white/40');
       }
     });
   }
@@ -121,8 +234,10 @@ const fade = {
     startAutoPlay();
   }
 
-  function handleNavigation(direction: 'next' | 'prev') {
-    if (direction === 'next') {
+  function handleNavigation(direction: 'next' | 'prev' | number) {
+    if (typeof direction === 'number') {
+      currentIndex = direction;
+    } else if (direction === 'next') {
       currentIndex = (currentIndex + 1) % totalSlides;
     } else {
       currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
@@ -138,13 +253,18 @@ const fade = {
     });
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') {
-      handleNavigation('next');
-    } else if (e.key === 'ArrowLeft') {
-      handleNavigation('prev');
-    }
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      const idx = parseInt((e.currentTarget as HTMLElement).getAttribute('data-dot-index') || '0', 10);
+      handleNavigation(idx);
+    });
   });
 
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') handleNavigation('next');
+    if (e.key === 'ArrowLeft') handleNavigation('prev');
+  });
+
+  updateCarousel();
   startAutoPlay();
 </script>

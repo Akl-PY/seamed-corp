@@ -37,7 +37,7 @@ const servicios = [
     link: "#ventilacion", 
     description: "Soporte ventilatorio invasivo y no invasivo de alta complejidad para adultos y pediatría.",
     text: "Solicitar Asesoramiento",
-    largeDescription: "Soluciones de ventilación asistida para pacientes con insuficiencia respiratoria crónica o aguda. Suministramos respiradores domiciliarios con monitoreo de volumen/presión, batería de larga duración e integración con monitores de parámetros vitales, acompañados por soporte técnico capacitado las 24 horas."
+    largeDescription: "Acompañamos a cada paciente con soluciones integrales de oxígeno medicinal certificado para uso domiciliario y ambulatorio, garantizando una terapia respiratoria segura, eficiente y adaptada."
   },
   { 
     id: "tos",

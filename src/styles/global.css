@@ -5,8 +5,8 @@ root{
 }
 @theme {
   /* Colores base estructurados para SeAMeD S.A. */
-  --color-main: #706e6e;
-  --color-theme:#284A95;          /* Gris corporativo */
+  --color-main: #00A9CE ;
+  --color-theme:#3B5998;          /* Gris corporativo */
   --color-bg: #FFFFFF;          /* Fondo blanco puro para optimizar el renderizado inicial */
 
   /* Componentes y tokens de soporte para la UI de la landing */

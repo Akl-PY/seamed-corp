@@ -6,41 +6,40 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
 <section id="cotizar" class="py-12 bg-surface">
   <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center overflow-hidden">
 
-    <!-- Lado Izquierdo -->
+    <!-- Lado Izquierdo (Título y frase principal reemplazados) -->
     <div class="flex flex-col gap-6">
-      <div
+      <!-- <div
         data-aos="fade-down"
         data-aos-duration="500"
         class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 text-accent w-fit"
       >
         <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-        <span class="text-xs font-bold uppercase tracking-wider">
+         <span class="text-xs font-bold uppercase tracking-wider">
           Cotización SeAMeD
-        </span>
-      </div>
+        </span> 
+      </div> -->
 
+      <!-- Título Principal con "ADJUNTA TU PEDIDO MEDICO" en negrita -->
       <h1
         data-aos="fade-up"
         data-aos-duration="500"
-        class="text-5xl sm:text-6xl font-bold text-theme leading-tight"
+        class="text-4xl sm:text-5xl md:text-6xl font-black text-theme leading-tight uppercase tracking-tight"
       >
-        Solicitá tu cotización
-        <span class="tracking-tighter uppercase text-accent">HOY</span>
+        ADJUNTA TU <span class="text-accent">PEDIDO MÉDICO</span>
       </h1>
 
+      <!-- Bajada explicativa -->
       <p
         data-aos="fade-up"
         data-aos-duration="500"
         data-aos-delay="200"
-        class="text-xl text-muted leading-relaxed"
+        class="text-xl md:text-2xl text-muted leading-relaxed font-medium"
       >
-        Nuestro equipo de expertos está listo para brindarte presupuesto de
-        equipos o insumos en minutos. Podés adjuntar tu receta médica y los
-        datos de tu obra social para agilizar tu trámite o reintegro.
+        para agilizar tiempo y que nuestro equipo pueda brindarte atención personalizada.
       </p>
     </div>
 
-    <!-- Formulario -->
+    <!-- Formulario (Lado Derecho) -->
     <div
       data-aos="fade-up"
       data-aos-duration="1000"
@@ -48,71 +47,70 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10"
     >
       <h3 class="text-2xl font-bold text-theme mb-1">
-        Presupuesto en Línea
+        Pedido Médico
       </h3>
 
       <p class="text-sm text-muted mb-6">
-        Completá los datos y te responderemos a la brevedad.
+        Respondemos en menos de 24 horas hábiles.
       </p>
 
       <form class="grid gap-4">
 
-        <!-- RECETA -->
+        <!-- 1. PEDIDO MEDICO (ÚNICO CAMPO OBLIGATORIO) -->
         <div class="flex flex-col gap-2">
-          <label class="text-xs font-semibold text-main/80">
-            Receta o Prescripción Médica *
+            <span class="text-[10px] text-accent font-semibold uppercase tracking-wider">Obligatorio</span>
           </label>
 
           <div
             id="drop-zone"
             class="relative flex flex-col items-center justify-center w-full p-6 border-2 border-dashed border-main/20 rounded-xl bg-surface/50 hover:bg-surface hover:border-accent transition-all duration-200"
           >
-            <!-- Estado Inicial: Subir archivo -->
+            <!-- Estado Inicial -->
             <div id="upload-prompt" class="flex flex-col items-center text-center pointer-events-none">
               <Upload class="w-8 h-8 mb-2 text-accent" />
               <p class="text-sm">
                 <span class="font-semibold text-main">
-                  Hacé clic para adjuntar
+                  Hacé clic para adjuntar tu pedido médico
                 </span>
                 <br />
                 o arrastrá tu archivo aquí
               </p>
               <p class="text-[11px] text-gray-400 mt-1">
-                PDF, JPG o PNG (Máx. 5 MB)
+                PDF, JPG o PNG (Máx. 25 MB)
               </p>
             </div>
 
             <!-- Estado Con Archivo Cargado -->
             <div
-  id="file-uploaded"
-  class="hidden grid-cols-[1fr_auto]  items-center gap-2 w-full p-3 rounded-lg bg-accent/10 text-accent font-medium text-sm transition-all z-10"
->
-  <div class="flex flex-1 items-center gap-2 min-w-0 overflow-hidden">
-    <FileText class="w-5 h-5 shrink-0 text-accent" />
+              id="file-uploaded"
+              class="hidden grid-cols-[1fr_auto] items-center gap-2 w-full p-3 rounded-lg bg-accent/10 text-accent font-medium text-sm transition-all z-10"
+            >
+              <div class="flex flex-1 items-center gap-2 min-w-0 overflow-hidden">
+                <FileText class="w-5 h-5 shrink-0 text-accent" />
 
-    <div class="flex-1  overflow-hidden">
-      <span
-      id="file-name"
-      class="block max-w-[80%] flex-1 truncate text-main font-semibold text-xs"
-    ></span>
+                <div class="flex-1 overflow-hidden">
+                  <span
+                    id="file-name"
+                    class="block max-w-[80%] flex-1 truncate text-main font-semibold text-xs"
+                  ></span>
 
-      <span
-        id="file-size"
-        class="block w-fit text-[10px] text-muted"
-      ></span>
-    </div>
-  </div>
+                  <span
+                    id="file-size"
+                    class="block w-fit text-[10px] text-muted"
+                  ></span>
+                </div>
+              </div>
 
-  <button
-    type="button"
-    id="remove-file"
-    class="shrink-0 p-1.5 rounded-full hover:bg-accent/20 text-main/60 hover:text-red-500 transition-colors"
-  >
-    <X class="w-4 h-4" />
-  </button>
-</div>
+              <button
+                type="button"
+                id="remove-file"
+                class="shrink-0 p-1.5 rounded-full hover:bg-accent/20 text-main/60 hover:text-red-500 transition-colors"
+              >
+                <X class="w-4 h-4" />
+              </button>
+            </div>
 
-            <!-- Input File Oculto pero Funcional -->
+            <!-- Input File ÚNICO OBLIGATORIO -->
             <input
               id="receta"
               type="file"
@@ -126,54 +124,54 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
           <p id="file-error" class="hidden text-xs font-semibold text-red-500 mt-1"></p>
         </div>
 
-        <!-- OBRA SOCIAL -->
+        <!-- 2. OBRA SOCIAL Y Nº DE AFILIADO (OPCIONALES) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="Obra Social / Prepaga"
+            placeholder="Obra Social / Prepaga (Opcional)"
             class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
           />
 
           <input
             type="text"
-            placeholder="Nº de Afiliado"
+            placeholder="Nº de Afiliado (Opcional)"
             class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
           />
         </div>
 
-        <!-- NOMBRE -->
+        <!-- 3. NOMBRE COMPLETO (OPCIONAL) -->
         <input
           type="text"
-          placeholder="Nombre completo"
+          placeholder="Nombre completo (Opcional)"
           class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
         />
 
-        <!-- TELEFONO / EMAIL -->
+        <!-- 4. TELEFONO / EMAIL (OPCIONALES) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="tel"
-            placeholder="Teléfono / WhatsApp"
+            placeholder="Teléfono / WhatsApp (Opcional)"
             class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
           />
 
           <input
             type="email"
-            placeholder="Correo electrónico"
+            placeholder="Correo electrónico (Opcional)"
             class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
           />
         </div>
 
-        <!-- MENSAJE -->
+        <!-- 5. MENSAJE (OPCIONAL) -->
         <textarea
-          placeholder="¿Qué equipo o insumo estás buscando?"
+          placeholder="Tu mensaje / Asunto... (Opcional)"
           class="w-full border border-main/20 p-3 rounded-lg min-h-[90px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
         ></textarea>
 
         <button
           type="submit"
-          class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm"
+          class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-2"
         >
-          Solicitar Cotización
+          Enviar Mensaje
         </button>
       </form>
     </div>
@@ -206,7 +204,7 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
 
     if (!input || !dropZone) return;
 
-    const MAX_SIZE_MB = 5;
+    const MAX_SIZE_MB = 25;
 
     function formatBytes(bytes: number): string {
       if (bytes === 0) return "0 Bytes";
@@ -237,7 +235,7 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       }
       if (uploadPrompt) uploadPrompt.classList.remove("hidden");
       if (fileUploaded) {
-        fileUploaded.classList.remove("flex");
+        fileUploaded.classList.remove("grid");
         fileUploaded.classList.add("hidden");
       }
       clearError();
@@ -246,7 +244,6 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
     function handleFile(file: File) {
       clearError();
 
-      // Validar peso máximo (5 MB)
       if (file.size > MAX_SIZE_MB * 1024 * 1024) {
         showError(`El archivo supera el límite de ${MAX_SIZE_MB} MB.`);
         clearFile();
@@ -262,11 +259,9 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
         fileUploaded.classList.add("grid");
       }
       
-      // Ocultar interacción del input para no bloquear el botón de remover
       input?.classList.add("pointer-events-none");
     }
 
-    // Listener para input tradicional
     input.addEventListener("change", () => {
       if (input.files && input.files[0]) {
         handleFile(input.files[0]);
@@ -275,14 +270,12 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       }
     });
 
-    // Listener para remover archivo
     removeBtn?.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       clearFile();
     });
 
-    // Prevenir comportamientos por defecto del navegador para Drag & Drop
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       dropZone.addEventListener(eventName, (e) => {
         e.preventDefault();
@@ -290,7 +283,6 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       }, false);
     });
 
-    // Feedback visual al arrastrar
     ['dragenter', 'dragover'].forEach(eventName => {
       dropZone.addEventListener(eventName, () => {
         dropZone.classList.add('border-accent', 'bg-accent/10');
@@ -303,15 +295,12 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       }, false);
     });
 
-    // Procesar el evento Drop
     dropZone.addEventListener('drop', (e: DragEvent) => {
       const dt = e.dataTransfer;
       const files = dt?.files;
 
       if (files && files.length > 0) {
         const file = files[0];
-
-        // Crear una lista de archivos para asignar al input nativo
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         input.files = dataTransfer.files;
@@ -321,7 +310,6 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
     });
   }
 
-  // Inicializar script respetando View Transitions de Astro
   document.addEventListener("astro:page-load", setupFileInput);
   setupFileInput();
 </script>
