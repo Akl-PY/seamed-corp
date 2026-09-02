@@ -1,58 +1,174 @@
 ---
+// Servicios.astro - Sección de especialidades y guía completa de Terapia de Sueño basada en Excel
 import { Image } from "astro:assets";
-import { ChevronDown, HelpCircle } from "lucide-astro";
+import { 
+  ChevronDown, 
+  HelpCircle, 
+  Moon, 
+  Activity, 
+  HeartPulse, 
+  Stethoscope, 
+  ShieldCheck, 
+  CheckCircle2, 
+  AlertCircle, 
+  FileText, 
+  Package 
+} from "lucide-astro";
 import servicios from "../../data/servicios";
 
-// Datos para las 3 columnas de Soporte y Educación (Terapia de Sueño / FAQ)
-const soporteEducacion = [
+// 1. HOJA 1: SUEÑO SALUDABLE (3 Columnas)
+const colSuenoSaludable = [
   {
-    categoria: "Terapia de Sueño & CPAP",
-    preguntas: [
+    titulo: "Fundamentos y Pilares",
+    icon: Moon,
+    items: [
       {
-        q: "¿Cómo debo limpiar mi máscara de CPAP?",
-        a: "Se recomienda lavar la almohadilla diariamente con agua tibia y jabón neutro. Evitá el uso de alcohol o detergentes abrasivos."
+        q: "¿Qué es el sueño saludable?",
+        a: "El sueño saludable es un proceso biológico activo y natural fundamental para la vida. La Organización Mundial de la Salud (OMS) y expertos en salud lo definen como un estado de descanso reparador que cumple con cantidad, continuidad, profundidad y satisfacción, permitiendo un correcto equilibrio físico, mental y emocional."
       },
       {
-        q: "¿Cada cuánto se cambian los filtros?",
-        a: "Los filtros desechables se reemplazan cada 30 días o al tornarse grises. Los filtros lavables se enjuagan semanalmente con agua."
+        q: "¿Cuántas horas de calidad se necesitan?",
+        a: "Se estima entre 7 y 8 horas diarias de sueño de calidad. Aunque usted tenga un sueño de óptima calidad, si dura solamente 3 a 4 horas no será suficiente para reparar y restaurar funciones. En el otro extremo, 10 horas de sueño con muy baja calidad tampoco resultan revitalizantes."
       },
       {
-        q: "¿Qué hago si siento sequedad al dormir?",
-        a: "Aumentá progresivamente el nivel del humidificador térmico o consultá con nuestro equipo para ajustar la temperatura y humedad."
+        q: "Los tres pilares de la salud",
+        a: "El sueño es uno de los tres pilares de la salud, junto con el ejercicio y la nutrición. Para un estilo de vida equilibrado es indispensable otorgar el mismo nivel de atención y cuidado a los tres."
       }
     ]
   },
   {
-    categoria: "Uso y Mantenimiento",
-    preguntas: [
+    titulo: "Etapas del Sueño Saludable",
+    icon: Activity,
+    items: [
       {
-        q: "¿Qué mantenimiento requiere el concentrador?",
-        a: "Lavar el filtro de aire externo una vez por semana con agua tibia y dejar secar por completo antes de volver a colocarlo."
+        q: "Etapa 1: Inicio del sueño",
+        a: "Marca el inicio del descanso. En esta fase usted podrá distraerse fácilmente del sueño y, según el nivel de cansancio acumulado, suele durar hasta 7 minutos."
       },
       {
-        q: "¿Qué hacer ante un corte de luz?",
-        a: "Conectar inmediatamente la cánula al tubo o cilindro de oxígeno de reserva provisto para situaciones de emergencia."
+        q: "Etapa 2: Sueño ligero",
+        a: "Es mucho menos probable despertarse en esta etapa. Puede prolongarse hasta 25 minutos, dependiendo también del agotamiento físico y mental."
       },
       {
-        q: "¿Puedo viajar con los equipos?",
-        a: "Sí, los equipos portátiles cuentan con certificación FAA para uso en transporte aéreo. Consultanos previa salida."
+        q: "Etapa 3: Sueño profundo (Ondas lentas)",
+        a: "Conocida como fase de ondas lentas. Suele durar entre 20 y 40 minutos durante el primer ciclo de descanso nocturno antes de dar paso a la fase REM."
+      },
+      {
+        q: "Etapa 4: Sueño REM (Movimiento Ocular Rápido)",
+        a: "Fase crucial para procesar emociones, consolidar la memoria y el aprendizaje. Se caracteriza por una actividad cerebral muy alta, movimientos rápidos de los ojos y relajación/parálisis muscular temporal. Aparece por primera vez entre 70 y 90 minutos después de conciliar el sueño."
       }
     ]
   },
   {
-    categoria: "Cobertura y Gestión",
-    preguntas: [
+    titulo: "Higiene del Sueño (Pautas)",
+    icon: ShieldCheck,
+    items: [
       {
-        q: "¿Disponen de servicio de guardia?",
-        a: "Contamos con soporte técnico de guardia disponible para urgencias con equipamiento de soporte vital."
+        q: "¿Qué hacer? (Hábitos recomendados)",
+        a: "• Definir una rutina fija para dormir y levantarse.\n• Asegurar entre 7 y 9 horas diarias para una correcta función cerebral y de memoria.\n• Mantener una adecuada ingesta de vitamina D (favorece la producción de melatonina).\n• Preparar un entorno cómodo y silencioso.\n• Mantener la cama como un lugar sagrado: asociarla únicamente al descanso (evitar trabajar o ver televisión en ella).\n• Brindarle tiempo al cuerpo para relajarse cada noche antes de acostarse."
       },
       {
-        q: "¿Cómo presento el trámite a la Obra Social?",
-        a: "Emitimos la documentación técnica y presupuestos requeridos para la solicitud de cobertura ante prepagas u obras sociales."
+        q: "¿Qué no hacer? (Factores a evitar)",
+        a: "• No ingerir bebidas con cafeína (café, té, chocolate, gaseosas); optar por agua tibia o infusiones de hierbas.\n• Evitar el alcohol: empeora los ronquidos y las pausas de apnea, produciendo inquietud.\n• No realizar actividad física intensa dentro de las 2 horas previas a dormir.\n• Evitar cenas copiosas, alimentos muy condimentados o azucarados, así como irse a la cama con hambre.\n• Eliminar el consumo de tabaco (la nicotina actúa como estimulante).\n• Evitar pantallas, películas de acción, videojuegos competitivos o charlas intensas que sobreestimulen la mente."
+      }
+    ]
+  }
+];
+
+// 2. HOJA 2: APNEA DEL SUEÑO (3 Columnas)
+const colApneaSueno = [
+  {
+    titulo: "Definición y Síntomas",
+    icon: HeartPulse,
+    items: [
+      {
+        q: "¿Qué es la apnea del sueño?",
+        a: "Es un trastorno donde los músculos de la garganta se relajan y colapsan, obstruyendo el paso del aire. Ante cada pausa respiratoria, el cerebro genera un microdespertar para reanudar el flujo, un ciclo que puede repetirse más de 50 veces por hora sin que la persona lo recuerde. Esto reduce severamente el oxígeno en el organismo y cerebro, provocando cansancio crónico y riesgos cardiovasculares graves."
       },
       {
-        q: "¿Realizan envíos de insumos a domicilio?",
-        a: "Sí, realizamos entregas y despachos programados de mascarillas, tubuladuras, filtros y accesorios directamente a tu domicilio."
+        q: "Síntomas característicos más comunes",
+        a: "• Ronquidos intensos y frecuentes.\n• Cansancio diurno constante y falta de energía.\n• Dificultad para concentrarse y fallas de memoria.\n• Dolores de cabeza matinales frecuentes.\n• Estado de ánimo depresivo o irritabilidad.\n• Sudoración nocturna y aumento injustificado de peso."
+      }
+    ]
+  },
+  {
+    titulo: "Grados de Severidad",
+    icon: HelpCircle,
+    items: [
+      {
+        q: "Clasificación según pausas por hora",
+        a: "• Apnea Leve: De 5 a 14 interrupciones de la respiración por hora de sueño.\n• Apnea Moderada: De 15 a 30 pausas respiratorias por hora de sueño.\n• Apnea Severa: 30 o más eventos de interrupción respiratoria por cada hora de sueño."
+      },
+      {
+        q: "La buena noticia y el primer paso",
+        a: "La apnea del sueño tiene un tratamiento efectivo. Descubrir si está en riesgo es el primer paso para proteger su salud. Es indispensable acudir a un médico especialista, quien determinará la indicación del estudio. Con el diagnóstico correcto, la gran mayoría de los trastornos respiratorios del sueño se resuelven satisfactoriamente."
+      }
+    ]
+  },
+  {
+    titulo: "Diagnóstico y Estudios",
+    icon: Stethoscope,
+    items: [
+      {
+        q: "Poligrafía Respiratoria Domiciliaria",
+        a: "Estudio simplificado que se realiza en la comodidad del hogar con dispositivos de última generación como el Resmed ApneaLink™ Air. El paciente duerme en su propio entorno con sensores especializados que registran el flujo aéreo, saturación de oxígeno y esfuerzo respiratorio, entregando el equipo al especialista al día siguiente."
+      },
+      {
+        q: "Polisomnografía Clínica",
+        a: "Examen médico integral de noche completa llevado a cabo en un laboratorio de sueño dentro de una clínica u hospital, donde múltiples sensores monitorean la actividad cerebral, neuromuscular y cardiopulmonar en tiempo real."
+      }
+    ]
+  }
+];
+
+// 3. HOJA 3: TERAPIA PARA EL SUEÑO SALUDABLE (3 Columnas)
+const colTerapiaCpap = [
+  {
+    titulo: "Equipos CPAP y Beneficios",
+    icon: ShieldCheck,
+    items: [
+      {
+        q: "¿Qué son los equipos CPAP?",
+        a: "El CPAP (Presión Positiva Continua en la Vía Aérea) es el dispositivo médico considerado el tratamiento de primera elección para la apnea obstructiva del sueño (AOS)."
+      },
+      {
+        q: "¿Cómo funcionan?",
+        a: "El equipo toma aire del ambiente, lo filtra y lo envía a una presión regulada a través de un tubo conectado a la mascarilla. El CPAP no respira por el paciente, sino que mantiene abierta la vía aérea para permitir una ventilación natural continua."
+      },
+      {
+        q: "Beneficios directos de la terapia",
+        a: "• Elimina o reduce drásticamente los ronquidos.\n• Suprime las pausas respiratorias nocturnas.\n• Restaura la calidad reparadora del sueño.\n• Elimina la somnolencia excesiva en el día.\n• Devuelve la concentración y claridad mental.\n• Disminuye significativamente el riesgo cardiovascular asociado a la apnea."
+      }
+    ]
+  },
+  {
+    titulo: "Tipos de Equipos CPAP",
+    icon: HeartPulse,
+    items: [
+      {
+        q: "CPAP de presión fija",
+        a: "Suministra una presión de aire constante y continua a lo largo de toda la noche. El nivel de presión exacto es calibrado previamente por prescripción médica según las necesidades anatómicas del paciente."
+      },
+      {
+        q: "CPAP Autoajustable (APAP / AutoSet)",
+        a: "Dispositivo inteligente que mide la resistencia respiratoria respiración a respiración y ajusta automáticamente el nivel de presión en tiempo real, brindando la mínima presión necesaria para mantener abierta la vía aérea y otorgando máximo confort al dormir."
+      }
+    ]
+  },
+  {
+    titulo: "Accesorios e Insumos",
+    icon: Package,
+    items: [
+      {
+        q: "Mascarillas (Nasales y Faciales)",
+        a: "Disponemos de un amplio catálogo de mascarillas nasales, oronasales (buconasales) y de almohadillas, diseñadas para un sellado ergonómico que previene fugas de aire y maximiza la adherencia al tratamiento."
+      },
+      {
+        q: "Tubuladuras y repuestos",
+        a: "Conductos flexibles y livianos compatibles con las principales marcas mundiales, garantizando un flujo sin pérdidas ni condensación."
+      },
+      {
+        q: "Adquisición y asesoramiento",
+        a: "Contamos con insumos originales, humidificadores, filtros y repuestos. Consulte para coordinar la selección de su máscara o la calibración de su equipo."
       }
     ]
   }
@@ -68,7 +184,7 @@ const soporteEducacion = [
       <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted mt-2 text-xs sm:text-sm">Soluciones adaptadas a las necesidades clínicas de cada paciente</p>
     </div>
 
-    <!-- Grilla de Tarjetas (Mapeo normal de las 8 especialidades) -->
+    <!-- Grilla de Tarjetas (Mapeo normal de las especialidades) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {servicios.map((srv, index) => (
         <a 
@@ -112,48 +228,163 @@ const soporteEducacion = [
       ))}
     </div>
 
-    <!-- BLOQUE FUERA DEL MAP: SOPORTE Y EDUCACIÓN AL PACIENTE (3 COLUMNAS DESPLEGABLES) -->
-    <div class="mt-20 pt-12 border-t border-brand-gray/15">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme">
-          Soporte y Educación al Paciente
-        </h3>
-        <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-2">
-          Preguntas frecuentes y guía de uso para pacientes y familiares
-        </p>
+    <!-- ========================================================================= -->
+    <!-- BLOQUE INFERIOR: GUÍA Y EDUCACIÓN AL PACIENTE (3 SECCIONES DE 3 COLUMNAS) -->
+    <!-- ========================================================================= -->
+    <div class="mt-20 pt-16 border-t border-brand-gray/15 space-y-20">
+      
+      <!-- 1. SECCIÓN: SUEÑO SALUDABLE -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme mt-2">
+            Sueño Saludable
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-1.5">
+            Definición clínica, ciclos biológicos y hábitos para un descanso verdaderamente reparador
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {colSuenoSaludable.map((col, colIdx) => {
+            const IconComp = col.icon;
+            return (
+              <div 
+                data-aos="fade-up"
+                data-aos-delay={100 + colIdx * 100}
+                class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+              >
+                <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+                  <IconComp class="w-4 h-4 text-accent shrink-0" />
+                  {col.titulo}
+                </h4>
+
+                <div class="flex flex-col gap-2">
+                  {col.items.map((item) => (
+                    <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                        <span>{item.q}</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                          <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                        </span>
+                      </summary>
+                      <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2 whitespace-pre-line">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      <!-- Grid de 3 Columnas -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-        {soporteEducacion.map((col, colIdx) => (
-          <div 
-            data-aos="fade-up"
-            data-aos-delay={100 + colIdx * 100}
-            class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
-          >
-            <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
-              <HelpCircle class="w-4 h-4 text-accent shrink-0" />
-              {col.categoria}
-            </h4>
+      <!-- 2. SECCIÓN: APNEA DEL SUEÑO -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme mt-2">
+            Apnea del Sueño
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-1.5">
+            Detección de síntomas, grados de interrupción y estudios diagnósticos domiciliarios y clínicos
+          </p>
+        </div>
 
-            <div class="flex flex-col gap-2">
-              {col.preguntas.map((item) => (
-                <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
-                  <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
-                    <span>{item.q}</span>
-                    <span class="shrink-0 transition duration-300 group-open:-rotate-180">
-                      <ChevronDown class="w-3.5 h-3.5 text-accent" />
-                    </span>
-                  </summary>
-                  <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2">
-                    <p>{item.a}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {colApneaSueno.map((col, colIdx) => {
+            const IconComp = col.icon;
+            return (
+              <div 
+                data-aos="fade-up"
+                data-aos-delay={100 + colIdx * 100}
+                class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+              >
+                <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+                  <IconComp class="w-4 h-4 text-accent shrink-0" />
+                  {col.titulo}
+                </h4>
+
+                <div class="flex flex-col gap-2">
+                  {col.items.map((item) => (
+                    <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                        <span>{item.q}</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                          <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                        </span>
+                      </summary>
+                      <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2 whitespace-pre-line">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- 3. SECCIÓN: TERAPIA PARA EL SUEÑO SALUDABLE (CPAP Y ACCESORIOS) -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme mt-2">
+            Terapia para el Sueño Saludable (CPAP)
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-1.5">
+            Mecanismo de acción, tipos de equipos de presión positiva e insumos esenciales para el tratamiento
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {colTerapiaCpap.map((col, colIdx) => {
+            const IconComp = col.icon;
+            return (
+              <div 
+                data-aos="fade-up"
+                data-aos-delay={100 + colIdx * 100}
+                class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+              >
+                <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+                  <IconComp class="w-4 h-4 text-accent shrink-0" />
+                  {col.titulo}
+                </h4>
+
+                <div class="flex flex-col gap-2">
+                  {col.items.map((item) => (
+                    <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                        <span>{item.q}</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                          <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                        </span>
+                      </summary>
+                      <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2 whitespace-pre-line">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+
+                <!-- Hipervínculo específico a accesorios requerido por el documento -->
+                {colIdx === 2 && (
+                  <div class="pt-2 mt-auto border-t border-brand-gray/10">
+                    <a 
+                      href="/cotizar" 
+                      class="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline"
+                    >
+                      <span>Ver catálogo y cotizar accesorios</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
                   </div>
-                </details>
-              ))}
-            </div>
-          </div>
-        ))}
+                )}
+
+              </div>
+            );
+          })}
+        </div>
       </div>
+
     </div>
 
   </div>
@@ -236,8 +467,6 @@ const soporteEducacion = [
     const selectedLargeDescription = document.getElementById("selectedLargeDescription");
     const selectedButtonText = document.getElementById("selectedButtonText");
 
-    let isModalOpen = false;
-
     function openModalWithService(srv) {
       if (!srv) return;
       
@@ -250,13 +479,11 @@ const soporteEducacion = [
 
       modal.classList.remove("hidden");
       document.body.style.overflow = "hidden";
-      isModalOpen = true;
     }
 
     function closeModal() {
       modal.classList.add("hidden");
       document.body.style.overflow = "";
-      isModalOpen = false;
 
       if (window.location.hash && window.location.hash !== "#cotizar" && window.location.hash !== "#servicios") {
         history.pushState(null, "", window.location.pathname + window.location.search);

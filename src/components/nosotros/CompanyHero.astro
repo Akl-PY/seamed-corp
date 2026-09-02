@@ -1,83 +1,147 @@
 ---
-// CompanyHero.astro
+// CompanyHero.astro - Sección institucional optimizada según requerimientos
+import { Image } from "astro:assets";
 import Slide1 from "../../assets/slide1.jpeg";
+import Ministerio from "../../assets/hab-ministerio.png";
+import Anmat from "../../assets/hab-anmat.jpg";
+
+const targetYears = 13; // +13 años de trayectoria
+const targetCerts = 100; // 100% Habilitaciones
+const targetPatients = 1282;
 ---
 
 <section class="relative pt-12 pb-12 bg-surface w-full">
-  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-    
+  <div
+    class="container mx-auto px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center"
+  >
     <!-- Lado Izquierdo: Texto y Stats -->
-    <div class="flex flex-col gap-2 md:gap-6">
-      <span data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" class="text-accent font-bold tracking-widest uppercase text-sm">
-        Trayectoria y Compromiso
-      </span>
-      
-      <h1 data-aos="fade-up" data-aos-duration="500" class="text-4xl md:text-6xl font-bold text-theme leading-tight">
-        Líderes en asistencia médica <br />
-        <span class="text-accent">domiciliaria en Córdoba</span>
+    <div class="flex flex-col gap-4 md:gap-6">
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="500"
+        class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-theme leading-tight text-balance"
+      >
+        TECNOLOGIA AL SERVICIO DEL <span class="text-accent"
+          >CUIDADO DE LA SALUD</span
+        >
       </h1>
-      
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" class="text-lg md:text-xl text-[var(--color-muted)] leading-relaxed">
-        Más de una década facilitando soluciones tecnológicas de alta
-        complejidad para la recuperación y el bienestar del paciente en su
-        hogar.
+
+      <p
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="100"
+        class="text-base sm:text-lg text-[var(--color-muted)] leading-relaxed text-pretty"
+      >
+        Combinamos tecnología médica, equipamiento certificado y asistencia
+        especializada para brindar soluciones confiables a pacientes,
+        instituciones, obras sociales y profesionales de la salud.
       </p>
 
-      <!-- Stats de Autoridad (Grid Responsive) -->
-      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+      <!-- Stats de Autoridad (Años, 100% Habilitaciones y Pacientes) -->
+      <div
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="200"
+        class="grid grid-cols-3 gap-4 mt-2 pt-3 border-t border-brand-gray/10"
+      >
         <div>
-          <div class="text-2xl md:text-3xl font-bold text-main">+<span id="years">0</span></div>
-          <div class="text-xs md:text-sm text-brand-gray uppercase tracking-widest">Años</div>
+          <div class="text-2xl sm:text-3xl font-bold text-main">
+            +<span id="years">0</span>
+          </div>
+          <div
+            class="text-xs sm:text-sm text-brand-gray uppercase tracking-widest font-semibold"
+          >
+            Años
+          </div>
         </div>
         <div>
-          <div class="text-2xl md:text-3xl font-bold text-main"><span id="certs">0</span>%</div>
-          <div class="text-xs md:text-sm text-brand-gray uppercase tracking-widest">Certificados</div>
+          <div class="text-2xl sm:text-3xl font-bold text-main">
+            <span id="certs">0</span>%
+          </div>
+          <div
+            class="text-xs sm:text-sm text-brand-gray uppercase tracking-widest font-semibold"
+          >
+            Habilitaciones
+          </div>
         </div>
-        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="600" class="col-span-2 md:col-span-1">
-          <div class="text-2xl md:text-3xl font-bold text-main">+<span id="patients">0</span></div>
-          <div class="text-xs md:text-sm text-brand-gray uppercase tracking-widest">Pacientes</div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold text-main">
+            +<span id="patients">0</span>
+          </div>
+          <div
+            class="text-xs sm:text-sm text-brand-gray uppercase tracking-widest font-semibold"
+          >
+            Pacientes
+          </div>
+        </div>
+      </div>
+
+      <!-- Insignias de Habilitaciones (Solo imágenes grandes, sin texto) -->
+      <div
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="300"
+        class="flex flex-col gap-2 pt-1"
+      >
+        <div class="flex items-center gap-6 bg-surface-alt/60">
+          <div class="flex-1 flex justify-center">
+            <Image
+              src={Ministerio}
+              alt="Ministerio de Salud"
+              class="h-10 sm:h-30 w-auto object-contain transition-transform hover:scale-105 duration-300"
+            />
+          </div>
+          <div class="h-8 w-px bg-brand-gray/20"></div>
+          <div class="flex-1 flex justify-center">
+            <Image
+              src={Anmat}
+              alt="ANMAT"
+              class="h-10 sm:h-30 w-auto object-contain transition-transform hover:scale-105 duration-300"
+            />
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Bloque Visual -->
-    <div data-aos="fade-up" data-aos-duration="500" class="relative order-first md:order-last">
+    <div
+      data-aos="fade-up"
+      data-aos-duration="500"
+      class="relative order-first md:order-last"
+    >
       <img
         src={Slide1.src}
-        alt="Equipo técnico de SeAMeD S.A. en Córdoba"
-        class="rounded-2xl shadow-2xl w-full h-[300px] md:h-[500px] object-cover"
+        alt="Equipo médico y tecnológico de SeAMeD S.A."
+        class="rounded-3xl shadow-2xl w-full h-[300px] md:h-[460px] object-cover border border-brand-gray/15"
         width="600"
         height="500"
-        loading="eager"
+        loading="lazy"
       />
     </div>
   </div>
 </section>
 
-<script>
-  // Tu lógica de JS permanece igual, pero asegúrate de envolverla en un 
-  // evento de carga para que no intente buscar elementos antes de que existan
+<script define:vars={{ targetYears, targetCerts, targetPatients }}>
   document.addEventListener("astro:page-load", () => {
     const yearsElement = document.getElementById("years");
     const certsElement = document.getElementById("certs");
     const patientsElement = document.getElementById("patients");
 
-    const targetYears = new Date().getFullYear() - 2010;
-    const targetCerts = 100;
-    const targetPatients = 1282;
-
-    function animateCounter(element: HTMLElement | null, target: number) {
+    function animateCounter(element, target) {
       if (!element) return;
       const duration = 2000;
       const startTime = performance.now();
 
-      function update(currentTime: number) {
+      function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easeProgress = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-        element!.textContent = Math.floor(easeProgress * target).toString();
+        const easeProgress =
+          progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        element.textContent = Math.floor(easeProgress * target).toString();
         if (progress < 1) requestAnimationFrame(update);
-        else element!.textContent = target.toString();
+        else element.textContent = target.toString();
       }
       requestAnimationFrame(update);
     }

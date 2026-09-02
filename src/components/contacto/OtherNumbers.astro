@@ -1,11 +1,12 @@
 ---
+// OtherContact.astro - Sección de otros medios de contacto optimizada según requerimientos
 import { Building2, Package, CreditCard, RotateCcw, PhoneCall, Mail } from "lucide-astro";
 
 const OtherContactDetails = [
   { 
     label: "Ventas y Alquiler", 
     phones: ["351 522-6545", "351 677-2000"],
-    emails: ["ventas@seamed.com.ar"],
+    emails: ["ventas@seamed.com.ar", "cotizaciones@seamed.com.ar"], // <--- Agregado acá correctamente
     icon: Package 
   },
   { 
@@ -95,6 +96,7 @@ const OtherContactDetails = [
             <span class="text-[10px] text-[var(--color-muted)] font-medium mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               Hacé clic para llamar o enviar mail
             </span>
+
           </div>
         );
       })}

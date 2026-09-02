@@ -1,8 +1,9 @@
 ---
+// Contact.astro - Sección de contacto optimizada según requerimientos
 import { Image } from "astro:assets";
-import { MessageSquare, Mail, Phone, Stethoscope } from "lucide-astro";
-import { SITE_CONFIG } from "../../config/site";
-import DoctorContactImg from "../../assets/catalog/insumo3.jpg"; // Reemplazá por la foto del médico/equipo
+import { MessageSquare, Mail, Phone } from "lucide-astro";
+import DoctorContactImg from "../../assets/catalog/insumo4.jpg"; // Foto actualizada de médico/equipo
+import contacto from "../../assets/contacto.jpg";
 
 const contactOptions = [
   { 
@@ -39,19 +40,14 @@ const contactOptions = [
     
     <!-- Lado Izquierdo: Información y Canales de Contacto (col-span-7) -->
     <div class="lg:col-span-7 flex flex-col gap-6">
-      <!-- Badge superior -->
-      <div data-aos="fade-down" data-aos-duration="500" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 text-accent w-fit">
-        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-        <span class="text-xs font-bold uppercase tracking-wider">Atención SeAMeD</span>
-      </div>
-
+      
       <!-- Título principal -->
-      <h1 data-aos="fade-up" data-aos-duration="500" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-theme leading-tight">
-        Estamos para escucharte y <span class="text-accent">asesorarte</span>
-      </h1>
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-theme leading-tight">
+        Estamos para <span class="text-accent">asesorarte</span>
+      </h2>
 
       <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-base sm:text-lg text-muted leading-relaxed max-w-2xl">
-        Ponete en contacto directo con nuestro equipo médico y comercial. Resolvemos tus dudas sobre soporte técnico, equipamiento domiciliario y gestiones administrativas.
+        Contamos con atención personalizada para orientarte y acompañarte en cada etapa, desde tu consulta hasta la solución que necesitás.
       </p>
 
       <!-- Canales Directos de Contacto -->
@@ -69,16 +65,16 @@ const contactOptions = [
                 <span class="mb-3 block text-accent group-hover:scale-110 transition-transform duration-300">
                   <IconComponent class="w-6 h-6 stroke-[1.75]" />
                 </span>
-                <span class="text-xs  uppercase tracking-wider block mb-2">{opt.label}</span>
+                <span class="text-xs uppercase tracking-wider block mb-2 font-semibold">{opt.label}</span>
                 
-                <!-- Sub-lista de enlaces (Múltiples elementos por tarjeta) -->
+                <!-- Sub-lista de enlaces -->
                 <div class="flex flex-col gap-1">
                   {opt.items.map((item) => (
                     <a 
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : "_self"}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      class="text-sm text-muted transition-colors block break-words"
+                      class="text-sm text-muted transition-colors block break-words hover:text-accent font-medium"
                     >
                       {item.value}
                     </a>
@@ -92,7 +88,7 @@ const contactOptions = [
       </div>
 
       <!-- Redirección a Cotización -->
-      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" class="pt-4">
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" class="pt-2">
         <p class="text-xs sm:text-sm text-muted">
           ¿Buscás un presupuesto formal para obra social o reintegro? 
           <a href="/cotizar" class="font-bold text-accent hover:underline inline-flex items-center gap-1 transition-colors ml-1">
@@ -102,38 +98,21 @@ const contactOptions = [
       </div>
     </div>
 
-    <!-- Lado Derecho: Imagen del Médico con tarjeta flotante (col-span-5) -->
+    <!-- Lado Derecho: Imagen Principal (col-span-5) - Se removió la tarjeta flotante de soporte médico -->
     <div data-aos="fade-left" data-aos-duration="700" class="lg:col-span-5 relative flex justify-center">
       <div class="relative w-full max-w-md lg:max-w-none">
         
-        <!-- Marco de Imagen Principal -->
+        <!-- Marco de Imagen Principal Actualizada -->
         <div class="relative h-[400px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-brand-gray/15">
           <Image 
-            src={DoctorContactImg} 
-            alt="Atención médica especializada SeAMeD" 
+            src={contacto} 
+            alt="Atención y asesoramiento especializado SeAMeD" 
             class="w-full h-full object-cover object-center"
             width={600}
             height={700}
-            loading="eager"
+            loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-main/70 via-transparent to-transparent"></div>
-        </div>
-
-        <!-- Tarjeta Flotante Inferior (Glassmorphism) -->
-        <div class="absolute -bottom-6 left-6 right-6 p-5 rounded-2xl bg-bg/90 backdrop-blur-md border border-brand-gray/20 shadow-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center font-bold flex-shrink-0">
-              <Stethoscope class="w-5 h-5 stroke-[1.75]" />
-            </div>
-            <div>
-              <p class="text-xs font-bold text-main">Soporte Médico & Técnico</p>
-              <p class="text-[11px] text-muted">Atención personalizada y profesional</p>
-            </div>
-          </div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold text-emerald-600 bg-emerald-500/10 border border-emerald-500/20">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Disponible
-          </span>
+          <div class="absolute inset-0 bg-gradient-to-t from-main/60 via-transparent to-transparent"></div>
         </div>
 
       </div>

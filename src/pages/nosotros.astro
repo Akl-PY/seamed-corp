@@ -5,13 +5,13 @@ import TechnicalAuthority from "../components/nosotros/TechnicalAuthority.astro"
 import Values from "../components/nosotros/Values.astro";
 import type { SEOProps } from "../core/types/seo";
 import titleGenerator from "../core/scripts/title-generator";
-const seo:SEOProps={
-    title: titleGenerator("Nosotros"),
-}
+const seo: SEOProps = {
+  title: titleGenerator("Nosotros"),
+};
 ---
 
 <Layout seo={seo}>
-    <CompanyHero/>
-    <TechnicalAuthority/>
-    <Values/>
+  <CompanyHero />
+  <!-- <TechnicalAuthority/> -->
+  <Values />
 </Layout>
