@@ -2,7 +2,6 @@
 // Contact.astro - Sección de contacto optimizada según requerimientos
 import { Image } from "astro:assets";
 import { MessageSquare, Mail, Phone } from "lucide-astro";
-import DoctorContactImg from "../../assets/catalog/insumo4.jpg"; // Foto actualizada de médico/equipo
 import contacto from "../../assets/contacto.jpg";
 
 const contactOptions = [
@@ -30,42 +29,42 @@ const contactOptions = [
       { value: "351 898-0811", href: "tel:03518980811" }
     ],
     icon: Phone,
-    subtext: "Lunes a Viernes de 8:00 a 18:00 hs"
+    subtext: "Lunes a Viernes de 9:00 a 17:30 hs"
   }
 ];
 ---
 
-<section class="py-8 md:py-16 bg-surface overflow-hidden border-b border-brand-gray/10">
-  <div class="container mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+<section class="pt-6 md:pt-10 pb-4 bg-surface overflow-hidden border-b border-brand-gray/10">
+  <div class="container mx-auto px-6 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
     
     <!-- Lado Izquierdo: Información y Canales de Contacto (col-span-7) -->
-    <div class="lg:col-span-7 flex flex-col gap-6">
+    <div class="lg:col-span-7 flex flex-col gap-4">
       
       <!-- Título principal -->
-      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-theme leading-tight">
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-3xl sm:text-4xl font-bold text-theme leading-tight">
         Estamos para <span class="text-accent">asesorarte</span>
       </h2>
 
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-base sm:text-lg text-muted leading-relaxed max-w-2xl">
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-sm sm:text-base text-muted leading-relaxed max-w-2xl">
         Contamos con atención personalizada para orientarte y acompañarte en cada etapa, desde tu consulta hasta la solución que necesitás.
       </p>
 
       <!-- Canales Directos de Contacto -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
         {contactOptions.map((opt, i) => {
           const IconComponent = opt.icon;
           return (
             <div 
               data-aos="fade-up" 
               data-aos-duration="500" 
-              data-aos-delay={200 + i * 100}
-              class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              data-aos-delay={150 + i * 100}
+              class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <span class="mb-3 block text-accent group-hover:scale-110 transition-transform duration-300">
-                  <IconComponent class="w-6 h-6 stroke-[1.75]" />
+                <span class="mb-2.5 block text-accent group-hover:scale-105 transition-transform duration-300">
+                  <IconComponent class="w-5 h-5 stroke-[1.75]" />
                 </span>
-                <span class="text-xs uppercase tracking-wider block mb-2 font-semibold">{opt.label}</span>
+                <span class="text-xs uppercase tracking-wider block mb-1.5 font-semibold text-main">{opt.label}</span>
                 
                 <!-- Sub-lista de enlaces -->
                 <div class="flex flex-col gap-1">
@@ -74,21 +73,21 @@ const contactOptions = [
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : "_self"}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      class="text-sm text-muted transition-colors block break-words hover:text-accent font-medium"
+                      class="text-xs sm:text-sm text-muted transition-colors block break-words hover:text-accent font-medium"
                     >
                       {item.value}
                     </a>
                   ))}
                 </div>
               </div>
-              <p class="text-[11px] text-muted mt-3 pt-2 border-t border-brand-gray/10">{opt.subtext}</p>
+              <p class="text-[11px] text-muted mt-2.5 pt-2 border-t border-brand-gray/10 leading-tight">{opt.subtext}</p>
             </div>
           );
         })}
       </div>
 
       <!-- Redirección a Cotización -->
-      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" class="pt-2">
+      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="450" class="pt-1">
         <p class="text-xs sm:text-sm text-muted">
           ¿Buscás un presupuesto formal para obra social o reintegro? 
           <a href="/cotizar" class="font-bold text-accent hover:underline inline-flex items-center gap-1 transition-colors ml-1">
@@ -98,23 +97,20 @@ const contactOptions = [
       </div>
     </div>
 
-    <!-- Lado Derecho: Imagen Principal (col-span-5) - Se removió la tarjeta flotante de soporte médico -->
+    <!-- Lado Derecho: Imagen compacta para evitar espacio muerto y scroll excesivo -->
     <div data-aos="fade-left" data-aos-duration="700" class="lg:col-span-5 relative flex justify-center">
-      <div class="relative w-full max-w-md lg:max-w-none">
-        
-        <!-- Marco de Imagen Principal Actualizada -->
-        <div class="relative h-[400px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-brand-gray/15">
+      <div class="relative w-full max-w-sm lg:max-w-none">
+        <div class="relative h-64 sm:h-72 lg:h-[340px] rounded-3xl overflow-hidden shadow-xl border border-brand-gray/15">
           <Image 
             src={contacto} 
             alt="Atención y asesoramiento especializado SeAMeD" 
-            class="w-full h-full object-cover object-center"
-            width={600}
-            height={700}
+            class="w-full h-full object-cover object-top"
+            width={500}
+            height={500}
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-main/60 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-main/50 via-transparent to-transparent"></div>
         </div>
-
       </div>
     </div>
 

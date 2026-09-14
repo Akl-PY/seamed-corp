@@ -9,10 +9,12 @@ import {
   HeartPulse,
 } from "lucide-astro";
 
-import SrvApnea from "../assets/catalog/insumo1.jpg";
-import SrvOxigeno from "../assets/catalog/insumo2.jpg";
-import SrvVentilacion from "../assets/catalog/insumo3.jpg";
-import SrvTos from "../assets/catalog/insumo4.jpg";
+import SrvApnea from "../assets/services/apnea.jpg";
+import SrvOxigeno from "../assets/services/oxigenoterapia.jpg";
+import SrvVentilacion from "../assets/services/ventilacion.jpg";
+import SrvPoligrafia from "../assets/services/poligrafia.jpg";
+import SrvAlimentacion from "../assets/services/alimentacion-cama.jpg";
+import SrvHomeCare from "../assets/services/home care.jpg";
 
 const servicios = [
   {
@@ -44,7 +46,7 @@ const servicios = [
     id: "poligrafia",
     title: "Poligrafía Domiciliaria",
     icon: Activity,
-    image: SrvApnea,
+    image: SrvPoligrafia,
     alt: "Estudios de Poligrafía Domiciliaria",
     link: "#poligrafia",
     description:
@@ -69,7 +71,7 @@ const servicios = [
     id: "alimentacion-enteral",
     title: "Alimentación Enteral",
     icon: Stethoscope,
-    image: SrvTos,
+    image: SrvAlimentacion,
     alt: "Sistemas de Alimentación Enteral",
     link: "#alimentacion-enteral",
     description:
@@ -82,7 +84,7 @@ const servicios = [
     id: "home-care",
     title: "Home Care",
     icon: ShieldCheck,
-    image: SrvTos,
+    image: SrvHomeCare,
     alt: "Equipamiento Home Care",
     link: "#home-care",
     description:

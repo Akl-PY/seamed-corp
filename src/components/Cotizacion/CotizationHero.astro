@@ -4,69 +4,59 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
 ---
 
 <section id="cotizar" class="py-12 bg-surface">
-  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center overflow-hidden">
-
-    <!-- Lado Izquierdo (Título y frase principal reemplazados) -->
+  <div
+    class="container mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
+  >
     <div class="flex flex-col gap-6">
-      <!-- <div
-        data-aos="fade-down"
-        data-aos-duration="500"
-        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 text-accent w-fit"
-      >
-        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-         <span class="text-xs font-bold uppercase tracking-wider">
-          Cotización SeAMeD
-        </span> 
-      </div> -->
-
-      <!-- Título Principal con "ADJUNTA TU PEDIDO MEDICO" en negrita -->
       <h1
         data-aos="fade-up"
         data-aos-duration="500"
-        class="text-4xl sm:text-5xl md:text-6xl font-black text-theme leading-tight uppercase tracking-tight"
+        class="text-4xl sm:text-5xl md:text-6xl font-black text-theme leading-tight tracking-tight"
       >
-        ADJUNTA TU <span class="text-accent">PEDIDO MÉDICO</span>
+        Adjuntá <span class="text-accent">tu pedido médico</span>
       </h1>
 
-      <!-- Bajada explicativa -->
       <p
         data-aos="fade-up"
         data-aos-duration="500"
         data-aos-delay="200"
         class="text-xl md:text-2xl text-muted leading-relaxed font-medium"
       >
-        para agilizar tiempo y que nuestro equipo pueda brindarte atención personalizada.
+        para agilizar tiempo y que nuestro equipo pueda brindarte atención
+        personalizada.
       </p>
     </div>
 
-    <!-- Formulario (Lado Derecho) -->
     <div
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-delay="600"
       class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10"
     >
-      <h3 class="text-2xl font-bold text-theme mb-1">
-        Pedido Médico
-      </h3>
+      <h3 class="text-2xl font-bold text-theme mb-1">Pedido Médico</h3>
 
       <p class="text-sm text-muted mb-6">
         Respondemos en menos de 24 horas hábiles.
       </p>
 
-      <form class="grid gap-4">
-
-        <!-- 1. PEDIDO MEDICO (ÚNICO CAMPO OBLIGATORIO) -->
+      <!-- Formulario con espaciado vertical equilibrado -->
+      <form class="flex flex-col gap-5">
+        <!-- Zona de Carga de Archivo -->
         <div class="flex flex-col gap-2">
-            <span class="text-[10px] text-accent font-semibold uppercase tracking-wider">Obligatorio</span>
-          </label>
+          <span
+            class="text-[10px] text-accent font-semibold uppercase tracking-wider"
+          >
+            Obligatorio
+          </span>
 
           <div
             id="drop-zone"
             class="relative flex flex-col items-center justify-center w-full p-6 border-2 border-dashed border-main/20 rounded-xl bg-surface/50 hover:bg-surface hover:border-accent transition-all duration-200"
           >
-            <!-- Estado Inicial -->
-            <div id="upload-prompt" class="flex flex-col items-center text-center pointer-events-none">
+            <div
+              id="upload-prompt"
+              class="flex flex-col items-center text-center pointer-events-none"
+            >
               <Upload class="w-8 h-8 mb-2 text-accent" />
               <p class="text-sm">
                 <span class="font-semibold text-main">
@@ -80,24 +70,22 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
               </p>
             </div>
 
-            <!-- Estado Con Archivo Cargado -->
             <div
               id="file-uploaded"
               class="hidden grid-cols-[1fr_auto] items-center gap-2 w-full p-3 rounded-lg bg-accent/10 text-accent font-medium text-sm transition-all z-10"
             >
-              <div class="flex flex-1 items-center gap-2 min-w-0 overflow-hidden">
+              <div
+                class="flex flex-1 items-center gap-2 min-w-0 overflow-hidden"
+              >
                 <FileText class="w-5 h-5 shrink-0 text-accent" />
-
                 <div class="flex-1 overflow-hidden">
                   <span
                     id="file-name"
                     class="block max-w-[80%] flex-1 truncate text-main font-semibold text-xs"
                   ></span>
-
                   <span
                     id="file-size"
-                    class="block w-fit text-[10px] text-muted"
-                  ></span>
+                    class="block w-fit text-[10px] text-muted"></span>
                 </div>
               </div>
 
@@ -110,7 +98,6 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
               </button>
             </div>
 
-            <!-- Input File ÚNICO OBLIGATORIO -->
             <input
               id="receta"
               type="file"
@@ -120,74 +107,81 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
             />
           </div>
 
-          <!-- Mensaje de Error -->
-          <p id="file-error" class="hidden text-xs font-semibold text-red-500 mt-1"></p>
+          <p
+            id="file-error"
+            class="hidden text-xs font-semibold text-red-500 mt-1"
+          >
+          </p>
         </div>
 
-        <!-- 2. OBRA SOCIAL Y Nº DE AFILIADO (OPCIONALES) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Campos: Obra Social y Afiliado -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
             placeholder="Obra Social / Prepaga (Opcional)"
-            class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
           />
 
           <input
             type="text"
             placeholder="Nº de Afiliado (Opcional)"
-            class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
           />
         </div>
 
-        <!-- 3. NOMBRE COMPLETO (OPCIONAL) -->
-        <input
-          type="text"
-          placeholder="Nombre completo (Opcional)"
-          class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
-        />
+        <!-- Campo: Nombre Completo -->
+        <div>
+          <input
+            type="text"
+            placeholder="Nombre completo (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          />
+        </div>
 
-        <!-- 4. TELEFONO / EMAIL (OPCIONALES) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Campos: Teléfono y Correo -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="tel"
             placeholder="Teléfono / WhatsApp (Opcional)"
-            class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
           />
 
           <input
             type="email"
             placeholder="Correo electrónico (Opcional)"
-            class="w-full border border-main/20 p-3 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
           />
         </div>
 
-        <!-- 5. MENSAJE (OPCIONAL) -->
-        <textarea
-          placeholder="Tu mensaje / Asunto... (Opcional)"
-          class="w-full border border-main/20 p-3 rounded-lg min-h-[90px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm"
-        ></textarea>
+        <!-- Campo: Mensaje -->
+        <div>
+          <textarea
+            placeholder="Tu mensaje / Asunto... (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg min-h-[100px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          ></textarea>
+        </div>
 
+        <!-- Botón de Envío -->
         <button
           type="submit"
-          class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-2"
+          class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-1 active:scale-[0.99]"
         >
           Enviar Mensaje
         </button>
       </form>
     </div>
+  </div>
 
-    <div class="md:col-span-2 text-center pt-6 border-t border-main/10">
-      <p class="text-sm text-muted">
-        ¿Buscás comunicarte por otras consultas, soporte técnico o administración?
-
-        <a
-          href="/contacto"
-          class="font-bold text-accent hover:underline inline-flex items-center gap-1"
-        >
-          Ir a medios de contacto →
-        </a>
-      </p>
-    </div>
+  <div class="md:col-span-2 text-center pt-8 mt-6 border-t border-main/10">
+    <p class="text-sm text-muted">
+      ¿Buscás comunicarte por otras consultas, soporte técnico o administración?
+      <a
+        href="/contacto"
+        class="font-bold text-accent hover:underline inline-flex items-center gap-1 ml-1"
+      >
+        Ir a medios de contacto →
+      </a>
+    </p>
   </div>
 </section>
 
@@ -258,7 +252,7 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
         fileUploaded.classList.remove("hidden");
         fileUploaded.classList.add("grid");
       }
-      
+
       input?.classList.add("pointer-events-none");
     }
 
@@ -276,26 +270,38 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
       clearFile();
     });
 
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      dropZone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }, false);
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        },
+        false,
+      );
     });
 
-    ['dragenter', 'dragover'].forEach(eventName => {
-      dropZone.addEventListener(eventName, () => {
-        dropZone.classList.add('border-accent', 'bg-accent/10');
-      }, false);
+    ["dragenter", "dragover"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        () => {
+          dropZone.classList.add("border-accent", "bg-accent/10");
+        },
+        false,
+      );
     });
 
-    ['dragleave', 'drop'].forEach(eventName => {
-      dropZone.addEventListener(eventName, () => {
-        dropZone.classList.remove('border-accent', 'bg-accent/10');
-      }, false);
+    ["dragleave", "drop"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        () => {
+          dropZone.classList.remove("border-accent", "bg-accent/10");
+        },
+        false,
+      );
     });
 
-    dropZone.addEventListener('drop', (e: DragEvent) => {
+    dropZone.addEventListener("drop", (e: DragEvent) => {
       const dt = e.dataTransfer;
       const files = dt?.files;
 

@@ -10,21 +10,15 @@ import vascularImagen from "../../assets/vascular.avif";
 const rubrosDetallados = [
   {
     id: "diabetes",
-    title: "Diabetes y Monitoreo Glucémico",
-    badge: "Control e Infusión",
+    title: "Diabetes y Monitoreo",
+    badge: "Control y Monitoreo",
     image: glucosaImagen,
+    imagePosition: "object-cover",
     description: "Proporcionamos todos los elementos necesarios para el autocontrol de la glucemia, garantizando el abastecimiento de instituciones de salud, obras sociales y otros prestadores.",
-    products: [
+    items: [
       { name: "Tiras Reactivas y Medidores", detail: "Sistemas de alta precisión con resultados en pocos segundos." },
       { name: "Agujas para Lapicera de Insulina", detail: "Bisel ultrasuave para aplicaciones prácticamente indoloras." },
       { name: "Monitoreo Continuo (CGM)", detail: "Sensores y accesorios para lectura sin pinchazos frecuentes." }
-    ],
-    otherProducts: [
-      "Lancetas y punzadores automáticos",
-      "Estuchería térmica para transporte de insulina",
-      "Jeringas graduadas de ultra-fina calibración",
-      "Soluciones de control y calibración glucémica",
-      "Sobres de gel frío reutilizables"
     ]
   },
   {
@@ -32,18 +26,16 @@ const rubrosDetallados = [
     title: "Alimentación Enteral y Soporte Nutricional",
     badge: "Soporte Nutricional",
     image: alimentacionImagen,
-    description: "Insumos para administración de nutrición enteral por sonda en pacientes con incapacidad de ingesta oral. Garantizamos máxima higiene y compatibilidad con bombas de infusión.",
-    products: [
-      { name: "Sondas de Alimentación", detail: "Sondas nasoenterales K-108 de poliuretano y silicona de alta durabilidad." },
-      { name: "Guías de Infusión", detail: "Guías para bombas continuas y opciones por gravedad con conector en Y." },
-      { name: "Bolsas de Nutrición y Recipientes", detail: "Sistemas cerrados y abiertos para administración segura." }
-    ],
-    otherProducts: [
-      "Botones y sondas de gastrostomía (PEG / Mic-Key)",
-      "Jeringas Toomey / EnFit para lavado de sonda",
-      "Fijadores de nariz y parches de sujeción",
-      "Fórmulas nutricionales poliméricas e hiperproteicas",
-      "Bombas de infusión enteral portátil"
+    imagePosition: "object-cover object-bottom", // Recorta la parte superior de la bolsa
+    description: "Insumos para administración de nutrición enteral por sonda en pacientes con incapacidad de ingesta oral.",
+    items: [
+      { name: "Sondas de Alimentación", detail: "Sondas nasogástricas de PVC, poliuretano y silicona de alta durabilidad." },
+      { name: "Guías de Infusión", detail: "Guías para bombas continuas y opciones por gravedad." },
+      { name: "Bolsas de Nutrición y Recipientes", detail: "Sistemas cerrados y abiertos para administración segura." },
+      { name: "Botones y sondas de gastrostomía (PEG / Mic-Key)" },
+      { name: "Bombas de infusión enteral" },
+      { name: "Fórmulas nutricionales" },
+      { name: "Jeringas Toomey / EnFit" }
     ]
   },
   {
@@ -51,18 +43,16 @@ const rubrosDetallados = [
     title: "Acceso Vascular y Terapia de Infusión",
     badge: "Terapia Intravenosa",
     image: vascularImagen,
+    imagePosition: "object-cover",
     description: "Material para la fijación, curación y mantenimiento de accesos venosos periféricos y centrales, minimizando el riesgo de infecciones asociadas al catéter.",
-    products: [
+    items: [
       { name: "Fijadores y Apósitos Transparentes", detail: "Con tecnología respirable y gluconato de clorhexidina integrados." },
       { name: "Conectores Luer-Lock Libres de Aguja", detail: "Válvulas de acceso bi-direccionales de sistema cerrado." },
-      { name: "Prolongadores y Llaves de 3 Vías", detail: "Sistemas estériles sin látex para infusión simultánea." }
-    ],
-    otherProducts: [
-      "Catéteres intravenosos periféricos (Abocath)",
-      "Agujas tipo Huber para puerto Port-a-Cath",
-      "Solución fisiológica en ampollas / Heparina para sellado",
-      "Kits estériles de curación e higiene de vía central",
-      "Cintas y parches de fijación quirúrgica hipoalergénica"
+      { name: "Prolongadores y Llaves de 3 Vías", detail: "Sistemas estériles sin látex para infusión simultánea." },
+      { name: "Catéteres intravenosos periféricos (Abocath)" },
+      { name: "Agujas tipo Huber para puerto Port-a-Cath" },
+      { name: "Kits estériles de curación e higiene de vía central" },
+      { name: "Solución fisiológica en ampollas / Heparina para sellado" }
     ]
   },
   {
@@ -70,18 +60,15 @@ const rubrosDetallados = [
     title: "Cirugía",
     badge: "Área Quirúrgica",
     image: cirugiaImagen,
+    imagePosition: "object-cover",
     description: "Insumos e instrumental descartable especializado para procedimientos quirúrgicos, curación avanzada de heridas complejas y manejo de drenajes.",
-    products: [
+    items: [
       { name: "Suturas Quirúrgicas", detail: "Seda, nylon, Vicryl y PDS con agujas de alta precisión." },
       { name: "Apósitos de Curación Avanzada", detail: "Hidrocoloides, alginatos y espumas de poliuretano estériles." },
-      { name: "Sistemas de Drenaje", detail: "Drenajes Jackson-Pratt, Redon y frascos de aspiración estéril." }
-    ],
-    otherProducts: [
-      "Hojas y mangos de bisturí descartables estériles",
-      "Gasas, compresas y vendas quirúrgicas",
-      "Batas, camisolines y campos quirúrgicos impermeables",
-      "Guantes quirúrgicos estériles libres de talco",
-      "Soluciones antisépticas (Iodopovidona, Clorhexidina)"
+      { name: "Sistemas de Drenaje", detail: "Drenajes Jackson-Pratt, Redon y frascos de aspiración estéril." },
+      { name: "Hojas y mangos de bisturí descartables estériles" },
+      { name: "Gasas, compresas y vendas quirúrgicas" },
+      { name: "Guantes quirúrgicos estériles libres de talco" }
     ]
   },
   {
@@ -89,18 +76,15 @@ const rubrosDetallados = [
     title: "Respiratorio",
     badge: "Terapia Respiratoria",
     image: respiratorioImagen,
+    imagePosition: "object-cover",
     description: "Equipamiento e insumos descartables para administración de oxígeno, humidificación, aeroterapia y manejo de vías aéreas en pacientes críticos y ambulatorios.",
-    products: [
+    items: [
       { name: "Cánulas y Máscaras de O₂", detail: "Sistemas Venturi, con reservorio y cánulas nasales ultra suaves." },
-      { name: "Aerocámaras y Inhaloterapia", detail: "Espaciadores estáticos y portátiles para adultos y pediatría." },
-      { name: "Filtros y Humidificadores", detail: "Filtros HME antibacterianos/virales y vasos humidificadores." }
-    ],
-    otherProducts: [
-      "Sondas de aspiración traqueal con válvula de control",
-      "Tubos endotraqueales y cánulas de traqueostomía",
-      "Kits de nebulización a pistón y ultrasónicos",
-      "Líneas de extensión para oxígeno y conectores universales",
-      "Sensores de oximetría de pulso y oxímetros portátiles"
+      { name: "Aerocámaras e Inhaloterapia", detail: "Espaciadores estáticos y portátiles para adultos y pediatría." },
+      { name: "Filtros y Humidificadores", detail: "Filtros HME antibacterianos/virales y vasos humidificadores." },
+      { name: "Tubos endotraqueales y cánulas de traqueostomía" },
+      { name: "Kits de nebulización a pistón y ultrasónicos" },
+      { name: "Sensores de oximetría de pulso y oxímetros portátiles" }
     ]
   }
 ];
@@ -109,57 +93,55 @@ const rubrosDetallados = [
 <section class="py-16 bg-surface">
   <div class="container mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16">
-      <h2 class="text-2xl sm:text-3xl font-bold text-theme mt-1">Insumos Médicos por Patologías</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-sky-900 mt-1">Nuestros principales productos</h2>
+      <div class="w-16 h-1 bg-sky-600 mx-auto mt-3 rounded-full"></div>
     </div>
 
     <div class="space-y-16">
       {rubrosDetallados.map((rubro, index) => (
-        <div class={`grid md:grid-cols-12 gap-8 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+        <div class={`grid md:grid-cols-12 gap-8 lg:gap-12 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
           
           <!-- Imagen -->
           <div class={`md:col-span-5 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
-            <div class="relative h-72 sm:h-80 md:h-full min-h-[300px] rounded-3xl overflow-hidden shadow-xl border border-brand-gray/15">
-              <Image src={rubro.image} alt={rubro.title} class="w-full h-full object-cover" width={600} height={500} />
+            <div class="relative h-72 sm:h-80 md:h-[340px] rounded-3xl overflow-hidden shadow-lg border border-sky-100 bg-sky-50/30">
+              <Image 
+                src={rubro.image} 
+                alt={rubro.title} 
+                class={`w-full h-full ${rubro.imagePosition || 'object-cover'}`} 
+                width={600} 
+                height={500} 
+              />
             </div>
           </div>
 
           <!-- Contenido -->
           <div class={`md:col-span-7 ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
-            <span class="text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full uppercase tracking-wider">
+            <span class="inline-block text-xs font-bold text-sky-700 bg-sky-100/80 border border-sky-200/70 px-3.5 py-1 rounded-full uppercase tracking-wider">
               {rubro.badge}
             </span>
-            <h3 class="text-2xl font-bold text-main mt-3 mb-3">{rubro.title}</h3>
-            <p class="text-sm text-muted mb-6 leading-relaxed">{rubro.description}</p>
+            <h3 class="text-2xl font-bold text-sky-950 mt-3 mb-2">{rubro.title}</h3>
+            <p class="text-sm text-slate-600 mb-6 leading-relaxed">{rubro.description}</p>
 
-            <!-- Grilla de productos destacados (Mini Cards) -->
-            <div class="grid sm:grid-cols-3 gap-3 mb-5">
-              {rubro.products.map((prod) => (
-                <div class="p-3.5 bg-bg rounded-xl border border-brand-gray/10">
-                  <p class="text-xs font-bold text-main mb-1">{prod.name}</p>
-                  <p class="text-[11px] text-muted leading-tight">{prod.detail}</p>
+            <!-- Lista de Ítems Sueltos (Estructura dinámica con toque azul) -->
+            <div class="grid sm:grid-cols-2 gap-2.5 mb-6">
+              {rubro.items.map((item) => (
+                <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-sky-50/60 border border-sky-100/90 hover:border-sky-200 transition-colors">
+                  <span class="w-2 h-2 rounded-full bg-sky-500 mt-1.5 flex-shrink-0"></span>
+                  <div>
+                    <p class="text-xs font-semibold text-slate-900">{item.name}</p>
+                    {item.detail && (
+                      <p class="text-[11px] text-slate-500 leading-snug mt-0.5">{item.detail}</p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
 
-            <!-- Lista de OTROS INSUMOS DISPONIBLES -->
-            {rubro.otherProducts && (
-              <div class="mb-6 p-4 rounded-xl bg-bg/60 border border-brand-gray/10">
-                <p class="text-xs font-bold text-main mb-2 flex items-center gap-1.5 uppercase tracking-wider">
-                  <span class="text-accent">✦</span> Otros insumos disponibles en stock:
-                </p>
-                <ul class="grid sm:grid-cols-2 gap-y-1.5 gap-x-4">
-                  {rubro.otherProducts.map((item) => (
-                    <li class="text-xs text-muted flex items-center gap-2">
-                      <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
             <!-- Botón de Acción -->
-            <a href="/cotizar" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white text-xs font-bold shadow-md hover:bg-accent transition-colors duration-200">
+            <a 
+              href="/cotizar" 
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-sky-600 text-white text-xs font-bold shadow-sm hover:bg-sky-700 hover:shadow transition-all duration-200"
+            >
               Solicitar Insumos de {rubro.title.split(' ')[0]} →
             </a>
           </div>
