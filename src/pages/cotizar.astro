@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CotizationHero from "../components/Cotizacion/CotizationHero.astro";
+import type { SEOProps } from "../core/types/seo";
+import titleGenerator from "../core/scripts/title-generator";
+const seo:SEOProps={
+    title: titleGenerator("Cotizacion"),
+}
+---
+
+<Layout seo={seo}>
+  <CotizationHero />
+</Layout>

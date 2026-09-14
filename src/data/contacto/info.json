@@ -1,0 +1,98 @@
+{
+  "heroTitulo": "Estamos para",
+  "heroTituloAcento": "asesorarte",
+  "heroBajada": "Contamos con atención personalizada para orientarte y acompañarte en cada etapa, desde tu consulta hasta la solución que necesitás.",
+  "otrosTitulo": "Otros medios de contacto",
+  "otrosBajada": "Podés comunicarte directamente a nuestras líneas o correos específicos haciendo clic en cualquiera de ellos.",
+  "canales": [
+    {
+      "label": "Atención por WhatsApp",
+      "icono": "message",
+      "subtext": "Respuesta rápida para urgencias e insumos",
+      "phones": [
+        "351 522-6545",
+        "351 677-2000"
+      ],
+      "emails": [],
+      "mostrarEnPrincipal": true,
+      "mostrarEnOtros": false
+    },
+    {
+      "label": "Correo Electrónico",
+      "icono": "mail",
+      "subtext": "Administración, presupuestos y proveedores",
+      "phones": [],
+      "emails": [
+        "ventas@seamed.com.ar",
+        "cotizaciones@seamed.com.ar"
+      ],
+      "mostrarEnPrincipal": true,
+      "mostrarEnOtros": false
+    },
+    {
+      "label": "Línea Directa / Fijo",
+      "icono": "phone",
+      "subtext": "Lunes a Viernes de 9:00 a 17:30 hs",
+      "phones": [
+        "351 898-0811"
+      ],
+      "emails": [],
+      "mostrarEnPrincipal": true,
+      "mostrarEnOtros": false
+    },
+    {
+      "label": "Ventas y Alquiler",
+      "icono": "package",
+      "subtext": "Atención para adquisición y presupuestos",
+      "phones": [
+        "351 522-6545",
+        "351 677-2000"
+      ],
+      "emails": [
+        "ventas@seamed.com.ar",
+        "cotizaciones@seamed.com.ar"
+      ],
+      "mostrarEnPrincipal": false,
+      "mostrarEnOtros": true
+    },
+    {
+      "label": "Pagos",
+      "icono": "creditCard",
+      "subtext": "Cobranzas y facturación",
+      "phones": [
+        "351 522-6190"
+      ],
+      "emails": [
+        "administracion@seamed.com.ar"
+      ],
+      "mostrarEnPrincipal": false,
+      "mostrarEnOtros": true
+    },
+    {
+      "label": "Devoluciones",
+      "icono": "rotateCcw",
+      "subtext": "Recepción y logística de retorno",
+      "phones": [
+        "351 623-6256"
+      ],
+      "emails": [
+        "seamed@seamed.com.ar"
+      ],
+      "mostrarEnPrincipal": false,
+      "mostrarEnOtros": true
+    },
+    {
+      "label": "Oficina",
+      "icono": "building",
+      "subtext": "Lunes a Viernes de 9:00 a 17:30 hs",
+      "phones": [
+        "351 898-0811"
+      ],
+      "emails": [
+        "info@seamed.com.ar"
+      ],
+      "mostrarEnPrincipal": false,
+      "mostrarEnOtros": true
+    }
+  ]
+}

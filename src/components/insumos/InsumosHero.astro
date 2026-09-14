@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import InsumoHeroImg from "../../assets/catalog/insumo1.jpg";
+import insumosData from "../../data/insumos.json";
+---
+
+<section
+  class="relative pt-12 pb-16 bg-surface w-full overflow-hidden border-b border-brand-gray/10"
+>
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <!-- Lado Izquierdo: Textos -->
+    <div class="flex flex-col gap-5">
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="500"
+        class="text-4xl sm:text-5xl md:text-6xl font-bold text-theme leading-tight"
+      >
+        {insumosData.heroTitulo}
+        <br />
+        <span class="text-accent">{insumosData.heroTituloAcento}</span>
+      </h1>
+
+      <p
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="200"
+        class="text-base md:text-lg text-muted leading-relaxed"
+      >
+        {insumosData.heroBajada}
+      </p>
+    </div>
+
+    <!-- Lado Derecho: Imagen destacada -->
+    <div data-aos="fade-left" data-aos-duration="600" class="relative">
+      <div
+        class="relative w-full h-[350px] sm:h-[420px] rounded-3xl overflow-hidden shadow-2xl border border-brand-gray/15"
+      >
+        <Image
+          src={InsumoHeroImg}
+          alt="Insumos médicos de alta calidad SeAMeD"
+          class="w-full h-full object-cover"
+          width={700}
+          height={500}
+          loading="eager"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+        >
+        </div>
+        <div class="absolute bottom-6 left-6 right-6 text-white">
+          <p class="text-xs uppercase font-bold tracking-wider text-accent">
+            {insumosData.heroBadge}
+          </p>
+          <p class="text-sm font-medium mt-1">
+            {insumosData.heroSubtextoFoto}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

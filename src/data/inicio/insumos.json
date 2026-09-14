@@ -1,0 +1,161 @@
+{
+  "tituloSeccion": "Nuestros principales productos",
+  "rubros": [
+    {
+      "id": "diabetes",
+      "title": "Diabetes y Monitoreo",
+      "badge": "Control y Monitoreo",
+      "description": "Proporcionamos todos los elementos necesarios para el autocontrol de la glucemia, garantizando el abastecimiento de instituciones de salud, obras sociales y otros prestadores.",
+      "items": [
+        {
+          "name": "Tiras Reactivas y Medidores",
+          "detail": "Sistemas de alta precisión con resultados en pocos segundos."
+        },
+        {
+          "name": "Agujas para Lapicera de Insulina",
+          "detail": "Bisel ultrasuave para aplicaciones prácticamente indoloras."
+        },
+        {
+          "name": "Monitoreo Continuo (CGM)",
+          "detail": "Sensores y accesorios para lectura sin pinchazos frecuentes."
+        }
+      ]
+    },
+    {
+      "id": "enteral",
+      "title": "Alimentación Enteral y Soporte Nutricional",
+      "badge": "Soporte Nutricional",
+      "description": "Insumos para administración de nutrición enteral por sonda en pacientes con incapacidad de ingesta oral.",
+      "items": [
+        {
+          "name": "Sondas de Alimentación",
+          "detail": "Sondas nasogástricas de PVC, poliuretano y silicona de alta durabilidad."
+        },
+        {
+          "name": "Guías de Infusión",
+          "detail": "Guías para bombas continuas y opciones por gravedad."
+        },
+        {
+          "name": "Bolsas de Nutrición y Recipientes",
+          "detail": "Sistemas cerrados y abiertos para administración segura."
+        },
+        {
+          "name": "Botones y sondas de gastrostomía (PEG / Mic-Key)",
+          "detail": ""
+        },
+        {
+          "name": "Bombas de infusión enteral",
+          "detail": ""
+        },
+        {
+          "name": "Fórmulas nutricionales",
+          "detail": ""
+        },
+        {
+          "name": "Jeringas Toomey / EnFit",
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "id": "vascular",
+      "title": "Acceso Vascular y Terapia de Infusión",
+      "badge": "Terapia Intravenosa",
+      "description": "Material para la fijación, curación y mantenimiento de accesos venosos periféricos y centrales, minimizando el riesgo de infecciones asociadas al catéter.",
+      "items": [
+        {
+          "name": "Fijadores y Apósitos Transparentes",
+          "detail": "Con tecnología respirable y gluconato de clorhexidina integrados."
+        },
+        {
+          "name": "Conectores Luer-Lock Libres de Aguja",
+          "detail": "Válvulas de acceso bi-direccionales de sistema cerrado."
+        },
+        {
+          "name": "Prolongadores y Llaves de 3 Vías",
+          "detail": "Sistemas estériles sin látex para infusión simultánea."
+        },
+        {
+          "name": "Catéteres intravenosos periféricos (Abocath)",
+          "detail": ""
+        },
+        {
+          "name": "Agujas tipo Huber para puerto Port-a-Cath",
+          "detail": ""
+        },
+        {
+          "name": "Kits estériles de curación e higiene de vía central",
+          "detail": ""
+        },
+        {
+          "name": "Solución fisiológica en ampollas / Heparina para sellado",
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "id": "cirugia",
+      "title": "Cirugía",
+      "badge": "Área Quirúrgica",
+      "description": "Insumos e instrumental descartable especializado para procedimientos quirúrgicos, curación avanzada de heridas complejas y manejo de drenajes.",
+      "items": [
+        {
+          "name": "Suturas Quirúrgicas",
+          "detail": "Seda, nylon, Vicryl y PDS con agujas de alta precisión."
+        },
+        {
+          "name": "Apósitos de Curación Avanzada",
+          "detail": "Hidrocoloides, alginatos y espumas de poliuretano estériles."
+        },
+        {
+          "name": "Sistemas de Drenaje",
+          "detail": "Drenajes Jackson-Pratt, Redon y frascos de aspiración estéril."
+        },
+        {
+          "name": "Hojas y mangos de bisturí descartables estériles",
+          "detail": ""
+        },
+        {
+          "name": "Gasas, compresas y vendas quirúrgicas",
+          "detail": ""
+        },
+        {
+          "name": "Guantes quirúrgicos estériles libres de talco",
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "id": "respiratorio",
+      "title": "Respiratorio",
+      "badge": "Terapia Respiratoria",
+      "description": "Equipamiento e insumos descartables para administración de oxígeno, humidificación, aeroterapia y manejo de vías aéreas en pacientes críticos y ambulatorios.",
+      "items": [
+        {
+          "name": "Cánulas y Máscaras de O₂",
+          "detail": "Sistemas Venturi, con reservorio y cánulas nasales ultra suaves."
+        },
+        {
+          "name": "Aerocámaras e Inhaloterapia",
+          "detail": "Espaciadores estáticos y portátiles para adultos y pediatría."
+        },
+        {
+          "name": "Filtros y Humidificadores",
+          "detail": "Filtros HME antibacterianos/virales y vasos humidificadores."
+        },
+        {
+          "name": "Tubos endotraqueales y cánulas de traqueostomía",
+          "detail": ""
+        },
+        {
+          "name": "Kits de nebulización a pistón y ultrasónicos",
+          "detail": ""
+        },
+        {
+          "name": "Sensores de oximetría de pulso y oxímetros portátiles",
+          "detail": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+---
+import { FileInput, X, FileText, Upload } from "lucide-astro";
+import cotizacionData from "../../data/cotizacion.json";
+---
+
+<section id="cotizar" class="py-12 bg-surface">
+  <div
+    class="container mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
+  >
+    <!-- Columna Izquierda: Textos Hero -->
+    <div class="flex flex-col gap-6">
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="500"
+        class="text-4xl sm:text-5xl md:text-6xl font-bold text-theme leading-tight tracking-tight"
+      >
+        {cotizacionData.heroTitulo}
+        <span class="text-accent">{cotizacionData.heroTituloAcento}</span>
+      </h1>
+
+      <p
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="200"
+        class="text-xl md:text-2xl text-muted leading-relaxed font-medium"
+      >
+        {cotizacionData.heroBajada}
+      </p>
+    </div>
+
+    <!-- Columna Derecha: Tarjeta de Formulario -->
+    <div
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-delay="600"
+      class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10"
+    >
+      <h3 class="text-2xl font-bold text-theme mb-1">
+        {cotizacionData.formTitulo}
+      </h3>
+
+      <p class="text-sm text-muted mb-6">
+        {cotizacionData.formSubtitulo}
+      </p>
+
+      <form class="flex flex-col gap-5">
+        <!-- Zona de Carga de Archivo -->
+        <div class="flex flex-col gap-2">
+          <span
+            class="text-[10px] text-accent font-semibold uppercase tracking-wider"
+          >
+            Obligatorio
+          </span>
+
+          <div
+            id="drop-zone"
+            class="relative flex flex-col items-center justify-center w-full p-6 border-2 border-dashed border-main/20 rounded-xl bg-surface/50 hover:bg-surface hover:border-accent transition-all duration-200"
+          >
+            <div
+              id="upload-prompt"
+              class="flex flex-col items-center text-center pointer-events-none"
+            >
+              <Upload class="w-8 h-8 mb-2 text-accent" />
+              <p class="text-sm">
+                <span class="font-semibold text-main">
+                  Hacé clic para adjuntar tu pedido médico
+                </span>
+                <br />
+                o arrastrá tu archivo aquí
+              </p>
+              <p class="text-[11px] text-gray-400 mt-1">
+                PDF, JPG o PNG (Máx. 25 MB)
+              </p>
+            </div>
+
+            <div
+              id="file-uploaded"
+              class="hidden grid-cols-[1fr_auto] items-center gap-2 w-full p-3 rounded-lg bg-accent/10 text-accent font-medium text-sm transition-all z-10"
+            >
+              <div
+                class="flex flex-1 items-center gap-2 min-w-0 overflow-hidden"
+              >
+                <FileText class="w-5 h-5 shrink-0 text-accent" />
+                <div class="flex-1 overflow-hidden">
+                  <span
+                    id="file-name"
+                    class="block max-w-[80%] flex-1 truncate text-main font-semibold text-xs"
+                  ></span>
+                  <span
+                    id="file-size"
+                    class="block w-fit text-[10px] text-muted"></span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                id="remove-file"
+                class="shrink-0 p-1.5 rounded-full hover:bg-accent/20 text-main/60 hover:text-red-500 transition-colors"
+              >
+                <X class="w-4 h-4" />
+              </button>
+            </div>
+
+            <input
+              id="receta"
+              type="file"
+              class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-0"
+              accept=".pdf,image/png,image/jpeg,image/webp"
+              required
+            />
+          </div>
+
+          <p
+            id="file-error"
+            class="hidden text-xs font-semibold text-red-500 mt-1"
+          >
+          </p>
+        </div>
+
+        <!-- Campos: Obra Social y Afiliado -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            type="text"
+            placeholder="Obra Social / Prepaga (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          />
+
+          <input
+            type="text"
+            placeholder="Nº de Afiliado (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          />
+        </div>
+
+        <!-- Campo: Nombre Completo -->
+        <div>
+          <input
+            type="text"
+            placeholder="Nombre completo (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          />
+        </div>
+
+        <!-- Campos: Teléfono y Correo -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            type="tel"
+            placeholder="Teléfono / WhatsApp (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          />
+
+          <input
+            type="email"
+            placeholder="Correo electrónico (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          />
+        </div>
+
+        <!-- Campo: Mensaje -->
+        <div>
+          <textarea
+            placeholder="Tu mensaje / Asunto... (Opcional)"
+            class="w-full border border-main/20 p-3.5 rounded-lg min-h-[100px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+          ></textarea>
+        </div>
+
+        <!-- Botón de Envío -->
+        <button
+          type="submit"
+          class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-1 active:scale-[0.99]"
+        >
+          {cotizacionData.formBotonTexto}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="md:col-span-2 text-center pt-8 mt-6 border-t border-main/10">
+    <p class="text-sm text-muted">
+      {cotizacionData.footerTexto}
+      <a
+        href="/contacto"
+        class="font-bold text-accent hover:underline inline-flex items-center gap-1 ml-1"
+      >
+        {cotizacionData.footerLinkTexto}
+      </a>
+    </p>
+  </div>
+</section>
+
+<script>
+  function setupFileInput() {
+    const input = document.getElementById("receta") as HTMLInputElement | null;
+    const dropZone = document.getElementById("drop-zone");
+    const uploadPrompt = document.getElementById("upload-prompt");
+    const fileUploaded = document.getElementById("file-uploaded");
+    const fileName = document.getElementById("file-name");
+    const fileSize = document.getElementById("file-size");
+    const removeBtn = document.getElementById("remove-file");
+    const fileError = document.getElementById("file-error");
+
+    if (!input || !dropZone) return;
+
+    const MAX_SIZE_MB = 25;
+
+    function formatBytes(bytes: number): string {
+      if (bytes === 0) return "0 Bytes";
+      const k = 1024;
+      const sizes = ["Bytes", "KB", "MB"];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+    }
+
+    function showError(msg: string) {
+      if (fileError) {
+        fileError.textContent = msg;
+        fileError.classList.remove("hidden");
+      }
+    }
+
+    function clearError() {
+      if (fileError) {
+        fileError.textContent = "";
+        fileError.classList.add("hidden");
+      }
+    }
+
+    function clearFile() {
+      if (input) {
+        input.value = "";
+        input.classList.remove("pointer-events-none");
+      }
+      if (uploadPrompt) uploadPrompt.classList.remove("hidden");
+      if (fileUploaded) {
+        fileUploaded.classList.remove("grid");
+        fileUploaded.classList.add("hidden");
+      }
+      clearError();
+    }
+
+    function handleFile(file: File) {
+      clearError();
+
+      if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+        showError(`El archivo supera el límite de ${MAX_SIZE_MB} MB.`);
+        clearFile();
+        return;
+      }
+
+      if (fileName) fileName.textContent = file.name;
+      if (fileSize) fileSize.textContent = formatBytes(file.size);
+
+      if (uploadPrompt) uploadPrompt.classList.add("hidden");
+      if (fileUploaded) {
+        fileUploaded.classList.remove("hidden");
+        fileUploaded.classList.add("grid");
+      }
+
+      input?.classList.add("pointer-events-none");
+    }
+
+    input.addEventListener("change", () => {
+      if (input.files && input.files[0]) {
+        handleFile(input.files[0]);
+      } else {
+        clearFile();
+      }
+    });
+
+    removeBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      clearFile();
+    });
+
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        },
+        false,
+      );
+    });
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        () => {
+          dropZone.classList.add("border-accent", "bg-accent/10");
+        },
+        false,
+      );
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        () => {
+          dropZone.classList.remove("border-accent", "bg-accent/10");
+        },
+        false,
+      );
+    });
+
+    dropZone.addEventListener("drop", (e: DragEvent) => {
+      const dt = e.dataTransfer;
+      const files = dt?.files;
+
+      if (files && files.length > 0) {
+        const file = files[0];
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        input.files = dataTransfer.files;
+
+        handleFile(file);
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupFileInput);
+  setupFileInput();
+</script>

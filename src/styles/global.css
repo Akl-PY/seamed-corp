@@ -1,14 +1,17 @@
 @import "tailwindcss";
 
+root{
+  color:#110944
+}
 @theme {
   /* Colores base estructurados para SeAMeD S.A. */
-  --color-theme: #00A3E0;       /* Cian extraído directamente del isotipo */
-  --color-main: #111827;        /* Charcoal profundo para texto principal (Garantiza score 100% Accesibilidad) */
+  --color-main: #00A9CE ;
+  --color-theme:#3B5998;          /* Gris corporativo */
   --color-bg: #FFFFFF;          /* Fondo blanco puro para optimizar el renderizado inicial */
 
   /* Componentes y tokens de soporte para la UI de la landing */
   --color-brand-gray: #7A7A7A;  /* Gris corporativo del logotipo ("EQUIPAMIENTO E INSUMOS MEDICOS") */
-  --color-accent: #0091C2;      /* Variante cian con mayor contraste para estados hover/active y enlaces */
+  --color-accent: #00A9CE;      /* Variante cian con mayor contraste para estados hover/active y enlaces */
   --color-muted: #4B5563;       /* Gris secundario para bajadas, subtítulos y meta-información */
   --color-surface: #F9FAFB;     /* Fondo gris sutil para romper secciones y colocar cards de autoridad */
 }

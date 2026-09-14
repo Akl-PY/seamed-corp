@@ -1,0 +1,44 @@
+{
+  "slides": [
+    {
+      "title": "OXIGENOTERAPIA DOMICILIARIA Y AMBULATORIA",
+      "description": "Suministro de concentradores de oxígeno domiciliarios, portátiles, tubos y mochilas ultralivianas para el cuidado del paciente en el hogar e instituciones.",
+      "imageKey": "medico",
+      "alt": "Concentradores de oxígeno portátiles y domiciliarios para pacientes con insuficiencia respiratoria",
+      "buttonText": "Solicitar Cotización",
+      "buttonHref": "/cotizar",
+      "isCertificationsSlide": false,
+      "counterValue": 100,
+      "counterSuffix": "%",
+      "counterLabel": "Habilitaciones Oficiales",
+      "reviewButtonText": "Nuestras Reseñas",
+      "reviewButtonHref": "https://maps.google.com/?q=SeAMeD+SA"
+    },
+    {
+      "title": "APNEA DEL SUEÑO",
+      "description": "Alquiler y venta de equipos CPAP, AutoCpap y BIPAP e insumos de última generación. Asesoramiento personalizado para cada necesidad.",
+      "imageKey": "med_paciente",
+      "alt": "Equipos CPAP y BIPAP para tratamiento del sueño y ventilación no invasiva",
+      "buttonText": "Ver Equipamiento",
+      "buttonHref": "/#equipamiento",
+      "isCertificationsSlide": false,
+      "counterValue": 100,
+      "counterSuffix": "%",
+      "counterLabel": "Habilitaciones Oficiales",
+      "reviewButtonText": "Nuestras Reseñas",
+      "reviewButtonHref": "https://maps.google.com/?q=SeAMeD+SA"
+    },
+    {
+      "title": "Garantía de Calidad y Respaldo Técnico",
+      "description": "Comprometidos en brindar soluciones medicas de calidad, para pacientes y profesionales de la salud.",
+      "imageKey": "med_paciente",
+      "alt": "Mantenimiento y certificación técnica de equipos médicos SeAMeD S.A.",
+      "isCertificationsSlide": true,
+      "counterValue": 100,
+      "counterSuffix": "%",
+      "counterLabel": "Habilitaciones Oficiales",
+      "reviewButtonText": "Nuestras Reseñas",
+      "reviewButtonHref": "https://maps.google.com/?q=SeAMeD+SA"
+    }
+  ]
+}

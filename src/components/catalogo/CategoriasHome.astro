@@ -1,0 +1,545 @@
+---
+// Servicios.astro - Sección de especialidades y guía completa de Terapia de Sueño
+import { Image } from "astro:assets";
+import { 
+  ChevronDown, 
+  HelpCircle, 
+  Moon, 
+  Activity, 
+  HeartPulse, 
+  Stethoscope, 
+  ShieldCheck, 
+  Package 
+} from "lucide-astro";
+import serviciosData from "../../data/servicios.json";
+
+import SrvApnea from "../../assets/services/apnea.jpg";
+import SrvOxigeno from "../../assets/services/oxigenoterapia.jpg";
+import SrvVentilacion from "../../assets/services/ventilacion.jpg";
+import SrvPoligrafia from "../../assets/services/poligrafia.jpg";
+import SrvAlimentacion from "../../assets/services/alimentacion-cama.jpg";
+import SrvHomeCare from "../../assets/services/home care.jpg";
+
+// Mapeo seguro de imágenes locales por ID
+const imageMap: Record<string, ImageMetadata> = {
+  oxigenoterapia: SrvOxigeno,
+  apnea: SrvApnea,
+  poligrafia: SrvPoligrafia,
+  ventilacion: SrvVentilacion,
+  "alimentacion-enteral": SrvAlimentacion,
+  "home-care": SrvHomeCare,
+};
+
+// Combinamos los textos de Keystatic con los assets de imagen
+const servicios = serviciosData.lista.map((srv) => ({
+  ...srv,
+  image: imageMap[srv.id] || SrvOxigeno,
+  alt: `Equipamiento e insumos para ${srv.title}`,
+  link: `#${srv.id}`,
+  text: srv.linkText || "Solicitar Asesoramiento",
+}));
+
+// 1. HOJA 1: SUEÑO SALUDABLE (3 Columnas)
+const colSuenoSaludable = [
+  {
+    titulo: "Fundamentos y Pilares",
+    icon: Moon,
+    items: [
+      {
+        q: "¿Qué es el sueño saludable?",
+        a: "El sueño saludable es un proceso biológico activo y natural fundamental para la vida. La Organización Mundial de la Salud (OMS) y expertos en salud lo definen como un estado de descanso reparador que cumple con cantidad, continuidad, profundidad y satisfacción, permitiendo un correcto equilibrio físico, mental y emocional."
+      },
+      {
+        q: "¿Cuántas horas de calidad se necesitan?",
+        a: "Se estima entre 7 y 8 horas diarias de sueño de calidad. Aunque usted tenga un sueño de óptima calidad, si dura solamente 3 a 4 horas no será suficiente para reparar y restaurar funciones. En el otro extremo, 10 horas de sueño con muy baja calidad tampoco resultan revitalizantes."
+      },
+      {
+        q: "Los tres pilares de la salud",
+        a: "El sueño es uno de los tres pilares de la salud, junto con el ejercicio y la nutrición. Para un estilo de vida equilibrado es indispensable otorgar el mismo nivel de atención y cuidado a los tres."
+      }
+    ]
+  },
+  {
+    titulo: "Etapas del Sueño Saludable",
+    icon: Activity,
+    items: [
+      {
+        q: "Etapa 1: Inicio del sueño",
+        a: "Marca el inicio del descanso. En esta fase usted podrá distraerse fácilmente del sueño y, según el nivel de cansancio acumulado, suele durar hasta 7 minutos."
+      },
+      {
+        q: "Etapa 2: Sueño ligero",
+        a: "Es mucho menos probable despertarse en esta etapa. Puede prolongarse hasta 25 minutos, dependiendo también del agotamiento físico y mental."
+      },
+      {
+        q: "Etapa 3: Sueño profundo (Ondas lentas)",
+        a: "Conocida como fase de ondas lentas. Suele durar entre 20 y 40 minutos durante el primer ciclo de descanso nocturno antes de dar paso a la fase REM."
+      },
+      {
+        q: "Etapa 4: Sueño REM (Movimiento Ocular Rápido)",
+        a: "Fase crucial para procesar emociones, consolidar la memoria y el aprendizaje. Se caracteriza por una actividad cerebral muy alta, movimientos rápidos de los ojos y relajación/parálisis muscular temporal. Aparece por primera vez entre 70 y 90 minutos después de conciliar el sueño."
+      }
+    ]
+  },
+  {
+    titulo: "Higiene del Sueño (Pautas)",
+    icon: ShieldCheck,
+    items: [
+      {
+        q: "¿Qué hacer? (Hábitos recomendados)",
+        a: "• Definir una rutina fija para dormir y levantarse.\n• Asegurar entre 7 y 9 horas diarias para una correcta función cerebral y de memoria.\n• Mantener una adecuada ingesta de vitamina D (favorece la producción de melatonina).\n• Preparar un entorno cómodo y silencioso.\n• Mantener la cama como un lugar sagrado: asociarla únicamente al descanso (evitar trabajar o ver televisión en ella).\n• Brindarle tiempo al cuerpo para relajarse cada noche antes de acostarse."
+      },
+      {
+        q: "¿Qué no hacer? (Factores a evitar)",
+        a: "• No ingerir bebidas con cafeína (café, té, chocolate, gaseosas); optar por agua tibia o infusiones de hierbas.\n• Evitar el alcohol: empeora los ronquidos y las pausas de apnea, produciendo inquietud.\n• No realizar actividad física intensa dentro de las 2 horas previas a dormir.\n• Evitar cenas copiosas, alimentos muy condimentados o azucarados, así como irse a la cama con hambre.\n• Eliminar el consumo de tabaco (la nicotina actúa como estimulante).\n• Evitar pantallas, películas de acción, videojuegos competitivos o charlas intensas que sobreestimulen la mente."
+      }
+    ]
+  }
+];
+
+// 2. HOJA 2: APNEA DEL SUEÑO (3 Columnas)
+const colApneaSueno = [
+  {
+    titulo: "Definición y Síntomas",
+    icon: HeartPulse,
+    items: [
+      {
+        q: "¿Qué es la apnea del sueño?",
+        a: "Es un trastorno donde los músculos de la garganta se relajan y colapsan, obstruyendo el paso del aire. Ante cada pausa respiratoria, el cerebro genera un microdespertar para reanudar el flujo, un ciclo que puede repetirse más de 50 veces por hora sin que la persona lo recuerde. Esto reduce severamente el oxígeno en el organismo y cerebro, provocando cansancio crónico y riesgos cardiovasculares graves."
+      },
+      {
+        q: "Síntomas característicos más comunes",
+        a: "• Ronquidos intensos y frecuentes.\n• Cansancio diurno constante y falta de energía.\n• Dificultad para concentrarse y fallas de memoria.\n• Dolores de cabeza matinales frecuentes.\n• Estado de ánimo depresivo o irritabilidad.\n• Sudoración nocturna y aumento injustificado de peso."
+      }
+    ]
+  },
+  {
+    titulo: "Grados de Severidad",
+    icon: HelpCircle,
+    items: [
+      {
+        q: "Clasificación según pausas por hora",
+        a: "• Apnea Leve: De 5 a 14 interrupciones de la respiración por hora de sueño.\n• Apnea Moderada: De 15 a 30 pausas respiratorias por hora de sueño.\n• Apnea Severa: 30 o más eventos de interrupción respiratoria por cada hora de sueño."
+      },
+      {
+        q: "La buena noticia y el primer paso",
+        a: "La apnea del sueño tiene un tratamiento efectivo. Descubrir si está en riesgo es el primer paso para proteger su salud. Es indispensable acudir a un médico especialista, quien determinará la indicación del estudio. Con el diagnóstico correcto, la gran mayoría de los trastornos respiratorios del sueño se resuelven satisfactoriamente."
+      }
+    ]
+  },
+  {
+    titulo: "Diagnóstico y Estudios",
+    icon: Stethoscope,
+    items: [
+      {
+        q: "Poligrafía Respiratoria Domiciliaria",
+        a: "Estudio simplificado que se realiza en la comodidad del hogar con dispositivos de última generación como el Resmed ApneaLink™ Air. El paciente duerme en su propio entorno con sensores especializados que registran el flujo aéreo, saturación de oxígeno y esfuerzo respiratorio, entregando el equipo al especialista al día siguiente."
+      },
+      {
+        q: "Polisomnografía Clínica",
+        a: "Examen médico integral de noche completa llevado a cabo en un laboratorio de sueño dentro de una clínica u hospital, donde múltiples sensores monitorean la actividad cerebral, neuromuscular y cardiopulmonar en tiempo real."
+      }
+    ]
+  }
+];
+
+// 3. HOJA 3: TERAPIA PARA EL SUEÑO SALUDABLE (3 Columnas)
+const colTerapiaCpap = [
+  {
+    titulo: "Equipos CPAP y Beneficios",
+    icon: ShieldCheck,
+    items: [
+      {
+        q: "¿Qué son los equipos CPAP?",
+        a: "El CPAP (Presión Positiva Continua en la Vía Aérea) es el dispositivo médico considerado el tratamiento de primera elección para la apnea obstructiva del sueño (AOS)."
+      },
+      {
+        q: "¿Cómo funcionan?",
+        a: "El equipo toma aire del ambiente, lo filtra y lo envía a una presión regulada a través de un tubo conectado a la mascarilla. El CPAP no respira por el paciente, sino que mantiene abierta la vía aérea para permitir una ventilación natural continua."
+      },
+      {
+        q: "Beneficios directos de la terapia",
+        a: "• Elimina o reduce drásticamente los ronquidos.\n• Suprime las pausas respiratorias nocturnas.\n• Restaura la calidad reparadora del sueño.\n• Elimina la somnolencia excesiva en el día.\n• Devuelve la concentración y claridad mental.\n• Disminuye significativamente el riesgo cardiovascular asociado a la apnea."
+      }
+    ]
+  },
+  {
+    titulo: "Tipos de Equipos CPAP",
+    icon: HeartPulse,
+    items: [
+      {
+        q: "CPAP de presión fija",
+        a: "Suministra una presión de aire constante y continua a lo largo de toda la noche. El nivel de presión exacto es calibrado previamente por prescripción médica según las necesidades anatómicas del paciente."
+      },
+      {
+        q: "CPAP Autoajustable (APAP / AutoSet)",
+        a: "Dispositivo inteligente que mide la resistencia respiratoria respiración a respiración y ajusta automáticamente el nivel de presión en tiempo real, brindando la mínima presión necesaria para mantener abierta la vía aérea y otorgando máximo confort al dormir."
+      }
+    ]
+  },
+  {
+    titulo: "Accesorios e Insumos",
+    icon: Package,
+    items: [
+      {
+        q: "Mascarillas (Nasales y Faciales)",
+        a: "Disponemos de un amplio catálogo de mascarillas nasales, oronasales (buconasales) y de almohadillas, diseñadas para un sellado ergonómico que previene fugas de aire y maximiza la adherencia al tratamiento."
+      },
+      {
+        q: "Tubuladuras y repuestos",
+        a: "Conductos flexibles y livianos compatibles con las principales marcas mundiales, garantizando un flujo sin pérdidas ni condensación."
+      },
+      {
+        q: "Adquisición y asesoramiento",
+        a: "Contamos con insumos originales, humidificadores, filtros y repuestos. Consulte para coordinar la selección de su máscara o la calibración de su equipo."
+      }
+    ]
+  }
+];
+---
+
+<section id="servicios" class="py-16 overflow-hidden bg-surface">
+  <div class="container mx-auto px-6">
+    
+    <!-- Encabezado único de la Sección -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl sm:text-3xl font-bold text-theme">Nuestras especialidades</h2>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted mt-2 text-xs sm:text-sm">Soluciones adaptadas a las necesidades clínicas de cada paciente</p>
+    </div>
+
+    <!-- Grilla de Tarjetas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {servicios.map((srv, index) => (
+        <a 
+          href={`#${srv.id}`} 
+          data-service-id={srv.id}
+          data-aos="fade-up"
+          data-aos-duration="500"
+          data-aos-delay={100 + index * 100}
+          class="service-card group flex flex-col justify-between overflow-hidden bg-bg rounded-2xl border border-brand-gray/15 transition-all duration-300 hover:shadow-2xl hover:border-accent hover:-translate-y-1.5 cursor-pointer"
+        >
+          <div>
+            <!-- Imagen -->
+            <div class="relative w-full h-52 overflow-hidden bg-surface">
+              <Image 
+                src={srv.image} 
+                alt={srv.alt}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                width={400}
+                height={300}
+                loading="eager"
+                fetchpriority="high"
+              />
+              <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
+            </div>
+
+            <!-- Contenido Breve -->
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-main mb-2.5 group-hover:text-accent transition-colors duration-200">{srv.title}</h3>
+              <p class="text-xs text-muted leading-relaxed line-clamp-3">{srv.description}</p>
+            </div>
+          </div>
+
+          <!-- Acción -->
+          <div class="px-6 pb-6 pt-1">
+            <span class="text-xs text-accent font-bold flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200">
+              Ver detalle del servicio 
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- BLOQUE INFERIOR: GUÍA Y EDUCACIÓN AL PACIENTE (3 SECCIONES DE 3 COLUMNAS) -->
+    <!-- ========================================================================= -->
+    <div class="mt-20 pt-16 border-t border-brand-gray/15 space-y-20">
+      
+      <!-- 1. SECCIÓN: SUEÑO SALUDABLE -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme mt-2">
+            Sueño Saludable
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-1.5">
+            Definición clínica, ciclos biológicos y hábitos para un descanso verdaderamente reparador
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {colSuenoSaludable.map((col, colIdx) => {
+            const IconComp = col.icon;
+            return (
+              <div 
+                data-aos="fade-up"
+                data-aos-delay={100 + colIdx * 100}
+                class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+              >
+                <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+                  <IconComp class="w-4 h-4 text-accent shrink-0" />
+                  {col.titulo}
+                </h4>
+
+                <div class="flex flex-col gap-2">
+                  {col.items.map((item) => (
+                    <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                        <span>{item.q}</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                          <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                        </span>
+                      </summary>
+                      <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2 whitespace-pre-line">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- 2. SECCIÓN: APNEA DEL SUEÑO -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme mt-2">
+            Apnea del Sueño
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-1.5">
+            Detección de síntomas, grados de interrupción y estudios diagnósticos domiciliarios y clínicos
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {colApneaSueno.map((col, colIdx) => {
+            const IconComp = col.icon;
+            return (
+              <div 
+                data-aos="fade-up"
+                data-aos-delay={100 + colIdx * 100}
+                class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+              >
+                <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+                  <IconComp class="w-4 h-4 text-accent shrink-0" />
+                  {col.titulo}
+                </h4>
+
+                <div class="flex flex-col gap-2">
+                  {col.items.map((item) => (
+                    <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                        <span>{item.q}</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                          <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                        </span>
+                      </summary>
+                      <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2 whitespace-pre-line">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- 3. SECCIÓN: TERAPIA PARA EL SUEÑO SALUDABLE (CPAP Y ACCESORIOS) -->
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h3 data-aos="fade-up" class="text-2xl sm:text-3xl font-bold text-theme mt-2">
+            Terapia para el Sueño Saludable (CPAP)
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="100" class="text-xs sm:text-sm text-muted mt-1.5">
+            Mecanismo de acción, tipos de equipos de presión positiva e insumos esenciales para el tratamiento
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {colTerapiaCpap.map((col, colIdx) => {
+            const IconComp = col.icon;
+            return (
+              <div 
+                data-aos="fade-up"
+                data-aos-delay={100 + colIdx * 100}
+                class="flex flex-col gap-3 p-5 bg-bg border border-brand-gray/15 rounded-2xl shadow-xs"
+              >
+                <h4 class="text-sm font-bold text-main border-b border-brand-gray/15 pb-3 flex items-center gap-2">
+                  <IconComp class="w-4 h-4 text-accent shrink-0" />
+                  {col.titulo}
+                </h4>
+
+                <div class="flex flex-col gap-2">
+                  {col.items.map((item) => (
+                    <details class="group rounded-xl bg-surface border border-brand-gray/10 transition-all [&_summary::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer items-center justify-between gap-2 p-3 text-xs font-semibold text-main hover:text-accent">
+                        <span>{item.q}</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                          <ChevronDown class="w-3.5 h-3.5 text-accent" />
+                        </span>
+                      </summary>
+                      <div class="px-3 pb-3 text-[11px] text-muted leading-relaxed border-t border-brand-gray/5 pt-2 whitespace-pre-line">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+
+                {colIdx === 2 && (
+                  <div class="pt-2 mt-auto border-t border-brand-gray/10">
+                    <a 
+                      href="/cotizar" 
+                      class="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline"
+                    >
+                      <span>Ver catálogo y cotizar accesorios</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                  </div>
+                )}
+
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL PROFESIONAL -->
+  <div id="modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" tabindex="-1">
+    <div id="overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300"></div>
+    
+    <div class="flex min-h-full items-center justify-center p-4 sm:p-6 md:p-10 text-left pointer-events-none">
+      <div 
+        id="selectedService" 
+        class="relative transform overflow-hidden rounded-3xl bg-bg border border-brand-gray/20 shadow-2xl transition-all w-full max-w-4xl my-auto z-10 max-h-[90vh] flex flex-col md:flex-row pointer-events-auto"
+      >
+        <button 
+          id="closeModalBtn" 
+          type="button" 
+          class="absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-accent hover:text-main transition-all duration-200 focus:outline-none shadow-lg cursor-pointer"
+          aria-label="Cerrar modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div class="relative w-full md:w-5/12 h-64 md:h-auto min-h-[250px] bg-surface flex-shrink-0">
+          <Image
+            id="selectedImage"
+            src={servicios[0].image}
+            alt={servicios[0].alt}
+            class="w-full h-full object-cover"
+            loading={"eager"}
+            fetchpriority={"high"}
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent md:hidden"></div>
+        </div>
+
+        <div class="p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto w-full md:w-7/12">
+          <div>
+            <h3 id="selectedTitle" class="text-2xl sm:text-3xl font-bold text-main mb-4 leading-tight"></h3>
+            <p id="selectedDescription" class="text-sm font-semibold text-main/80 mb-5 pb-4 border-b border-brand-gray/15 leading-relaxed"></p>
+            <p id="selectedLargeDescription" class="text-xs sm:text-sm text-muted leading-relaxed space-y-3 mb-8"></p>
+          </div>
+
+          <div class="pt-5 border-t border-brand-gray/15 mt-auto">
+            <a 
+              id="modalActionBtn" 
+              href="#cotizar" 
+              class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg hover:bg-accent transition-all duration-200 active:scale-98"
+            >
+              <span id="selectedButtonText">Solicitar Asesoramiento</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ servicios }}>
+  function initServiciosModal() {
+    const modal = document.getElementById("modal");
+    const overlay = document.getElementById("overlay");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modalActionBtn = document.getElementById("modalActionBtn");
+
+    if (!modal) return;
+
+    const selectedImage = document.getElementById("selectedImage");
+    const selectedTitle = document.getElementById("selectedTitle");
+    const selectedDescription = document.getElementById("selectedDescription");
+    const selectedLargeDescription = document.getElementById("selectedLargeDescription");
+    const selectedButtonText = document.getElementById("selectedButtonText");
+
+    function openModalWithService(srv) {
+      if (!srv) return;
+      
+      selectedImage.src = srv.image.src;
+      selectedImage.alt = srv.alt || srv.title;
+      selectedTitle.textContent = srv.title;
+      selectedDescription.textContent = srv.description;
+      selectedLargeDescription.textContent = srv.largeDescription;
+      selectedButtonText.textContent = srv.text || "Solicitar Asesoramiento";
+
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+
+      if (window.location.hash && window.location.hash !== "#cotizar" && window.location.hash !== "#servicios") {
+        history.pushState(null, "", window.location.pathname + window.location.search);
+      }
+    }
+
+    function checkHash() {
+      const rawHash = window.location.hash.replace("#", "");
+      if (!rawHash) {
+        closeModal();
+        return;
+      }
+
+      const srv = servicios.find(s => s.id === rawHash || s.link === `#${rawHash}`);
+      if (srv) {
+        openModalWithService(srv);
+      } else if (rawHash !== "cotizar" && rawHash !== "servicios") {
+        closeModal();
+      }
+    }
+
+    document.querySelectorAll(".service-card").forEach(card => {
+      card.addEventListener("click", (e) => {
+        e.preventDefault();
+        const serviceId = card.getAttribute("data-service-id");
+        const srv = servicios.find(s => s.id === serviceId);
+        
+        if (srv) {
+          history.pushState(null, "", `#${srv.id}`);
+          openModalWithService(srv);
+        }
+      });
+    });
+
+    overlay?.addEventListener("click", closeModal);
+    closeModalBtn?.addEventListener("click", closeModal);
+    modalActionBtn?.addEventListener("click", closeModal);
+
+    window.addEventListener("popstate", checkHash);
+    window.addEventListener("hashchange", checkHash);
+
+    checkHash();
+  }
+  document.addEventListener("astro:page-load", initServiciosModal);
+</script>

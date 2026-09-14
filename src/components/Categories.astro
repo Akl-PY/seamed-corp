@@ -41,9 +41,9 @@ const categories = [
     <!-- Bento Grid Asimétrico (Cero JS, Rendimiento Puro) -->
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
       {categories.map((cat) => (
-        <div class={`flex flex-col justify-between overflow-hidden rounded-2xl border border-brand-gray/10 bg-bg p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-theme/30 ${cat.gridClass}`}>
+        <div class={`flex flex-col justify-between overflow-hidden rounded-2xl border border-brand-gray/10 bg-bg p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-accent/30 ${cat.gridClass}`}>
           <div>
-            <span class="inline-flex items-center rounded-md bg-surface px-2.5 py-0.5 text-xs font-semibold text-theme border border-theme/10 uppercase tracking-wide">
+            <span class="inline-flex items-center rounded-md bg-surface px-2.5 py-0.5 text-xs font-semibold text-accent border border-accent/10 uppercase tracking-wide">
               {cat.tag}
             </span>
             <h3 class="mt-4 text-2xl font-bold tracking-tight text-main">
@@ -70,7 +70,7 @@ const categories = [
           <div class="mt-6 flex justify-end">
             <a 
               href={cat.link} 
-              class="inline-flex items-center gap-x-2 text-sm font-bold text-theme hover:text-accent transition-colors duration-200 group focus-visible:outline-2 focus-visible:outline-theme"
+              class="inline-flex items-center gap-x-2 text-sm font-bold text-accent hover:text-accent transition-colors duration-200 group focus-visible:outline-2 focus-visible:outline-accent"
             >
               Explorar Catálogo Técnico
               <svg class="h-4 w-4 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">

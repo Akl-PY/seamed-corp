@@ -1,42 +1,54 @@
 ---
-// TechnicalAuthority.astro
+import { ShieldCheck, Wrench, Headphones } from "lucide-astro";
+
 const certs = [
   { 
-    title: "Protocolos de Bioseguridad", 
-    desc: "Cumplimiento estricto de normas de desinfección en cada equipo.",
-    icon: "🛡️" 
+    title: "Mantenimiento y Control Técnico", 
+    desc: "Verificación y calibración de equipos de ventilación mecánica, oxigenoterapia y CPAP/BiPAP.",
+    icon: Wrench 
   },
   { 
-    title: "Mantenimiento Preventivo", 
-    desc: "Revisión técnica periódica con certificación de funcionamiento.",
-    icon: "⚙️" 
+    title: "Insumos y Bioseguridad", 
+    desc: "Acondicionamiento y entrega de insumos médicos bajo estrictos estándares para atención domiciliaria.",
+    icon: ShieldCheck 
   },
   { 
-    title: "Soporte Clínico 24/7", 
-    desc: "Asistencia telefónica y técnica para emergencias.",
-    icon: "📞" 
+    title: "Soporte Especializado 24/7", 
+    desc: "Asistencia técnica y seguimiento continuo para pacientes de media y alta complejidad.",
+    icon: Headphones 
   }
 ];
 ---
 
-<section class="py-20 bg-surface">
+<section class="py-12 bg-surface">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mb-16">
-      <h2 class="text-3xl font-bold mb-6 text-[var(--color-main)]">Nuestra Responsabilidad Técnica</h2>
-      <p class="text-lg text-[var(--color-muted)]">
-        En SeAMeD, la tecnología es el medio, pero la tranquilidad del paciente es nuestro fin. 
-        Garantizamos equipos certificados bajo normas internacionales.
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl sm:text-3xl font-bold mb-6 text-theme">
+        Nuestra Responsabilidad Técnica
+      </h2>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" class="text-sm sm:text-base text-muted leading-relaxed">
+        En SeAMeD acompañamos la atención domiciliaria y hospitalaria con equipamiento médico garantizado, servicio técnico capacitado y respuesta inmediata para la tranquilidad de pacientes y profesionales.
       </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-      {certs.map(c => (
-        <div class="p-6 border-l-4 border-[var(--color-theme)] bg-[var(--color-surface)] hover:shadow-md transition-shadow duration-300">
-          <div class="text-2xl mb-4">{c.icon}</div>
-          <h3 class="font-bold text-[var(--color-main)] mb-2">{c.title}</h3>
-          <p class="text-sm text-[var(--color-muted)] leading-relaxed">{c.desc}</p>
-        </div>
-      ))}
+      {certs.map((c, i) => {
+        const IconComponent = c.icon;
+        return (
+          <div 
+            data-aos="fade-right" 
+            data-aos-duration="500" 
+            data-aos-delay={100 + i * 100} 
+            class="p-6 border-l-4 border-[var(--color-accent)] bg-surface hover:shadow-md transition-shadow duration-300 rounded-r-xl"
+          >
+            <div class="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center mb-4">
+              <IconComponent class="w-5 h-5" />
+            </div>
+            <h3 class="font-bold text-[var(--color-main)] mb-2">{c.title}</h3>
+            <p class="text-sm text-[var(--color-muted)] leading-relaxed">{c.desc}</p>
+          </div>
+        );
+      })}
     </div>
   </div>
 </section>

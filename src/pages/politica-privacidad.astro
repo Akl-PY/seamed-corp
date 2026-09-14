@@ -1,0 +1,208 @@
+---
+import { SITE_CONFIG } from "../config/site";
+import titleGenerator from "../core/scripts/title-generator";
+import type { SEOProps } from "../core/types/seo";
+import Layout from "../layouts/Layout.astro";
+
+const lastUpdated = new Date().toLocaleDateString("es-AR", { 
+  year: "numeric", 
+  month: "long", 
+  day: "numeric" 
+});
+const seo:SEOProps={
+    title: titleGenerator("Politica de Privacidad"),
+    nofollow: true,
+    noindex: true
+}
+---
+
+<Layout seo={seo}>
+  <main class="py-12 sm:py-20 bg-bg min-h-screen">
+    <div class="container mx-auto px-4 sm:px-6 max-w-4xl">
+      
+      <!-- HERO / BANNER PRINCIPAL -->
+      <header class="relative overflow-hidden bg-surface border border-brand-gray/15 rounded-3xl p-6 sm:p-10 mb-8 shadow-sm">
+
+        
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme/10 border border-theme/20 text-theme text-xs font-bold uppercase tracking-wider mb-4">
+            <span class="w-2 h-2 rounded-full bg-theme animate-pulse"></span>
+            Aviso Legal & Transparencia
+          </div>
+          
+          <h1 class="text-3xl sm:text-5xl font-black text-main tracking-tight leading-tight">
+            Política de Privacidad
+          </h1>
+          
+          <p class="text-sm sm:text-base text-muted mt-3 leading-relaxed">
+            Transparencia total sobre cómo protegemos los datos de pacientes, profesionales e instituciones médicas en <strong class="text-main">SeAMeD S.A.</strong>
+          </p>
+
+          <div class="mt-6 pt-6 border-t border-brand-gray/15 flex flex-wrap items-center gap-4 text-xs text-muted">
+            <span class="flex items-center gap-1.5 font-medium text-main">
+              <svg class="w-4 h-4 text-theme shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Última revisión: {lastUpdated}
+            </span>
+            <span class="hidden sm:inline text-brand-gray/40">•</span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-theme shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Conforme a Ley de Protección de Datos
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <!-- RESUMEN EJECUTIVO (TL;DR) -->
+      <div class="mb-10 bg-theme/5 border border-theme/20 rounded-2xl p-6">
+        <h3 class="text-base sm:text-lg font-bold text-main mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-theme shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Resumen de compromisos clave (TL;DR)
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm text-muted">
+          <div class="bg-bg p-3.5 rounded-xl border border-brand-gray/10">
+            <p class="font-bold text-main mb-1">🔒 No comercializamos datos</p>
+            <p>Nunca vendemos ni alquilamos tu información personal a terceros.</p>
+          </div>
+          <div class="bg-bg p-3.5 rounded-xl border border-brand-gray/10">
+            <p class="font-bold text-main mb-1">🩺 Uso exclusivo médico</p>
+            <p>Tus datos solo se usan para presupuestos, logística y atención técnica.</p>
+          </div>
+          <div class="bg-bg p-3.5 rounded-xl border border-brand-gray/10">
+            <p class="font-bold text-main mb-1">⚙️ Control total</p>
+            <p>Podés solicitar la eliminación o modificación de tus datos cuando quieras.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIONES DE CONTENIDO -->
+      <div class="space-y-6 text-muted text-sm sm:text-base leading-relaxed">
+        
+        <!-- 1. Introducción -->
+        <section class="bg-surface border border-brand-gray/15 rounded-2xl p-6 sm:p-8">
+          <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-theme/10 text-theme font-bold text-xs mb-3">
+            01
+          </div>
+          <h2 class="text-xl font-bold text-main mb-3">1. Introducción</h2>
+          <p>
+            En <strong class="text-main">SeAMeD S.A.</strong> respetamos profundamente la confianza depositada en nosotros al solicitar servicios de equipamiento médico, oxigenoterapia e insumos para la salud. Esta Política de Privacidad establece los términos bajo los cuales recopilamos, procesamos y resguardamos la información provista a través de nuestro sitio web y canales digitales oficiales.
+          </p>
+        </section>
+
+        <!-- 2. Información recopilada -->
+        <section class="bg-surface border border-brand-gray/15 rounded-2xl p-6 sm:p-8">
+          <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-theme/10 text-theme font-bold text-xs mb-3">
+            02
+          </div>
+          <h2 class="text-xl font-bold text-main mb-3">2. Información que Recopilamos</h2>
+          <p class="mb-4">
+            Recopilamos únicamente la información estrictamente necesaria para coordinar prestaciones, presupuestos y soporte de guardia:
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-bg p-4 rounded-xl border border-brand-gray/10">
+              <span class="w-2 h-2 rounded-full bg-theme mt-2 shrink-0"></span>
+              <div>
+                <strong class="text-main block text-xs sm:text-sm">Datos de identificación y contacto</strong>
+                <span class="text-xs sm:text-sm">Nombre, teléfono, WhatsApp, correo electrónico y domicilio para envíos o montajes técnicos.</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-bg p-4 rounded-xl border border-brand-gray/10">
+              <span class="w-2 h-2 rounded-full bg-theme mt-2 shrink-0"></span>
+              <div>
+                <strong class="text-main block text-xs sm:text-sm">Detalles de la solicitud médica o servicio</strong>
+                <span class="text-xs sm:text-sm">Requerimientos de equipos (CPAP, Concentradores, Bombas) suministrados voluntariamente por el usuario.</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-bg p-4 rounded-xl border border-brand-gray/10">
+              <span class="w-2 h-2 rounded-full bg-theme mt-2 shrink-0"></span>
+              <div>
+                <strong class="text-main block text-xs sm:text-sm">Datos de navegación técnica</strong>
+                <span class="text-xs sm:text-sm">Dirección IP y cookies estrictamente necesarias para el correcto funcionamiento de la interfaz.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Finalidad -->
+        <section class="bg-surface border border-brand-gray/15 rounded-2xl p-6 sm:p-8">
+          <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-theme/10 text-theme font-bold text-xs mb-3">
+            03
+          </div>
+          <h2 class="text-xl font-bold text-main mb-3">3. Finalidad del Tratamiento de Datos</h2>
+          <p class="mb-4">Sus datos personales son procesados con los siguientes fines legítimos:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+            <div class="p-4 bg-bg border border-brand-gray/10 rounded-xl">
+              <p class="font-bold text-main mb-1">🚚 Logística y Asistencia</p>
+              <p>Coordinación de entregas, retiro de equipos y asistencia de guardias técnicas 24hs.</p>
+            </div>
+            <div class="p-4 bg-bg border border-brand-gray/10 rounded-xl">
+              <p class="font-bold text-main mb-1">📋 Cotizaciones</p>
+              <p>Emisión y envío de presupuestos para particulares, obras sociales o instituciones.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Seguridad -->
+        <section class="bg-surface border border-brand-gray/15 rounded-2xl p-6 sm:p-8">
+          <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-theme/10 text-theme font-bold text-xs mb-3">
+            04
+          </div>
+          <h2 class="text-xl font-bold text-main mb-3">4. Seguridad y Confidencialidad</h2>
+          <p>
+            Aplicamos rigurosos estándares técnicos y administrativos para salvaguardar la integridad de la información. <strong class="text-main">SeAMeD S.A. bajo ninguna circunstancia vende, cede ni transfiere datos de pacientes o clientes a empresas de marketing.</strong>
+          </p>
+        </section>
+
+        <!-- 5. WhatsApp -->
+        <section class="bg-surface border border-brand-gray/15 rounded-2xl p-6 sm:p-8">
+          <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#25D366]/10 text-[#25D366] font-bold text-xs mb-3">
+            05
+          </div>
+          <h2 class="text-xl font-bold text-main mb-3">5. Canales de WhatsApp</h2>
+          <p>
+            Al utilizar los botones o la modal flotante de comunicación por WhatsApp, el usuario entabla contacto directo a través de los servidores de Meta. Los datos compartidos dentro del chat quedan protegidos por el cifrado de extremo a extremo de dicha plataforma.
+          </p>
+        </section>
+
+        <!-- 6. Derechos -->
+        <section class="bg-surface border border-brand-gray/15 rounded-2xl p-6 sm:p-8">
+          <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-theme/10 text-theme font-bold text-xs mb-3">
+            06
+          </div>
+          <h2 class="text-xl font-bold text-main mb-3">6. Tus Derechos (ARCO)</h2>
+          <p>
+            Como titular de los datos, tenés derecho a <strong class="text-main">Acceder, Rectificar, Cancelar u Oponerte</strong> al tratamiento de tu información personal. Podés solicitar la actualización o supresión de tus registros enviando una nota a nuestros canales oficiales.
+          </p>
+        </section>
+
+        <!-- 7. Contacto Directo -->
+        <section class="bg-theme/10 border border-theme/30 rounded-2xl p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-main mb-2">7. Canal Oficial de Privacidad</h2>
+          <p class="text-xs sm:text-sm mb-4">
+            Si querés consultar sobre el estado de tus datos o solicitar correcciones:
+          </p>
+          <div class="space-y-2 text-xs sm:text-sm text-main font-semibold">
+            <p class="flex items-center gap-2">
+              📍 {SITE_CONFIG.organization.address?.streetAddress}, {SITE_CONFIG.organization.address?.addressLocality}
+            </p>
+            <p class="flex items-center gap-2">
+              📞 +{SITE_CONFIG.organization.contactPoint?.telephone}
+            </p>
+          </div>
+        </section>
+
+        <!-- BOTÓN VOLVER -->
+        <div class="pt-6 text-center sm:text-left">
+          <a 
+            href="/" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-surface border border-brand-gray/20 text-main font-bold text-sm rounded-xl hover:bg-theme hover:text-main transition-all duration-200 shadow-sm active:scale-95"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Volver a la página principal
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</Layout>

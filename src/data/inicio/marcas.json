@@ -1,9 +1,15 @@
 {
   "titulo": "Somos distribuidores de marcas líderes",
   "lista": [
-    {
-      "name": "Resmed",
-      "imageKey": "resmed"
-    }
+    { "name": "Abott", "imageKey": "abott" },
+    { "name": "BMC", "imageKey": "bmc" },
+    { "name": "GCE", "imageKey": "gce" },
+    { "name": "Lexel", "imageKey": "lexel" },
+    { "name": "Medtronic", "imageKey": "medtronic" },
+    { "name": "Pari", "imageKey": "pari" },
+    { "name": "Respironics", "imageKey": "respironics" },
+    { "name": "Resmed", "imageKey": "resmed" },
+    { "name": "Silmag", "imageKey": "silmag" },
+    { "name": "Yuwell", "imageKey": "yuwell" }
   ]
 }
