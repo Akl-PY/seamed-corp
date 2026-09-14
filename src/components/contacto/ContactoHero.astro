@@ -1,118 +1,161 @@
 ---
-// Contact.astro - Sección de contacto optimizada según requerimientos
+// ContactHero.astro
 import { Image } from "astro:assets";
-import { MessageSquare, Mail, Phone } from "lucide-astro";
+import {
+  MessageSquare,
+  Mail,
+  Phone,
+  Package,
+  CreditCard,
+  RotateCcw,
+  Building2,
+} from "lucide-astro";
 import contacto from "../../assets/contacto.jpg";
+import contactData from "../../data/contacto/info.json";
 
-const contactOptions = [
-  { 
-    label: "Atención por WhatsApp", 
-    items: [
-      { value: "351 522-6545", href: "https://wa.me/5493515226545" },
-      { value: "351 677-2000", href: "https://wa.me/5493516772000" }
-    ],
-    icon: MessageSquare,
-    subtext: "Respuesta rápida para urgencias e insumos"
-  },
-  { 
-    label: "Correo Electrónico", 
-    items: [
-      { value: "ventas@seamed.com.ar", href: "mailto:ventas@seamed.com.ar" },
-      { value: "cotizaciones@seamed.com.ar", href: "mailto:cotizaciones@seamed.com.ar" }
-    ],
-    icon: Mail,
-    subtext: "Administración, presupuestos y proveedores"
-  },
-  { 
-    label: "Línea Directa / Fijo", 
-    items: [
-      { value: "351 898-0811", href: "tel:03518980811" }
-    ],
-    icon: Phone,
-    subtext: "Lunes a Viernes de 9:00 a 17:30 hs"
-  }
-];
+const iconMap: Record<string, any> = {
+  message: MessageSquare,
+  mail: Mail,
+  phone: Phone,
+  package: Package,
+  creditCard: CreditCard,
+  rotateCcw: RotateCcw,
+  building: Building2,
+};
+
+// Filtramos solo los canales que van en la tarjeta principal superior
+const mainChannels = contactData.canales.filter((c) => c.mostrarEnPrincipal);
 ---
 
-<section class="pt-6 md:pt-10 pb-4 bg-surface overflow-hidden border-b border-brand-gray/10">
-  <div class="container mx-auto px-6 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-    
-    <!-- Lado Izquierdo: Información y Canales de Contacto (col-span-7) -->
+<section
+  class="pt-6 md:pt-10 pb-4 bg-surface overflow-hidden border-b border-brand-gray/10"
+>
+  <div
+    class="container mx-auto px-6 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+  >
+    <!-- Lado Izquierdo: Textos y Canales Principales -->
     <div class="lg:col-span-7 flex flex-col gap-4">
-      
-      <!-- Título principal -->
-      <h2 data-aos="fade-up" data-aos-duration="500" class="text-4xl sm:text-5xl md:text-6xl font-bold text-theme leading-tight">
-        Estamos para <span class="text-accent">asesorarte</span>
+      <h2
+        data-aos="fade-up"
+        data-aos-duration="500"
+        class="text-3xl sm:text-4xl font-bold text-theme leading-tight"
+      >
+        {contactData.heroTitulo}
+        <span class="text-accent">{contactData.heroTituloAcento}</span>
       </h2>
 
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-sm sm:text-base text-muted leading-relaxed max-w-2xl">
-        Contamos con atención personalizada para orientarte y acompañarte en cada etapa, desde tu consulta hasta la solución que necesitás.
+      <p
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="150"
+        class="text-sm sm:text-base text-muted leading-relaxed max-w-2xl"
+      >
+        {contactData.heroBajada}
       </p>
 
-      <!-- Canales Directos de Contacto -->
+      <!-- Canales Directos -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-        {contactOptions.map((opt, i) => {
-          const IconComponent = opt.icon;
-          return (
-            <div 
-              data-aos="fade-up" 
-              data-aos-duration="500" 
-              data-aos-delay={150 + i * 100}
-              class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <span class="mb-2.5 block text-accent group-hover:scale-105 transition-transform duration-300">
-                  <IconComponent class="w-5 h-5 stroke-[1.75]" />
-                </span>
-                <span class="text-xs uppercase tracking-wider block mb-1.5 font-semibold text-main">{opt.label}</span>
-                
-                <!-- Sub-lista de enlaces -->
-                <div class="flex flex-col gap-1">
-                  {opt.items.map((item) => (
-                    <a 
-                      href={item.href}
-                      target={item.href.startsWith("http") ? "_blank" : "_self"}
-                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      class="text-xs sm:text-sm text-muted transition-colors block break-words hover:text-accent font-medium"
-                    >
-                      {item.value}
-                    </a>
-                  ))}
+        {
+          mainChannels.map((opt, i) => {
+            const IconComponent = iconMap[opt.icono] || Phone;
+            const items = [
+              ...opt.phones.map((p) => ({
+                value: p,
+                href: p.startsWith("351 898")
+                  ? "tel:03518980811"
+                  : `https://wa.me/549${p.replace(/\s|-/g, "")}`,
+              })),
+              ...opt.emails.map((e) => ({ value: e, href: `mailto:${e}` })),
+            ];
+
+            return (
+              <div
+                data-aos="fade-up"
+                data-aos-duration="500"
+                data-aos-delay={150 + i * 100}
+                class="group p-4 bg-bg rounded-2xl border border-brand-gray/15 hover:border-accent hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <span class="mb-2.5 block text-accent group-hover:scale-105 transition-transform duration-300">
+                    <IconComponent class="w-5 h-5 stroke-[1.75]" />
+                  </span>
+                  <span class="text-xs uppercase tracking-wider block mb-1.5 font-semibold text-main">
+                    {opt.label}
+                  </span>
+
+                  <div class="flex flex-col gap-1">
+                    {items.map((item) => (
+                      <a
+                        href={item.href}
+                        target={
+                          item.href.startsWith("http") ? "_blank" : "_self"
+                        }
+                        rel={
+                          item.href.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                        class="text-xs sm:text-sm text-muted transition-colors block break-words hover:text-accent font-medium"
+                      >
+                        {item.value}
+                      </a>
+                    ))}
+                  </div>
                 </div>
+                {opt.subtext && (
+                  <p class="text-[11px] text-muted mt-2.5 pt-2 border-t border-brand-gray/10 leading-tight">
+                    {opt.subtext}
+                  </p>
+                )}
               </div>
-              <p class="text-[11px] text-muted mt-2.5 pt-2 border-t border-brand-gray/10 leading-tight">{opt.subtext}</p>
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </div>
 
       <!-- Redirección a Cotización -->
-      <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="450" class="pt-1">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-delay="450"
+        class="pt-1"
+      >
         <p class="text-xs sm:text-sm text-muted">
-          ¿Buscás un presupuesto formal para obra social o reintegro? 
-          <a href="/cotizar" class="font-bold text-accent hover:underline inline-flex items-center gap-1 transition-colors ml-1">
+          ¿Buscás un presupuesto formal para obra social o reintegro?
+          <a
+            href="/cotizar"
+            class="font-bold text-accent hover:underline inline-flex items-center gap-1 transition-colors ml-1"
+          >
             Ir al formulario de cotización →
           </a>
         </p>
       </div>
     </div>
 
-    <!-- Lado Derecho: Imagen compacta para evitar espacio muerto y scroll excesivo -->
-    <div data-aos="fade-left" data-aos-duration="700" class="lg:col-span-5 relative flex justify-center">
+    <!-- Lado Derecho: Imagen compacta para evitar espacios muertos -->
+    <div
+      data-aos="fade-left"
+      data-aos-duration="700"
+      class="lg:col-span-5 relative flex justify-center"
+    >
       <div class="relative w-full max-w-sm lg:max-w-none">
-        <div class="relative h-64 sm:h-72 lg:h-[340px] rounded-3xl overflow-hidden shadow-xl border border-brand-gray/15">
-          <Image 
-            src={contacto} 
-            alt="Atención y asesoramiento especializado SeAMeD" 
+        <div
+          class="relative h-64 sm:h-72 lg:h-[340px] rounded-3xl overflow-hidden shadow-xl border border-brand-gray/15"
+        >
+          <Image
+            src={contacto}
+            alt="Atención y asesoramiento especializado SeAMeD"
             class="w-full h-full object-cover object-top"
             width={500}
             height={500}
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-main/50 via-transparent to-transparent"></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-main/50 via-transparent to-transparent"
+          >
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </section>

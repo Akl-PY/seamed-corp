@@ -1,22 +1,20 @@
 ---
-// LocalTrust.astro - Sección de ubicación optimizada y limpia
-import { SITE_CONFIG } from "../../config/site";
+// LocalTrust.astro
 import { MapPin, Navigation, Star } from "lucide-astro";
-
-const MAP_URL =
-  "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6810.716027764946!2d-64.2222637!3d-31.4042608!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a2a6e80f294d%3A0x527eaa34ded1a60f!2sSeAMeD%20S.A.!5e0!3m2!1ses-419!2sar!4v1780420464893!5m2!1ses-419!2sar";
+import ubicacionData from "../../data/contacto/ubicacion.json";
 ---
 
 <section class="py-12 bg-surface" id="ubicacion">
   <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
     <div class="flex flex-col gap-6">
-      <!-- Título principal fijo y claro -->
       <h2
         data-aos="fade-up"
         data-aos-duration="500"
         class="text-3xl md:text-4xl font-bold text-theme"
       >
-        Estamos en <span class="text-accent">Deán Funes 2870</span>
+        Estamos en <span class="text-accent"
+          >{ubicacionData.titulo.replace("Estamos en ", "")}</span
+        >
       </h2>
 
       <p
@@ -25,8 +23,7 @@ const MAP_URL =
         data-aos-delay="200"
         class="text-muted leading-relaxed text-sm sm:text-base"
       >
-        Atención personalizada en nuestras oficinas en Córdoba. Coordiná tu
-        visita, revisá nuestras opiniones o solicitá asistencia inmediata.
+        {ubicacionData.descripcion}
       </p>
 
       <div
@@ -39,7 +36,7 @@ const MAP_URL =
           class="not-italic text-main font-semibold flex items-center gap-2"
         >
           <MapPin class="w-5 h-5 text-accent flex-shrink-0" />
-          <span>Dirección: Deán Funes 2870, Córdoba.</span>
+          <span>Dirección: {ubicacionData.direccion}</span>
         </address>
 
         <!-- Rating informativo de Google Maps -->
@@ -51,8 +48,8 @@ const MAP_URL =
             <Star class="w-4 h-4 fill-current" />
             <Star class="w-4 h-4 fill-current" />
           </div>
-          <span class="text-main font-bold">4.9 / 5.0</span>
-          <span>(Basado en opiniones reales de pacientes)</span>
+          <span class="text-main font-bold">{ubicacionData.ratingPuntaje}</span>
+          <span>{ubicacionData.ratingEtiqueta}</span>
         </div>
       </div>
 
@@ -62,7 +59,7 @@ const MAP_URL =
           data-aos="fade-up"
           data-aos-duration="500"
           data-aos-delay={600}
-          href={SITE_CONFIG.social.googleMaps}
+          href={ubicacionData.googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-theme text-white font-bold rounded-xl hover:bg-accent transition-all w-fit shadow-md active:scale-95 text-sm group"
@@ -84,7 +81,7 @@ const MAP_URL =
       id="map-container"
     >
       <iframe
-        data-src={MAP_URL}
+        data-src={ubicacionData.embedMapUrl}
         class="w-full h-full z-20 border-0 opacity-0 transition-opacity duration-700"
         loading="lazy"
         title="Ubicación de SeAMeD S.A. en Google Maps"
@@ -94,7 +91,6 @@ const MAP_URL =
 </section>
 
 <script>
-  // Observer diferido para el mapa
   function initLocalTrust() {
     const mapContainer = document.getElementById("map-container");
     if (mapContainer) {

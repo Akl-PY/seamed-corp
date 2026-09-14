@@ -1,66 +1,26 @@
 ---
-// Hero.astro - Estructura optimizada para SEO, Core Web Vitals y UX Visual
+// src/components/Hero.astro
 import { Image } from "astro:assets";
-import Slide1 from "../assets/slide1.jpeg";
-import Slide2 from "../assets/slide2.jpeg";
+import med_paciente from "../assets/slides/med-paciente.jpeg";
+import medico from "../assets/slides/medico.jpeg";
 import Ministerio from "../assets/hab-ministerio.png";
 import Anmat from "../assets/hab-anmat.jpg";
+import heroData from "../data/inicio/hero.json";
 
-const carrouselItems = [
-  {
-    title: "OXIGENOTERAPIA DOMICILIARIA Y AMBULATORIA",
-    description: "Suministro de concentradores de oxígeno domiciliarios, portátiles, tubos y mochilas ultralivianas para el cuidado del paciente en el hogar e instituciones.",
-    image: Slide1,
-    alt: "Concentradores de oxígeno portátiles y domiciliarios para pacientes con insuficiencia respiratoria",
-    button: "Solicitar Cotización",
-    href: "/cotizar",
-    textColor: "text-white",
-    descColor: "text-gray-200"
-  },
-  {
-    title: "APNEA DEL SUEÑO",
-    description: "Alquiler y venta de equipos CPAP, AutoCpap y BIPAP e insumos de última generación. Asesoramiento personalizado para cada necesidad.",
-    image: Slide2,
-    alt: "Equipos CPAP y BIPAP para tratamiento del sueño y ventilación no invasiva",
-    button: "Ver Equipamiento",
-    href: "/#equipamiento",
-    textColor: "text-white",
-    descColor: "text-gray-200"
-  },
-  {
-    title: "Garantía de Calidad y Respaldo Técnico",
-    description: "Comprometidos en brindar soluciones medicas de calidad, para pacientes y profesionales de la salud.",
-    image: Slide2,
-    alt: "Mantenimiento y certificación técnica de equipos médicos SeAMeD S.A.",
-    textColor: "text-white",
-    descColor: "text-gray-100",
-    extra: {
-      id: "certs",
-      targetValue: 100,
-      suffix: "%",
-      label: "Habilitaciones Oficiales"
-    },
-    googleReviewButton: {
-      text: "Nuestras Reseñas",
-      href: "https://maps.google.com/?q=SeAMeD+SA",
-    },
-    habilitations: [
-      {
-        name: "Ministerio de Salud",
-        image: Ministerio,
-        alt: "Habilitación del Ministerio de Salud para SeAMeD S.A."
-      },
-      {
-        name: "ANMAT",
-        image: Anmat,
-        alt: "Habilitación de ANMAT para SeAMeD S.A."
-      }
-    ]
-  }
+
+
+const imageMap: Record<string, any> = {
+  med_paciente,
+  medico,
+};
+
+const habilitations = [
+  { name: "Ministerio de Salud", image: Ministerio, alt: "Habilitación del Ministerio de Salud para SeAMeD S.A." },
+  { name: "ANMAT", image: Anmat, alt: "Habilitación de ANMAT para SeAMeD S.A." }
 ];
 
 const fade = {
-  down : "fade-down",
+  down: "fade-down",
   up: "fade-up",
   left: "fade-left",
   right: "fade-right",
@@ -69,97 +29,94 @@ const fade = {
 
 <section class="relative w-full h-[85vh] min-h-[580px] overflow-hidden bg-gray-900 select-none">
   <div id="carousel-track" class="relative w-full h-full">
-    {carrouselItems.map((item, index) => (
+    {heroData.slides.map((item, index) => (
       <div 
         class={`carousel-slide absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out ${
           index === 0 ? "z-10 opacity-100 scale-100 pointer-events-auto" : "z-0 opacity-0 scale-105 pointer-events-none"
         }`}
         data-index={index}
-        data-target-value={item.extra?.targetValue}
-        data-counter-id={item.extra?.id}
+        data-target-value={item.isCertificationsSlide ? item.counterValue : undefined}
+        data-counter-id={item.isCertificationsSlide ? "certs" : undefined}
       >
         <Image 
           class="h-full w-full object-cover object-center transform transition-transform duration-10000 ease-out scale-105" 
-          src={item.image}
-          alt={item.alt}
+          src={imageMap[item.imageKey]}
+          alt={item.alt || item.title}
           loading={index === 0 ? "eager" : "lazy"}
           fetchpriority={index === 0 ? "high" : "auto"}
         />
         
-        <!-- Gradiente para lecturabilidad de texto optimizado -->
+        <!-- Gradiente para lecturabilidad -->
         <div class="absolute inset-0 bg-gradient-to-t from-gray-950/95 via-gray-950/70 to-gray-950/40 backdrop-blur-[1px]"></div>
 
-        <!-- Contenido principal de la slide -->
+        <!-- Contenido principal -->
         <div class="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-8 text-center z-10">
           <div data-aos={fade.up} class="max-w-4xl space-y-4 flex flex-col items-center">
             {index === 0 
-              ? <h1 data-aos={fade.up} data-aos-duration="400" class={`text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-md leading-tight text-balance ${item.textColor}`}>{item.title}</h1>
-              : <h2 data-aos={fade.up} data-aos-duration="400" class={`text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-md leading-tight text-balance ${item.textColor}`}>{item.title}</h2>
+              ? <h1 data-aos={fade.up} data-aos-duration="400" class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-md leading-tight text-balance text-white">{item.title}</h1>
+              : <h2 data-aos={fade.up} data-aos-duration="400" class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase drop-shadow-md leading-tight text-balance text-white">{item.title}</h2>
             }
             
-            <p data-aos={fade.up} data-aos-duration="500" data-aos-delay="300" class={`text-base sm:text-lg md:text-xl mx-auto w-[92%] sm:w-[85%] font-medium leading-relaxed drop-shadow text-pretty ${item.descColor}`}>
+            <p data-aos={fade.up} data-aos-duration="500" data-aos-delay="300" class="text-base sm:text-lg md:text-xl mx-auto w-[92%] sm:w-[85%] font-medium leading-relaxed drop-shadow text-pretty text-gray-200">
               {item.description}
             </p>
 
             <div class="flex flex-col items-center gap-3 pt-1 w-full">
               
-              <!-- 1. Botón CTA Común (Sólo si está definido) -->
-              {item.button && item.href && (
+              <!-- 1. Botón CTA normal -->
+              {item.buttonText && item.buttonHref && (
                 <a 
-                  href={item.href}
+                  href={item.buttonHref}
                   data-aos={fade.up} 
                   data-aos-duration="800" 
                   data-aos-delay="500" 
                   class="inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white font-bold text-base sm:text-lg rounded-2xl hover:bg-white hover:text-accent transition-all duration-300 shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-accent/20 transform hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-accent/50"
                 >
-                  {item.button}
+                  {item.buttonText}
                 </a>
               )}
 
-              {/* 2. Logos grandes de Habilitaciones y Contador (Específico para el slide 3) */}
-              {item.extra && (
+              <!-- 2. Logos de Habilitaciones y Contador -->
+              {item.isCertificationsSlide && (
                 <div 
                   data-aos={fade.up} 
                   data-aos-duration="800" 
                   data-aos-delay="400" 
                   class="flex flex-col items-center gap-3 w-full"
                 >
-                  <!-- Logos de Habilitaciones Grandes y apaisados -->
-                  {item.habilitations && (
-                    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20 shadow-xl max-w-2xl mx-auto">
-                      {item.habilitations.map((hab) => (
-                          <Image 
-                            src={hab.image} 
-                            alt={hab.alt} 
-                            class="h-12 sm:h-30 w-auto max-w-[200px] object-contain drop-shadow-md filter brightness-110" 
-                          />
-                      ))}
-                    </div>
-                  )}
+                  <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20 shadow-xl max-w-2xl mx-auto">
+                    {habilitations.map((hab) => (
+                      <Image 
+                        src={hab.image} 
+                        alt={hab.alt} 
+                        class="h-12 sm:h-30 w-auto max-w-[200px] object-contain drop-shadow-md filter brightness-110" 
+                      />
+                    ))}
+                  </div>
 
                   <div class="inline-flex items-center gap-3 mt-1">
                     <div class="text-2xl sm:text-3xl font-black text-accent drop-shadow-md tracking-tight">
-                      <span id={item.extra.id}>0</span>{item.extra.suffix || "%"}
+                      <span id="certs">0</span>{item.counterSuffix || "%"}
                     </div>
                     <div class="text-xs sm:text-sm text-gray-200 uppercase tracking-widest font-bold">
-                      {item.extra.label}
+                      {item.counterLabel}
                     </div>
                   </div>
                 </div>
               )}
 
               <!-- 3. Botón de Reseñas de Google Maps -->
-              {item.googleReviewButton && (
+              {item.isCertificationsSlide && item.reviewButtonText && (
                 <a 
-                  href={item.googleReviewButton.href}
-                  target="_blank"
+                  href={item.reviewButtonHref} 
+                  target="_blank" 
                   rel="noopener noreferrer"
                   data-aos={fade.up} 
                   data-aos-duration="800" 
                   data-aos-delay="600" 
                   class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-accent text-white font-bold text-base sm:text-lg rounded-2xl hover:bg-white hover:text-accent transition-all duration-300 shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-accent/20 transform hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-accent/50"
                 >
-                  <span>{item.googleReviewButton.text}</span>
+                  <span>{item.reviewButtonText}</span>
                   <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                   </svg>
@@ -185,7 +142,7 @@ const fade = {
 
   <!-- Indicadores de Paginación (Dots) -->
   <div class="absolute bottom-5 inset-x-0 flex justify-center items-center gap-2.5 z-20">
-    {carrouselItems.map((_, i) => (
+    {heroData.slides.map((_, i) => (
       <button 
         data-dot-index={i}
         class={`carousel-dot h-2.5 rounded-full transition-all duration-500 ${i === 0 ? "w-8 bg-accent" : "w-2.5 bg-white/40 hover:bg-white/80"}`}

@@ -1,21 +1,23 @@
 ---
 import { Image } from "astro:assets";
-import InsumoHeroImg from "../../assets/catalog/insumo1.jpg"; // Cambiá por tu imagen principal
+import InsumoHeroImg from "../../assets/catalog/insumo1.jpg";
+import insumosData from "../../data/insumos.json";
 ---
 
 <section
   class="relative pt-12 pb-16 bg-surface w-full overflow-hidden border-b border-brand-gray/10"
 >
   <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-    <!-- Lado Izquierdo: Textos y Propuesta de Valor -->
+    <!-- Lado Izquierdo: Textos -->
     <div class="flex flex-col gap-5">
       <h1
         data-aos="fade-up"
         data-aos-duration="500"
         class="text-4xl sm:text-5xl md:text-6xl font-bold text-theme leading-tight"
       >
-        Insumos de alta calidad <br />
-        <span class="text-accent">para cada necesidad</span>
+        {insumosData.heroTitulo}
+        <br />
+        <span class="text-accent">{insumosData.heroTituloAcento}</span>
       </h1>
 
       <p
@@ -24,9 +26,7 @@ import InsumoHeroImg from "../../assets/catalog/insumo1.jpg"; // Cambiá por tu 
         data-aos-delay="200"
         class="text-base md:text-lg text-muted leading-relaxed"
       >
-        Garantizamos el abastecimiento continuo de descartables y material
-        médico de primer nivel para tratamientos domiciliarios e
-        institucionales. Seguridad, trazabilidad y marcas certificadas.
+        {insumosData.heroBajada}
       </p>
     </div>
 
@@ -49,10 +49,10 @@ import InsumoHeroImg from "../../assets/catalog/insumo1.jpg"; // Cambiá por tu 
         </div>
         <div class="absolute bottom-6 left-6 right-6 text-white">
           <p class="text-xs uppercase font-bold tracking-wider text-accent">
-            Atención Domiciliaria e Institucional
+            {insumosData.heroBadge}
           </p>
           <p class="text-sm font-medium mt-1">
-            Soluciones integrales para pacientes, clínicas y obras sociales.
+            {insumosData.heroSubtextoFoto}
           </p>
         </div>
       </div>

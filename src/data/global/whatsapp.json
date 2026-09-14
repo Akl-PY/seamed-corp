@@ -1,0 +1,31 @@
+{
+  "modalTitulo": "¿Cómo podemos ayudarte?",
+  "modalSubtitulo": "Seleccioná el área correspondiente para derivar tu consulta.",
+  "horarioAtencion": "LUN a VIE 09 - 17:30 hs",
+  "opciones": [
+    {
+      "title": "Ventas y Equipamiento",
+      "description": "Consultas por compra o alquiler de equipos médicos",
+      "badge": "Respuesta rápida",
+      "phoneNumber": "5493515226545",
+      "defaultText": "Hola! Quisiera realizar una consulta sobre equipamiento médico.",
+      "iconType": "cart"
+    },
+    {
+      "title": "Insumos y Repuestos",
+      "description": "Cánulas, máscaras, filtros y descartables",
+      "badge": "Stock disponible",
+      "phoneNumber": "5493516772000",
+      "defaultText": "Hola! Necesito consultar por stock de insumos y descartables.",
+      "iconType": "box"
+    },
+    {
+      "title": "Atención a Pacientes / Soporte",
+      "description": "Asistencia técnica y seguimiento de servicios",
+      "badge": "Asistencia",
+      "phoneNumber": "5493515226545",
+      "defaultText": "Hola! Necesito asistencia o soporte técnico con un equipo.",
+      "iconType": "support"
+    }
+  ]
+}

@@ -1,102 +1,133 @@
 ---
 import { Image } from "astro:assets";
 import SeamedLogo from "../assets/SeamedLogoHor.png";
+import navData from "../data/global/navegacion.json";
 
 const pathname = new URL(Astro.request.url).pathname;
-
-const links = [
-  { name: "Servicios", href: "/servicios" },
-  { name: "Insumos médicos", href: "/insumos" },
-  { name: "Nosotros", href: "/nosotros" },
-  { name: "Contacto", href: "/contacto" },
-  { name: "Solicitar Cotización", href: "/cotizar" }
-];
+const links = navData.enlacesNav || [];
+const navLinksDesktop = links.filter((l) => !l.esBoton);
+const ctaLink = links.find((l) => l.esBoton);
 ---
 
 <header id="main-header" class="w-full bg-bg">
-  <div id="logo-mobile-container" class="flex justify-center items-center  md:hidden border-b border-brand-gray/10 bg-bg">
-    <a href="/" class=" focus-visible:outline-2 focus-visible:outline-accent" aria-label="SeAMeD S.A. - Volver al inicio">
-      <Image 
-        class="h-20 w-auto object-contain" 
+  <!-- Logo en Mobile -->
+  <div
+    id="logo-mobile-container"
+    class="flex justify-center items-center md:hidden border-b border-brand-gray/10 bg-bg"
+  >
+    <a
+      href="/"
+      class="focus-visible:outline-2 focus-visible:outline-accent"
+      aria-label="SeAMeD S.A. - Volver al inicio"
+    >
+      <Image
+        class="h-20 w-auto object-contain"
         src={SeamedLogo}
-        alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
-        width="300" 
-        height="100"
+        alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos"
+        width={300}
+        height={100}
         loading="eager"
         fetchpriority="high"
       />
     </a>
   </div>
 
-  <div 
-    id="nav-bar" 
+  <!-- Barra de Navegación -->
+  <div
+    id="nav-bar"
     class="w-full bg-theme md:bg-bg/95 border-b border-brand-gray/15 transition-all duration-200 z-50"
   >
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 py-2 md:py-0 md:h-20">
-      
+    <div
+      class="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 py-2 md:py-0 md:h-20"
+    >
+      <!-- Logo en Desktop -->
       <div class="hidden md:flex md:flex-1">
-        <a href="/" class="-m-1.5 p-1.5 focus-visible:outline-2 focus-visible:outline-accent" aria-label="SeAMeD S.A. - Volver al inicio">
-          <Image 
-            class="h-20 w-auto object-contain" 
+        <a
+          href="/"
+          class="-m-1.5 p-1.5 focus-visible:outline-2 focus-visible:outline-accent"
+          aria-label="SeAMeD S.A. - Volver al inicio"
+        >
+          <Image
+            class="h-20 w-auto object-contain"
             src={SeamedLogo}
-            alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos" 
-            width="600" 
-            height="200"
+            alt="Logotipo de SeAMeD S.A. Equipamiento e Insumos Médicos"
+            width={600}
+            height={200}
             loading="eager"
             fetchpriority="high"
           />
         </a>
       </div>
 
-      <div class="flex md:hidden w-full flex-wrap justify-center items-center gap-1.5 py-1 text-xs font-semibold">
-        {links.map((link) => {
-          const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-          return (
-            <a 
-              href={link.href} 
-              class={`px-2.5 py-1.5 rounded-md border text-center transition-colors duration-200 active:scale-95 last:bg-accent last:text-white ${
-                isActive 
-                  ? "bg-accent/15 border-accent text-accent font-bold" 
-                  : "text-main hover:text-accent bg-white hover:bg-white/90 border-brand-gray/10"
-              }`}
-            >
-              {link.name}
-            </a>
-          );
-        })}
+      <!-- Links Mobile (Chips interactivos) -->
+      <div
+        class="flex md:hidden w-full flex-wrap justify-center items-center gap-1.5 py-1 text-xs font-semibold"
+      >
+        {
+          links.map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <a
+                href={link.href}
+                class={`px-2.5 py-1.5 rounded-md border text-center transition-colors duration-200 active:scale-95 ${
+                  link.esBoton
+                    ? "bg-accent text-white border-accent"
+                    : isActive
+                      ? "bg-accent/15 border-accent text-accent font-bold"
+                      : "text-main hover:text-accent bg-white hover:bg-white/90 border-brand-gray/10"
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })
+        }
       </div>
 
-
-      <nav class="hidden md:flex text-center md:gap-x-8 lg:gap-x-10" aria-label="Navegación principal desktop">
-        {links.map((link) => {
-          const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-          return (
-            <a 
-              href={link.href} 
-              class={`text-sm font-semibold tracking-wide transition-colors duration-200 last:hidden relative py-1 ${
-                isActive 
-                  ? "text-accent font-bold" 
-                  : "text-main hover:text-accent"
-              }`}
-            >
-              {link.name}
-              {isActive && (
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent rounded-full"></span>
-              )}
-            </a>
-          );
-        })}
+      <!-- Links Desktop -->
+      <nav
+        class="hidden md:flex text-center md:gap-x-8 lg:gap-x-10"
+        aria-label="Navegación principal desktop"
+      >
+        {
+          navLinksDesktop.map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <a
+                href={link.href}
+                class={`text-sm font-semibold tracking-wide transition-colors duration-200 relative py-1 ${
+                  isActive
+                    ? "text-accent font-bold"
+                    : "text-main hover:text-accent"
+                }`}
+              >
+                {link.name}
+                {isActive && (
+                  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent rounded-full" />
+                )}
+              </a>
+            );
+          })
+        }
       </nav>
 
+      <!-- Botón Cotizar Desktop -->
       <div class="hidden md:flex md:flex-1 md:justify-end">
-        <a 
-          href="/cotizar" 
-          class="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-xs hover:brightness-110 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-95"
-        >
-          Solicitar Cotización
-        </a>
+        {
+          ctaLink && (
+            <a
+              href={ctaLink.href}
+              class="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-xs hover:brightness-110 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-95"
+            >
+              {ctaLink.name}
+            </a>
+          )
+        }
       </div>
-
     </div>
   </div>
 </header>
@@ -104,29 +135,28 @@ const links = [
 <div id="nav-spacer" class="hidden"></div>
 
 <script>
-const setupFixedNav = () => {
-  const logoContainer = document.getElementById("logo-mobile-container");
-  const navBar = document.getElementById("nav-bar");
-  const spacer = document.getElementById("nav-spacer");
+  const setupFixedNav = () => {
+    const logoContainer = document.getElementById("logo-mobile-container");
+    const navBar = document.getElementById("nav-bar");
+    const spacer = document.getElementById("nav-spacer");
 
-  if (!navBar || !spacer) return;
+    if (!navBar || !spacer) return;
 
-  const handleScroll = () => {
-    const logoHeight = logoContainer ? logoContainer.offsetHeight : 50;
+    const handleScroll = () => {
+      const logoHeight = logoContainer ? logoContainer.offsetHeight : 50;
 
-    if (window.scrollY > logoHeight) {
-      spacer.style.height = `${navBar.offsetHeight}px`;
-      
-      navBar.classList.add("fixed", "top-0", "left-0", "shadow-md");
-      spacer.classList.remove("hidden");
-    } else {
-      navBar.classList.remove("fixed", "top-0", "left-0", "shadow-md");
-      spacer.classList.add("hidden");
-    }
+      if (window.scrollY > logoHeight) {
+        spacer.style.height = `${navBar.offsetHeight}px`;
+        navBar.classList.add("fixed", "top-0", "left-0", "shadow-md");
+        spacer.classList.remove("hidden");
+      } else {
+        navBar.classList.remove("fixed", "top-0", "left-0", "shadow-md");
+        spacer.classList.add("hidden");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
   };
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
-};
-
-document.addEventListener("astro:page-load", setupFixedNav);
+  document.addEventListener("astro:page-load", setupFixedNav);
 </script>

@@ -1,13 +1,14 @@
 ---
-// CompanyHero.astro - Sección institucional optimizada según requerimientos
+// CompanyHero.astro
 import { Image } from "astro:assets";
 import Slide1 from "../../assets/slide1.jpeg";
 import Ministerio from "../../assets/hab-ministerio.png";
 import Anmat from "../../assets/hab-anmat.jpg";
+import heroData from "../../data/nosotros/hero.json";
 
-const targetYears = 13; // +13 años de trayectoria
-const targetCerts = 100; // 100% Habilitaciones
-const targetPatients = 1282;
+const targetYears = heroData.targetYears ?? 13;
+const targetCerts = heroData.targetCerts ?? 100;
+const targetPatients = heroData.targetPatients ?? 1282;
 ---
 
 <section class="relative pt-12 pb-12 bg-surface w-full">
@@ -21,9 +22,8 @@ const targetPatients = 1282;
         data-aos-duration="500"
         class="text-4xl sm:text-5xl md:text-6xl font-bold text-theme leading-tight text-balance"
       >
-        Tecnología al servicio del <span class="text-accent"
-          >cuidado de la salud</span
-        >
+        {heroData.titulo}{" "}
+        <span class="text-accent">{heroData.tituloAcento}</span>
       </h1>
 
       <p
@@ -32,12 +32,10 @@ const targetPatients = 1282;
         data-aos-delay="100"
         class="text-base sm:text-lg text-[var(--color-muted)] leading-relaxed text-pretty"
       >
-        Combinamos tecnología médica, equipamiento certificado y asistencia
-        especializada para brindar soluciones confiables a pacientes,
-        instituciones, obras sociales y profesionales de la salud.
+        {heroData.bajada}
       </p>
 
-      <!-- Stats de Autoridad (Años, 100% Habilitaciones y Pacientes) -->
+      <!-- Stats de Autoridad -->
       <div
         data-aos="fade-up"
         data-aos-duration="500"
@@ -76,7 +74,7 @@ const targetPatients = 1282;
         </div>
       </div>
 
-      <!-- Insignias de Habilitaciones (Solo imágenes grandes, sin texto) -->
+      <!-- Insignias de Habilitaciones -->
       <div
         data-aos="fade-up"
         data-aos-duration="500"

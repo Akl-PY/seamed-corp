@@ -1,19 +1,21 @@
 ---
-import { slide } from "astro:transitions";
 import { FileInput, X, FileText, Upload } from "lucide-astro";
+import cotizacionData from "../../data/cotizacion.json";
 ---
 
 <section id="cotizar" class="py-12 bg-surface">
   <div
     class="container mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-center overflow-hidden"
   >
+    <!-- Columna Izquierda: Textos Hero -->
     <div class="flex flex-col gap-6">
       <h1
         data-aos="fade-up"
         data-aos-duration="500"
         class="text-4xl sm:text-5xl md:text-6xl font-bold text-theme leading-tight tracking-tight"
       >
-        Adjuntá <span class="text-accent">tu pedido médico</span>
+        {cotizacionData.heroTitulo}
+        <span class="text-accent">{cotizacionData.heroTituloAcento}</span>
       </h1>
 
       <p
@@ -22,24 +24,25 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
         data-aos-delay="200"
         class="text-xl md:text-2xl text-muted leading-relaxed font-medium"
       >
-        para agilizar tiempo y que nuestro equipo pueda brindarte atención
-        personalizada.
+        {cotizacionData.heroBajada}
       </p>
     </div>
 
+    <!-- Columna Derecha: Tarjeta de Formulario -->
     <div
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-delay="600"
       class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10"
     >
-      <h3 class="text-2xl font-bold text-theme mb-1">Pedido Médico</h3>
+      <h3 class="text-2xl font-bold text-theme mb-1">
+        {cotizacionData.formTitulo}
+      </h3>
 
       <p class="text-sm text-muted mb-6">
-        Respondemos en menos de 24 horas hábiles.
+        {cotizacionData.formSubtitulo}
       </p>
 
-      <!-- Formulario con espaciado vertical equilibrado -->
       <form class="flex flex-col gap-5">
         <!-- Zona de Carga de Archivo -->
         <div class="flex flex-col gap-2">
@@ -166,7 +169,7 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
           type="submit"
           class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-1 active:scale-[0.99]"
         >
-          Enviar Mensaje
+          {cotizacionData.formBotonTexto}
         </button>
       </form>
     </div>
@@ -174,12 +177,12 @@ import { FileInput, X, FileText, Upload } from "lucide-astro";
 
   <div class="md:col-span-2 text-center pt-8 mt-6 border-t border-main/10">
     <p class="text-sm text-muted">
-      ¿Buscás comunicarte por otras consultas, soporte técnico o administración?
+      {cotizacionData.footerTexto}
       <a
         href="/contacto"
         class="font-bold text-accent hover:underline inline-flex items-center gap-1 ml-1"
       >
-        Ir a medios de contacto →
+        {cotizacionData.footerLinkTexto}
       </a>
     </p>
   </div>

@@ -1,0 +1,31 @@
+{
+  "enlacesNav": [
+    { "name": "Servicios", "href": "/servicios", "esBoton": false },
+    { "name": "Insumos médicos", "href": "/insumos", "esBoton": false },
+    { "name": "Nosotros", "href": "/nosotros", "esBoton": false },
+    { "name": "Contacto", "href": "/contacto", "esBoton": false },
+    { "name": "Solicitar Cotización", "href": "/cotizar", "esBoton": true }
+  ],
+  "footerDireccion": "Deán Funes 2870, Córdoba, Argentina",
+  "footerTelefono": "+54 9 351 898-0811",
+  "footerCtaTexto": "Solicitá un presupuesto formal para obra social o reintegro.",
+  "footerCtaBoton": "Solicitar Cotización",
+  "footerColumnas": [
+    {
+      "tituloColumna": "Catálogo & Soluciones",
+      "enlaces": [
+        { "label": "Equipamiento Destacado", "href": "/#equipamiento" },
+        { "label": "Insumos y Repuestos", "href": "/insumos" },
+        { "label": "Servicios Técnicos", "href": "/servicios" }
+      ]
+    },
+    {
+      "tituloColumna": "Empresa",
+      "enlaces": [
+        { "label": "Nosotros", "href": "/nosotros" },
+        { "label": "Contacto", "href": "/contacto" },
+        { "label": "Ubicación", "href": "/contacto#ubicacion" }
+      ]
+    }
+  ]
+}

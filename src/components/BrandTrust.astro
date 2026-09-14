@@ -1,51 +1,78 @@
 ---
 // BrandTrust.astro
-// Definimos los partners en un array para mantener el código limpio y escalable.
-import ResmedLogo from '../assets/resmed.png';
-import AbottLogo from '../assets/Abott.webp';
-import BmcLogo from '../assets/bmc.png';
-import GceLogo from '../assets/cge.png';
-import LexelLogo from '../assets/lexel.svg';
-import MedtronicLogo from '../assets/medtronic.png';
-import PariLogo from '../assets/pari.png';
-import RespironicsLogo from '../assets/respironics.png';
-import SilmagLogo from '../assets/silmag.webp';
-import YuwellLogo from '../assets/yuwell.jpeg';
+import { Image } from "astro:assets";
+import marcasData from "../data/inicio/marcas.json";
 
-import { Image } from 'astro:assets';
-const brands = [
-  { name: "Abott", logo: AbottLogo, isSvg: false },
-  { name: "BMC", logo: BmcLogo, isSvg: false },
-  { name: "GCE", logo: GceLogo, isSvg: false },
-  { name: "Lexel", logo: LexelLogo, isSvg: true },
-  { name: "Medtronic", logo: MedtronicLogo, isSvg: false },
-  { name: "Pari", logo: PariLogo, isSvg: false },
-  { name: "Respironics", logo: RespironicsLogo, isSvg: false },
-  { name: "Resmed", logo: ResmedLogo, isSvg: false },
-  { name: "Silmag", logo: SilmagLogo, isSvg: false },
-  { name: "Yuwell", logo: YuwellLogo, isSvg: false }
-];
+import ResmedLogo from "../assets/resmed.png";
+import AbottLogo from "../assets/Abott.webp";
+import BmcLogo from "../assets/bmc.png";
+import GceLogo from "../assets/cge.png";
+import LexelLogo from "../assets/lexel.svg";
+import MedtronicLogo from "../assets/medtronic.png";
+import PariLogo from "../assets/pari.png";
+import RespironicsLogo from "../assets/respironics.png";
+import SilmagLogo from "../assets/silmag.webp";
+import YuwellLogo from "../assets/yuwell.jpeg";
+
+const logoMap: Record<string, { src: ImageMetadata; isSvg?: boolean }> = {
+  abott: { src: AbottLogo, isSvg: false },
+  bmc: { src: BmcLogo, isSvg: false },
+  gce: { src: GceLogo, isSvg: false },
+  lexel: { src: LexelLogo, isSvg: true },
+  medtronic: { src: MedtronicLogo, isSvg: false },
+  pari: { src: PariLogo, isSvg: false },
+  respironics: { src: RespironicsLogo, isSvg: false },
+  resmed: { src: ResmedLogo, isSvg: false },
+  silmag: { src: SilmagLogo, isSvg: false },
+  yuwell: { src: YuwellLogo, isSvg: false },
+};
+
+const brands = marcasData.lista || [];
 ---
 
 <section class="py-16 bg-surface">
   <div class="container mx-auto px-6 text-center">
-    <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl font-bold uppercase tracking-widest text-brand-gray mb-10">
-      Somos distribuidores de marcas líderes
+    <h2
+      data-aos="fade-up"
+      data-aos-duration="500"
+      class="text-2xl font-bold uppercase tracking-widest text-brand-gray mb-10"
+    >
+      {marcasData.titulo}
     </h2>
-    
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-80">
-      {brands.map((brand, i) => (
-        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay={i * 100} class={`flex justify-center md:grayscale border border-brand-gray h-30 items-center p-4 rounded-2xl hover:md:grayscale-0 transition-all duration-500 ${i === brands.length - 1 && brands.length % 2 === 1 ? 'col-span-2 md:col-span-1' : ''}`}>
 
-          <Image
-            src={brand.logo} 
-            alt={`Distribuidor oficial de ${brand.name} en Córdoba`}
-            class={` w-auto object-contain max-h-16 ${brand.isSvg ? 'text-main' : ''}`}
-            loading="lazy"
-            fetchpriority="high"
-          />
-        </div>
-      ))}
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-80">
+      {
+        brands.map((brand, i) => {
+          const logoData = logoMap[brand.imageKey];
+
+          return (
+            <div
+              data-aos="fade-up"
+              data-aos-duration="500"
+              data-aos-delay={i * 80}
+              class={`flex justify-center md:grayscale border border-brand-gray h-28 items-center p-4 rounded-2xl hover:md:grayscale-0 transition-all duration-500 ${
+                i === brands.length - 1 && brands.length % 2 === 1
+                  ? "col-span-2 md:col-span-1"
+                  : ""
+              }`}
+            >
+              {logoData ? (
+                <Image
+                  src={logoData.src}
+                  alt={`Distribuidor oficial de ${brand.name} en Córdoba`}
+                  class={`w-auto object-contain max-h-16 ${logoData.isSvg ? "text-main" : ""}`}
+                  loading="lazy"
+                  fetchpriority="high"
+                />
+              ) : (
+                <span class="text-sm font-bold text-slate-500">
+                  {brand.name}
+                </span>
+              )}
+            </div>
+          );
+        })
+      }
     </div>
   </div>
 </section>

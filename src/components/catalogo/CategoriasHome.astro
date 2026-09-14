@@ -1,5 +1,5 @@
 ---
-// Servicios.astro - Sección de especialidades y guía completa de Terapia de Sueño basada en Excel
+// Servicios.astro - Sección de especialidades y guía completa de Terapia de Sueño
 import { Image } from "astro:assets";
 import { 
   ChevronDown, 
@@ -9,12 +9,35 @@ import {
   HeartPulse, 
   Stethoscope, 
   ShieldCheck, 
-  CheckCircle2, 
-  AlertCircle, 
-  FileText, 
   Package 
 } from "lucide-astro";
-import servicios from "../../data/servicios";
+import serviciosData from "../../data/servicios.json";
+
+import SrvApnea from "../../assets/services/apnea.jpg";
+import SrvOxigeno from "../../assets/services/oxigenoterapia.jpg";
+import SrvVentilacion from "../../assets/services/ventilacion.jpg";
+import SrvPoligrafia from "../../assets/services/poligrafia.jpg";
+import SrvAlimentacion from "../../assets/services/alimentacion-cama.jpg";
+import SrvHomeCare from "../../assets/services/home care.jpg";
+
+// Mapeo seguro de imágenes locales por ID
+const imageMap: Record<string, ImageMetadata> = {
+  oxigenoterapia: SrvOxigeno,
+  apnea: SrvApnea,
+  poligrafia: SrvPoligrafia,
+  ventilacion: SrvVentilacion,
+  "alimentacion-enteral": SrvAlimentacion,
+  "home-care": SrvHomeCare,
+};
+
+// Combinamos los textos de Keystatic con los assets de imagen
+const servicios = serviciosData.lista.map((srv) => ({
+  ...srv,
+  image: imageMap[srv.id] || SrvOxigeno,
+  alt: `Equipamiento e insumos para ${srv.title}`,
+  link: `#${srv.id}`,
+  text: srv.linkText || "Solicitar Asesoramiento",
+}));
 
 // 1. HOJA 1: SUEÑO SALUDABLE (3 Columnas)
 const colSuenoSaludable = [
@@ -178,14 +201,14 @@ const colTerapiaCpap = [
 <section id="servicios" class="py-16 overflow-hidden bg-surface">
   <div class="container mx-auto px-6">
     
-    <!-- Encabezado de la Sección -->
+    <!-- Encabezado único de la Sección -->
     <div class="text-center max-w-2xl mx-auto mb-12">
       <h2 data-aos="fade-up" data-aos-duration="500" class="text-2xl sm:text-3xl font-bold text-theme">Nuestras especialidades</h2>
       <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" class="text-muted mt-2 text-xs sm:text-sm">Soluciones adaptadas a las necesidades clínicas de cada paciente</p>
     </div>
 
-    <!-- Grilla de Tarjetas (Mapeo normal de las especialidades) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Grilla de Tarjetas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {servicios.map((srv, index) => (
         <a 
           href={`#${srv.id}`} 
@@ -366,7 +389,6 @@ const colTerapiaCpap = [
                   ))}
                 </div>
 
-                <!-- Hipervínculo específico a accesorios requerido por el documento -->
                 {colIdx === 2 && (
                   <div class="pt-2 mt-auto border-t border-brand-gray/10">
                     <a 
@@ -391,16 +413,13 @@ const colTerapiaCpap = [
 
   <!-- MODAL PROFESIONAL -->
   <div id="modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" tabindex="-1">
-    <!-- Overlay con Blur -->
     <div id="overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300"></div>
     
-    <!-- Contenedor Centrado -->
     <div class="flex min-h-full items-center justify-center p-4 sm:p-6 md:p-10 text-left pointer-events-none">
       <div 
         id="selectedService" 
         class="relative transform overflow-hidden rounded-3xl bg-bg border border-brand-gray/20 shadow-2xl transition-all w-full max-w-4xl my-auto z-10 max-h-[90vh] flex flex-col md:flex-row pointer-events-auto"
       >
-        <!-- Botón de Cerrar (X) -->
         <button 
           id="closeModalBtn" 
           type="button" 
@@ -410,7 +429,6 @@ const colTerapiaCpap = [
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
 
-        <!-- Columna Imagen -->
         <div class="relative w-full md:w-5/12 h-64 md:h-auto min-h-[250px] bg-surface flex-shrink-0">
           <Image
             id="selectedImage"
@@ -423,17 +441,13 @@ const colTerapiaCpap = [
           <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent md:hidden"></div>
         </div>
 
-        <!-- Columna Contenido -->
         <div class="p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto w-full md:w-7/12">
           <div>
             <h3 id="selectedTitle" class="text-2xl sm:text-3xl font-bold text-main mb-4 leading-tight"></h3>
-            
             <p id="selectedDescription" class="text-sm font-semibold text-main/80 mb-5 pb-4 border-b border-brand-gray/15 leading-relaxed"></p>
-            
             <p id="selectedLargeDescription" class="text-xs sm:text-sm text-muted leading-relaxed space-y-3 mb-8"></p>
           </div>
 
-          <!-- Botón de Acción -->
           <div class="pt-5 border-t border-brand-gray/15 mt-auto">
             <a 
               id="modalActionBtn" 

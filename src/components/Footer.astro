@@ -1,72 +1,84 @@
 ---
-import { SITE_CONFIG } from "../config/site";
 import { PhoneCall } from "lucide-astro";
+import navData from "../data/global/navegacion.json";
+
 const currentYear = new Date().getFullYear();
+const cleanPhone = (navData.footerTelefono || "").replace(/\s|\+/g, "");
 ---
 
 <footer class="bg-theme text-white pt-16 pb-8 border-t border-brand-gray/10">
   <div class="container mx-auto px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-16">
-      
-      <!-- Brand & Datos de Contacto (NAP) -->
+      <!-- Brand & Datos de Contacto -->
       <div class="flex flex-col gap-4">
         <h3 class="text-2xl font-bold text-white">SeAMeD S.A.</h3>
         <address class="not-italic text-white/80 text-sm leading-relaxed">
-          {SITE_CONFIG.organization.address?.streetAddress}, {SITE_CONFIG.organization.address?.addressLocality}<br>
-          Argentina
+          {navData.footerDireccion}
         </address>
-        <a 
-          href={`tel:+${SITE_CONFIG.organization.contactPoint?.telephone}`} 
-          class="text-white hover:text-white/70 transition-colors font-medium text-sm flex items-center gap-2"
-        >
-          <PhoneCall class="w-4 h-4 shrink-0 text-white" /> +{SITE_CONFIG.organization.contactPoint?.telephone}
-        </a>
+        {
+          navData.footerTelefono && (
+            <a
+              href={`tel:${cleanPhone}`}
+              class="text-white hover:text-white/70 transition-colors font-medium text-sm flex items-center gap-2"
+            >
+              <PhoneCall class="w-4 h-4 shrink-0 text-white" />{" "}
+              {navData.footerTelefono}
+            </a>
+          )
+        }
       </div>
 
-      <!-- Navegación Directa / Catálogo -->
-      <div>
-        <h4 class="font-bold mb-4 uppercase tracking-wider text-xs text-white">Catálogo & Soluciones</h4>
-        <ul class="flex flex-col gap-2 text-white/80 text-sm">
-          <li><a href="/#equipamiento" class="hover:text-white transition-colors">Equipamiento Destacado</a></li>
-          <li><a href="/#insumos" class="hover:text-white transition-colors">Insumos y Repuestos</a></li>
-          <li><a href="/servicios" class="hover:text-white transition-colors">Servicios Técnicos</a></li>
-        </ul>
-      </div>
-
-      <!-- Empresa & Institucional -->
-      <div>
-        <h4 class="font-bold mb-4 uppercase tracking-wider text-xs text-white">Empresa</h4>
-        <ul class="flex flex-col gap-2 text-white/80 text-sm">
-          <li><a href="/nosotros" class="hover:text-white transition-colors font-medium">Nosotros</a></li>
-          <li><a href="/contacto" class="hover:text-white transition-colors">Contacto</a></li>
-          <li><a href="/politica-privacidad" class="hover:text-white transition-colors">Política de Privacidad</a></li>
-        </ul>
-      </div>
+      <!-- Columnas Dinámicas -->
+      {
+        navData.footerColumnas?.map((col) => (
+          <div>
+            <h4 class="font-bold mb-4 uppercase tracking-wider text-xs text-white">
+              {col.tituloColumna}
+            </h4>
+            <ul class="flex flex-col gap-2 text-white/80 text-sm">
+              {col.enlaces?.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
 
       <!-- CTA Cotización -->
       <div class="flex flex-col gap-4">
-        <h4 class="font-bold uppercase tracking-wider text-xs text-white">Cotización</h4>
+        <h4 class="font-bold uppercase tracking-wider text-xs text-white">
+          Cotización
+        </h4>
         <p class="text-xs text-white/80 leading-relaxed">
-          Solicita un presupuesto formal para obra social o reintegro.
+          {navData.footerCtaTexto}
         </p>
-        <a 
-          href="/cotizar" 
+        <a
+          href="/cotizar"
           class="bg-accent text-white text-center py-2.5 px-4 rounded-xl text-sm font-bold hover:brightness-110 active:scale-98 transition-all duration-200 shadow-md"
         >
-          Solicitar Cotización
+          {navData.footerCtaBoton}
         </a>
       </div>
     </div>
 
     <!-- Crédito Técnico & Copyright -->
-    <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/80 gap-4">
+    <div
+      class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/80 gap-4"
+    >
       <p>© {currentYear} SeAMeD S.A. Todos los derechos reservados.</p>
       <p>
-        Desarrollo por 
-        <a 
-          href="https://www.aim.com.ar" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        Desarrollo por
+        <a
+          href="https://www.aim.com.ar"
+          target="_blank"
+          rel="noopener noreferrer"
           class="hover:text-white transition-colors font-medium underline underline-offset-4 decoration-white/40"
         >
           AIM

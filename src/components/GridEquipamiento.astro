@@ -1,54 +1,27 @@
 ---
+// src/components/EquipamientoSlider.astro
 import { SITE_CONFIG } from "../config/site";
 import ventMecanico from "../assets/products/vent-mecanico.jpg";
 import concentrador from "../assets/products/concentrador.webp";
 import bomba from "../assets/products/bomba.png";
 import { Image } from "astro:assets";
+import equipamientoData from "../data/inicio/equipamiento.json";
 
-const equipment = [
-  { 
-    name: "Ventilador Mecánico V1", 
-    category: "Cuidados Críticos", 
-    description: "Ventilación invasiva y no invasiva con monitoreo avanzado de parámetros vitales.",
-    img: ventMecanico 
-  },
-  { 
-    name: "Concentrador de Oxígeno 5L", 
-    category: "Atención Domiciliaria", 
-    description: "Flujo continuo y silencioso, diseñado para uso nocturno prolongado y alto rendimiento.",
-    img: concentrador
-  },
-  { 
-    name: "Bomba de Infusión B2", 
-    category: "Terapias Intravenosas", 
-    description: "Infusión precisa con múltiples modos de administración y alarmas inteligentes de seguridad.",
-    img: bomba
-  },
-  { 
-    name: "CPAP Auto-ajustable Premium", 
-    category: "Apnea del Sueño", 
-    description: "Algoritmo de presión adaptativo, humidificador integrado y registro de datos de cumplimiento.",
-    img: ventMecanico
-  },
-  { 
-    name: "Concentrador Portátil de Flujo", 
-    category: "Autonomía y Movilidad", 
-    description: "Sistema liviano con baterías de larga duración para mantener la independencia del paciente.",
-    img: concentrador
-  }
-];
+// Mapeo de imágenes locales disponibles para los productos
+const imageMap: Record<string, any> = {
+  ventMecanico,
+  concentrador,
+  bomba,
+};
 ---
 
 <section id="equipamiento" class="py-16 bg-surface w-full overflow-hidden">
   <div class="container mx-auto px-6">
     
     <div class="text-center max-w-2xl mx-auto mb-10">
-      <h2 data-aos="fade-up" data-aos-duration="500" class="text-theme text-2xl md:text-3xl  font-bold">
-        Productos destacados
+      <h2 data-aos="fade-up" data-aos-duration="500" class="text-theme text-2xl md:text-3xl font-bold">
+        {equipamientoData.tituloSeccion}
       </h2>
-      <!-- <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" class="text-muted mt-2 text-xs sm:text-sm ">
-        Echá un vistazo a nuestro catálogo de tecnología médica de vanguardia para instituciones y domicilio.
-      </p> -->
     </div>
 
     <!-- Carrusel de Equipamiento -->
@@ -59,53 +32,56 @@ const equipment = [
         id="equipmentSlider" 
         class="flex gap-6 overflow-x-auto scrollbar-none scroll-smooth py-4 px-1 snap-x snap-mandatory"
       >
-        {equipment.map((item, i) => (
-          <div 
-            data-aos="fade-up" 
-            data-aos-duration="500" 
-            data-aos-delay={100 + (i % 3) * 100} 
-            class="snap-start flex-none w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group flex flex-col justify-between bg-bg border border-brand-gray/15 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-accent transition-all duration-300 hover:-translate-y-1"
-          >
-            <div>
-              <!-- Imagen -->
-              <div class="aspect-video bg-surface rounded-xl mb-4 overflow-hidden relative">
-                <Image 
-                  src={item.img} 
-                  alt={item.name} 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  width={400}
-                  height={225}
-                />
-                <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300"></div>
+        {equipamientoData.equipos.map((item, i) => {
+          const productImg = imageMap[item.imageKey] || ventMecanico;
+          return (
+            <div 
+              data-aos="fade-up" 
+              data-aos-duration="500" 
+              data-aos-delay={100 + (i % 3) * 100} 
+              class="snap-start flex-none w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group flex flex-col justify-between bg-bg border border-brand-gray/15 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-accent transition-all duration-300 hover:-translate-y-1"
+            >
+              <div>
+                <!-- Imagen -->
+                <div class="aspect-video bg-surface rounded-xl mb-4 overflow-hidden relative">
+                  <Image 
+                    src={productImg} 
+                    alt={item.name} 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    width={400}
+                    height={225}
+                  />
+                  <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300"></div>
+                </div>
+                
+                <!-- Categoría y Título -->
+                <span class="inline-block text-accent text-[11px] font-bold uppercase tracking-wider mb-1">
+                  {item.category}
+                </span>
+                <h3 class="text-base sm:text-lg font-bold text-main mb-2 leading-snug">
+                  {item.name}
+                </h3>
+                <p class="text-xs sm:text-sm text-muted leading-relaxed line-clamp-3 mb-6">
+                  {item.description}
+                </p>
               </div>
               
-              <!-- Categoría y Título -->
-              <span class="inline-block text-accent text-[11px] font-bold uppercase tracking-wider mb-1">
-                {item.category}
-              </span>
-              <h3 class="text-base sm:text-lg font-bold text-main mb-2 leading-snug">
-                {item.name}
-              </h3>
-              <p class="text-xs sm:text-sm text-muted leading-relaxed line-clamp-3 mb-6">
-                {item.description}
-              </p>
+              <!-- Botón de Consulta WhatsApp -->
+              <a 
+                href={`${SITE_CONFIG.social.whatsapp}/?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20${encodeURIComponent(item.name)}`} 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full py-3 px-4 border border-accent text-accent font-bold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 hover:bg-accent hover:text-main transition-all duration-300 shadow-sm active:scale-98"
+              >
+                <span>Consultar por WhatsApp</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
             </div>
-            
-            <!-- Botón de Consulta WhatsApp -->
-            <a 
-              href={`${SITE_CONFIG.social.whatsapp}/?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20${encodeURIComponent(item.name)}`} 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="w-full py-3 px-4 border border-accent text-accent font-bold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 hover:bg-accent hover:text-main transition-all duration-300 shadow-sm active:scale-98"
-            >
-              <span>Consultar por WhatsApp</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <!-- Botón Anterior (arranca deshabilitado por defecto en HTML) -->
+      <!-- Botón Anterior -->
       <button 
         id="prevBtn" 
         disabled
@@ -125,7 +101,6 @@ const equipment = [
       </button>
 
     </div>
-
   </div>
 </section>
 
@@ -155,34 +130,24 @@ const equipment = [
     const updateButtons = () => {
       const scrollLeft = Math.ceil(slider.scrollLeft);
       const maxScroll = Math.floor(slider.scrollWidth - slider.clientWidth);
-
-      // Si no se movió del inicio (scrollLeft <= 5px por margen de redondeo), se deshabilita
       prevBtn.disabled = scrollLeft <= 5;
-      
-      // Si llegó al final, se deshabilita la flecha derecha
       nextBtn.disabled = scrollLeft >= maxScroll - 5;
     };
 
     nextBtn.addEventListener("click", () => {
       const maxScroll = Math.floor(slider.scrollWidth - slider.clientWidth);
       if (slider.scrollLeft >= maxScroll - 5) return;
-      
       slider.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
     });
 
     prevBtn.addEventListener("click", () => {
-      // Guarda estricta: Si está al inicio, frena la ejecución
       if (slider.scrollLeft <= 5) return;
-      
       slider.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
     });
 
     slider.addEventListener("scroll", updateButtons, { passive: true });
-
-    // Verificación inicial inmediata
     updateButtons();
   }
 
-  // Compatible con Astro ViewTransitions / Client Router
   document.addEventListener("astro:page-load", initEquipmentSlider);
 </script>
