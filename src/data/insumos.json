@@ -13,16 +13,16 @@
       "description": "Proporcionamos todos los elementos necesarios para el autocontrol de la glucemia, garantizando el abastecimiento de instituciones de salud, obras sociales y otros prestadores.",
       "items": [
         {
+          "name": "Monitoreo Continuo (CGM)",
+          "detail": "Sensores y accesorios para lectura sin pinchazos frecuentes."
+        },
+        {
           "name": "Tiras Reactivas y Medidores",
           "detail": "Sistemas de alta precisión con resultados en pocos segundos."
         },
         {
           "name": "Agujas para Lapicera de Insulina",
           "detail": "Bisel ultrasuave para aplicaciones prácticamente indoloras."
-        },
-        {
-          "name": "Monitoreo Continuo (CGM)",
-          "detail": "Sensores y accesorios para lectura sin pinchazos frecuentes."
         }
       ]
     },
