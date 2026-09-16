@@ -6,35 +6,35 @@
       "name": "Ventilador Mecánico V1",
       "category": "Cuidados Críticos",
       "description": "Ventilación invasiva y no invasiva con monitoreo avanzado de parámetros vitales.",
-      "imageKey": "ventMecanico"
+      "imageKey": "CPAP"
     },
     {
       "id": "conc-5l",
       "name": "Concentrador de Oxígeno 5L",
       "category": "Atención Domiciliaria",
       "description": "Flujo continuo y silencioso, diseñado para uso nocturno prolongado y alto rendimiento.",
-      "imageKey": "concentrador"
+      "imageKey": "CPAP"
     },
     {
       "id": "bomba-b2",
       "name": "Bomba de Infusión B2",
       "category": "Terapias Intravenosas",
       "description": "Infusión precisa con múltiples modos de administración y alarmas inteligentes de seguridad.",
-      "imageKey": "bomba"
+      "imageKey": "CPAP"
     },
     {
       "id": "cpap-auto",
       "name": "CPAP Auto-ajustable Premium",
       "category": "Apnea del Sueño",
       "description": "Algoritmo de presión adaptativo, humidificador integrado y registro de datos de cumplimiento.",
-      "imageKey": "ventMecanico"
+      "imageKey": "CPAP"
     },
     {
       "id": "conc-portatil",
       "name": "Concentrador Portátil de Flujo",
       "category": "Autonomía y Movilidad",
       "description": "Sistema liviano con baterías de larga duración para mantener la independencia del paciente.",
-      "imageKey": "concentrador"
+      "imageKey": "CPAP"
     }
   ]
 }

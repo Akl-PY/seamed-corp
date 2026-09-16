@@ -22,11 +22,14 @@ export const inicioEquipamiento = singleton({
           label:
             "Imagen del equipo(avisar si se necesita agregar más imágenes en equipamiento)",
           options: [
-            { label: "Ventilador Mecánico", value: "ventMecanico" },
-            { label: "Concentrador de Oxígeno", value: "concentrador" },
-            { label: "Bomba de Infusión", value: "bomba" },
+            { label: "Equipo CPAP / APAP (BMC C2S / C20)", value: "CPAP" },
+            {
+              label: "Glucómetro y accesorios para diabetes",
+              value: "glucometro",
+            },
+            { label: "Oxímetro de pulso de mesa", value: "oximetro" },
           ],
-          defaultValue: "ventMecanico",
+          defaultValue: "CPAP",
         }),
       }),
       {
