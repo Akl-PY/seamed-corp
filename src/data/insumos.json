@@ -3,7 +3,7 @@
   "heroTituloAcento": "para cada necesidad",
   "heroBajada": "Garantizamos el abastecimiento continuo de descartables y material médico de primer nivel para instituciones de salud como para pacientes domiciliarios. Brindando siempre seguridad, trazabilidad y marcas certificadas.",
   "heroBadge": "Atención Domiciliaria e Institucional",
-  "heroSubtextoFoto": "Soluciones integrales para pacientes, clínicas y obras sociales.",
+  "heroSubtextoFoto": "Soluciones integrales para Pacientes, Obras Sociales, Clínicas, Sanatorios y Hospitales.",
   "catalogoTitulo": "Nuestros principales productos",
   "rubros": [
     {
@@ -13,16 +13,16 @@
       "description": "Proporcionamos todos los elementos necesarios para el autocontrol de la glucemia, garantizando el abastecimiento de instituciones de salud, obras sociales y otros prestadores.",
       "items": [
         {
+          "name": "Monitoreo Continuo (CGM)",
+          "detail": "Sensores y accesorios para lectura sin pinchazos frecuentes."
+        },
+        {
           "name": "Tiras Reactivas y Medidores",
           "detail": "Sistemas de alta precisión con resultados en pocos segundos."
         },
         {
           "name": "Agujas para Lapicera de Insulina",
           "detail": "Bisel ultrasuave para aplicaciones prácticamente indoloras."
-        },
-        {
-          "name": "Monitoreo Continuo (CGM)",
-          "detail": "Sensores y accesorios para lectura sin pinchazos frecuentes."
         }
       ]
     },
