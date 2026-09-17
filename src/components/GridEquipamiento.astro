@@ -1,17 +1,17 @@
 ---
 // src/components/EquipamientoSlider.astro
 import { SITE_CONFIG } from "../config/site";
-import ventMecanico from "../assets/products/vent-mecanico.jpg";
-import concentrador from "../assets/products/concentrador.webp";
-import bomba from "../assets/products/bomba.png";
+import CPAP from "../assets/products/CPAP.png";
+import oximetro from "../assets/products/oximetro.png";
+import glucometro from "../assets/products/glucometro.png";
 import { Image } from "astro:assets";
 import equipamientoData from "../data/inicio/equipamiento.json";
 
 // Mapeo de imágenes locales disponibles para los productos
 const imageMap: Record<string, any> = {
-  ventMecanico,
-  concentrador,
-  bomba,
+  CPAP,
+  oximetro,
+  glucometro,
 };
 ---
 
