@@ -194,64 +194,88 @@ import cotizacionData from "../../data/cotizacion.json";
   </div>
 </section>
 
-<!-- Toast -->
+<!-- =========================================================
+     TOAST CONTAINER
+     ========================================================= -->
+
 <div
   id="toast-container"
-  class="fixed top-5 right-5 z-[9999] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-3 pointer-events-none"
+  class="fixed top-0 left-0 right-0 z-[99999] pointer-events-none flex justify-center px-4 pt-4 sm:pt-6"
   aria-live="polite"
   aria-atomic="true"
 ></div>
 
 <style>
+  /* =========================================================
+     TOAST
+     ========================================================= */
+
   #toast-container {
-    font-family: inherit;
+    isolation: isolate;
   }
 
   .toast {
     position: relative;
-    overflow: hidden;
+
+    width: min(100%, 430px);
 
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 12px;
+    gap: 13px;
 
-    padding: 14px 14px 16px;
+    padding: 14px 14px 17px;
 
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    border-radius: 16px;
+
+    background: #ffffff;
 
     box-shadow:
-      0 12px 30px rgba(0, 0, 0, 0.1),
-      0 3px 8px rgba(0, 0, 0, 0.06);
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+      0 20px 45px rgba(0, 0, 0, 0.15),
+      0 6px 15px rgba(0, 0, 0, 0.08);
 
     pointer-events: auto;
 
     opacity: 0;
-    transform: translateX(calc(100% + 2rem)) scale(0.96);
+    transform: translateY(-25px) scale(0.96);
 
-    animation: toast-in 0.38s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+    animation: toast-enter 0.42s
+      cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    overflow: hidden;
   }
 
-  .toast.toast-leaving {
-    animation: toast-out 0.28s ease forwards;
+  .toast.is-leaving {
+    animation: toast-leave 0.3s
+      cubic-bezier(0.4, 0, 1, 1) forwards;
   }
+
+  /* =========================================================
+     ICON
+     ========================================================= */
 
   .toast-icon {
+    width: 40px;
+    height: 40px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 34px;
-    height: 34px;
-
-    border-radius: 999px;
     flex-shrink: 0;
+
+    border-radius: 12px;
   }
+
+  .toast-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* =========================================================
+     CONTENT
+     ========================================================= */
 
   .toast-content {
     min-width: 0;
@@ -261,140 +285,189 @@ import cotizacionData from "../../data/cotizacion.json";
     margin: 0;
 
     color: #171717;
-    font-size: 13px;
+
+    font-size: 14px;
     font-weight: 700;
     line-height: 1.35;
   }
 
   .toast-message {
-    margin: 2px 0 0;
+    margin: 3px 0 0;
 
-    color: #737373;
+    color: #666666;
+
     font-size: 12px;
+    font-weight: 400;
     line-height: 1.45;
   }
 
+  /* =========================================================
+     CLOSE BUTTON
+     ========================================================= */
+
   .toast-close {
+    width: 30px;
+    height: 30px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 28px;
-    height: 28px;
+    flex-shrink: 0;
+
+    padding: 0;
 
     border: 0;
     border-radius: 8px;
 
     background: transparent;
-    color: #737373;
+    color: #8a8a8a;
 
     cursor: pointer;
 
     transition:
-      background 0.15s ease,
-      color 0.15s ease;
+      background-color 0.15s ease,
+      color 0.15s ease,
+      transform 0.15s ease;
   }
 
   .toast-close:hover {
     background: rgba(0, 0, 0, 0.06);
-    color: #171717;
+    color: #222222;
   }
+
+  .toast-close:active {
+    transform: scale(0.9);
+  }
+
+  .toast-close svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* =========================================================
+     PROGRESS BAR
+     ========================================================= */
 
   .toast-progress {
     position: absolute;
+
     left: 0;
     bottom: 0;
 
-    height: 3px;
     width: 100%;
+    height: 3px;
 
     transform-origin: left;
 
-    animation: toast-progress var(--toast-duration) linear forwards;
+    animation: toast-progress var(--toast-duration) linear
+      forwards;
   }
 
-  /* SUCCESS */
+  /* =========================================================
+     SUCCESS
+     ========================================================= */
+
   .toast-success {
-    border-color: rgba(34, 197, 94, 0.18);
+    border-color: rgba(34, 197, 94, 0.2);
   }
 
   .toast-success .toast-icon {
-    background: rgba(34, 197, 94, 0.12);
-    color: rgb(22, 163, 74);
+    background: #ecfdf3;
+    color: #16a34a;
   }
 
   .toast-success .toast-progress {
-    background: rgb(34, 197, 94);
+    background: #22c55e;
   }
 
-  /* ERROR */
+  /* =========================================================
+     ERROR
+     ========================================================= */
+
   .toast-error {
-    border-color: rgba(239, 68, 68, 0.18);
+    border-color: rgba(239, 68, 68, 0.2);
   }
 
   .toast-error .toast-icon {
-    background: rgba(239, 68, 68, 0.12);
-    color: rgb(220, 38, 38);
+    background: #fef2f2;
+    color: #dc2626;
   }
 
   .toast-error .toast-progress {
-    background: rgb(239, 68, 68);
+    background: #ef4444;
   }
 
-  /* WARNING */
+  /* =========================================================
+     WARNING
+     ========================================================= */
+
   .toast-warning {
-    border-color: rgba(245, 158, 11, 0.18);
+    border-color: rgba(245, 158, 11, 0.2);
   }
 
   .toast-warning .toast-icon {
-    background: rgba(245, 158, 11, 0.12);
-    color: rgb(217, 119, 6);
+    background: #fffbeb;
+    color: #d97706;
   }
 
   .toast-warning .toast-progress {
-    background: rgb(245, 158, 11);
+    background: #f59e0b;
   }
 
-  /* INFO */
+  /* =========================================================
+     INFO
+     ========================================================= */
+
   .toast-info {
-    border-color: rgba(59, 130, 246, 0.18);
+    border-color: rgba(59, 130, 246, 0.2);
   }
 
   .toast-info .toast-icon {
-    background: rgba(59, 130, 246, 0.12);
-    color: rgb(37, 99, 235);
+    background: #eff6ff;
+    color: #2563eb;
   }
 
   .toast-info .toast-progress {
-    background: rgb(59, 130, 246);
+    background: #3b82f6;
   }
 
-  @keyframes toast-in {
-    from {
+  /* =========================================================
+     ANIMATIONS
+     ========================================================= */
+
+  @keyframes toast-enter {
+    0% {
       opacity: 0;
-      transform: translateX(calc(100% + 2rem)) scale(0.96);
+      transform: translateY(-25px) scale(0.96);
     }
 
-    to {
+    60% {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateY(3px) scale(1.005);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
-  @keyframes toast-out {
-    from {
+  @keyframes toast-leave {
+    0% {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateY(0) scale(1);
       max-height: 100px;
+      margin-bottom: 0;
     }
 
-    to {
+    100% {
       opacity: 0;
-      transform: translateX(calc(100% + 2rem)) scale(0.96);
+      transform: translateY(-18px) scale(0.96);
       max-height: 0;
       padding-top: 0;
       padding-bottom: 0;
-      margin-bottom: -12px;
+      margin-bottom: -10px;
     }
   }
 
@@ -408,58 +481,82 @@ import cotizacionData from "../../data/cotizacion.json";
     }
   }
 
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
   @media (max-width: 640px) {
     #toast-container {
-      top: auto;
-      right: 1rem;
-      bottom: 1rem;
-      left: 1rem;
-
-      width: auto;
-      max-width: none;
+      padding-top: 12px;
+      padding-left: 12px;
+      padding-right: 12px;
     }
 
     .toast {
-      transform: translateY(calc(100% + 2rem)) scale(0.96);
-      animation-name: toast-in-mobile;
+      width: 100%;
+      max-width: 430px;
+
+      grid-template-columns: auto minmax(0, 1fr) auto;
+
+      gap: 10px;
+
+      padding: 13px 12px 16px;
+
+      border-radius: 15px;
+
+      transform: translateY(-20px) scale(0.97);
     }
 
-    .toast.toast-leaving {
-      animation-name: toast-out-mobile;
+    .toast-icon {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 11px;
     }
 
-    @keyframes toast-in-mobile {
-      from {
+    .toast-icon svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .toast-title {
+      font-size: 13px;
+    }
+
+    .toast-message {
+      font-size: 11.5px;
+    }
+
+    .toast-close {
+      width: 30px;
+      height: 30px;
+    }
+
+    @keyframes toast-enter {
+      0% {
         opacity: 0;
-        transform: translateY(calc(100% + 2rem)) scale(0.96);
+        transform: translateY(-20px) scale(0.97);
       }
 
-      to {
+      60% {
+        opacity: 1;
+        transform: translateY(2px) scale(1.005);
+      }
+
+      100% {
         opacity: 1;
         transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes toast-out-mobile {
-      from {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        max-height: 100px;
-      }
-
-      to {
-        opacity: 0;
-        transform: translateY(calc(100% + 2rem)) scale(0.96);
-        max-height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
       }
     }
   }
 
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+
   @media (prefers-reduced-motion: reduce) {
     .toast,
-    .toast.toast-leaving {
+    .toast.is-leaving {
       animation: none;
       transform: none;
     }
@@ -471,7 +568,19 @@ import cotizacionData from "../../data/cotizacion.json";
 </style>
 
 <script>
-  type ToastType = "success" | "error" | "warning" | "info";
+  type ToastType =
+    | "success"
+    | "error"
+    | "warning"
+    | "info";
+
+  function escapeHtml(value: string): string {
+    const element = document.createElement("div");
+
+    element.textContent = value;
+
+    return element.innerHTML;
+  }
 
   function showToast(
     title: string,
@@ -479,9 +588,25 @@ import cotizacionData from "../../data/cotizacion.json";
     type: ToastType = "success",
     duration = 5000,
   ) {
-    const container = document.getElementById("toast-container");
+    const container =
+      document.getElementById("toast-container");
 
     if (!container) return;
+
+    /*
+     * Si ya hay un toast visible, lo cerramos antes
+     * de mostrar el nuevo.
+     */
+    const currentToast =
+      container.querySelector(".toast:not(.is-leaving)");
+
+    if (currentToast) {
+      currentToast.classList.add("is-leaving");
+
+      setTimeout(() => {
+        currentToast.remove();
+      }, 300);
+    }
 
     const icons: Record<ToastType, string> = {
       success: `
@@ -490,14 +615,12 @@ import cotizacionData from "../../data/cotizacion.json";
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-width="2.5"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="18"
-          height="18"
           aria-hidden="true"
         >
-          <path d="M20 6 9 17l-5-5"/>
+          <path d="M20 6 9 17l-5-5"></path>
         </svg>
       `,
 
@@ -507,16 +630,14 @@ import cotizacionData from "../../data/cotizacion.json";
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-width="2.5"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="18"
-          height="18"
           aria-hidden="true"
         >
-          <circle cx="12" cy="12" r="10"/>
-          <path d="m15 9-6 6"/>
-          <path d="m9 9 6 6"/>
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m15 9-6 6"></path>
+          <path d="m9 9 6 6"></path>
         </svg>
       `,
 
@@ -526,16 +647,14 @@ import cotizacionData from "../../data/cotizacion.json";
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-width="2.5"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="18"
-          height="18"
           aria-hidden="true"
         >
-          <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
-          <path d="M12 9v4"/>
-          <path d="M12 17h.01"/>
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
         </svg>
       `,
 
@@ -548,13 +667,11 @@ import cotizacionData from "../../data/cotizacion.json";
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="18"
-          height="18"
           aria-hidden="true"
         >
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 16v-4"/>
-          <path d="M12 8h.01"/>
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
         </svg>
       `,
     };
@@ -562,6 +679,7 @@ import cotizacionData from "../../data/cotizacion.json";
     const toast = document.createElement("div");
 
     toast.className = `toast toast-${type}`;
+
     toast.setAttribute(
       "role",
       type === "error" ? "alert" : "status",
@@ -578,8 +696,13 @@ import cotizacionData from "../../data/cotizacion.json";
       </div>
 
       <div class="toast-content">
-        <p class="toast-title">${escapeHtml(title)}</p>
-        <p class="toast-message">${escapeHtml(message)}</p>
+        <p class="toast-title">
+          ${escapeHtml(title)}
+        </p>
+
+        <p class="toast-message">
+          ${escapeHtml(message)}
+        </p>
       </div>
 
       <button
@@ -595,12 +718,10 @@ import cotizacionData from "../../data/cotizacion.json";
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="16"
-          height="16"
           aria-hidden="true"
         >
-          <path d="M18 6 6 18"/>
-          <path d="m6 6 12 12"/>
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
         </svg>
       </button>
 
@@ -609,21 +730,26 @@ import cotizacionData from "../../data/cotizacion.json";
 
     container.appendChild(toast);
 
-    let timeout: ReturnType<typeof setTimeout>;
+    let timeout: ReturnType<typeof setTimeout> | null =
+      null;
 
-    const removeToast = () => {
-      clearTimeout(timeout);
+    let removed = false;
 
-      toast.classList.add("toast-leaving");
+    function removeToast() {
+      if (removed) return;
 
-      toast.addEventListener(
-        "animationend",
-        () => {
-          toast.remove();
-        },
-        { once: true },
-      );
-    };
+      removed = true;
+
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      toast.classList.add("is-leaving");
+
+      setTimeout(() => {
+        toast.remove();
+      }, 300);
+    }
 
     toast
       .querySelector(".toast-close")
@@ -632,26 +758,31 @@ import cotizacionData from "../../data/cotizacion.json";
     timeout = setTimeout(removeToast, duration);
   }
 
-  function escapeHtml(value: string): string {
-    const div = document.createElement("div");
-
-    div.textContent = value;
-
-    return div.innerHTML;
-  }
-
-  function setupFileInput() {
+  function setupCotizacion() {
     const input = document.getElementById(
       "receta",
     ) as HTMLInputElement | null;
 
-    const dropZone = document.getElementById("drop-zone");
-    const uploadPrompt = document.getElementById("upload-prompt");
-    const fileUploaded = document.getElementById("file-uploaded");
-    const fileName = document.getElementById("file-name");
-    const fileSize = document.getElementById("file-size");
-    const removeBtn = document.getElementById("remove-file");
-    const fileError = document.getElementById("file-error");
+    const dropZone =
+      document.getElementById("drop-zone");
+
+    const uploadPrompt =
+      document.getElementById("upload-prompt");
+
+    const fileUploaded =
+      document.getElementById("file-uploaded");
+
+    const fileName =
+      document.getElementById("file-name");
+
+    const fileSize =
+      document.getElementById("file-size");
+
+    const removeBtn =
+      document.getElementById("remove-file");
+
+    const fileError =
+      document.getElementById("file-error");
 
     const form = document.getElementById(
       "cotizacion-form",
@@ -659,8 +790,13 @@ import cotizacionData from "../../data/cotizacion.json";
 
     if (!input || !dropZone || !form) return;
 
-    // Evita duplicar listeners durante las navegaciones de Astro.
-    if (form.dataset.initialized === "true") return;
+    /*
+     * Astro puede ejecutar astro:page-load varias veces.
+     * Evitamos registrar los listeners nuevamente.
+     */
+    if (form.dataset.initialized === "true") {
+      return;
+    }
 
     form.dataset.initialized = "true";
 
@@ -670,7 +806,12 @@ import cotizacionData from "../../data/cotizacion.json";
       if (bytes === 0) return "0 Bytes";
 
       const k = 1024;
-      const sizes = ["Bytes", "KB", "MB"];
+
+      const sizes = [
+        "Bytes",
+        "KB",
+        "MB",
+      ];
 
       const i = Math.floor(
         Math.log(bytes) / Math.log(k),
@@ -678,17 +819,21 @@ import cotizacionData from "../../data/cotizacion.json";
 
       return (
         parseFloat(
-          (bytes / Math.pow(k, i)).toFixed(2),
+          (
+            bytes /
+            Math.pow(k, i)
+          ).toFixed(2),
         ) +
         " " +
         sizes[i]
       );
     }
 
-    function showError(msg: string) {
+    function showError(message: string) {
       if (!fileError) return;
 
-      fileError.textContent = msg;
+      fileError.textContent = message;
+
       fileError.classList.remove("hidden");
     }
 
@@ -696,12 +841,16 @@ import cotizacionData from "../../data/cotizacion.json";
       if (!fileError) return;
 
       fileError.textContent = "";
+
       fileError.classList.add("hidden");
     }
 
     function clearFile() {
       input.value = "";
-      input.classList.remove("pointer-events-none");
+
+      input.classList.remove(
+        "pointer-events-none",
+      );
 
       uploadPrompt?.classList.remove("hidden");
 
@@ -716,7 +865,10 @@ import cotizacionData from "../../data/cotizacion.json";
     function handleFile(file: File) {
       clearError();
 
-      if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+      if (
+        file.size >
+        MAX_SIZE_MB * 1024 * 1024
+      ) {
         showError(
           `El archivo supera el límite de ${MAX_SIZE_MB} MB.`,
         );
@@ -737,7 +889,8 @@ import cotizacionData from "../../data/cotizacion.json";
       }
 
       if (fileSize) {
-        fileSize.textContent = formatBytes(file.size);
+        fileSize.textContent =
+          formatBytes(file.size);
       }
 
       uploadPrompt?.classList.add("hidden");
@@ -747,16 +900,14 @@ import cotizacionData from "../../data/cotizacion.json";
         fileUploaded.classList.add("grid");
       }
 
-      input.classList.add("pointer-events-none");
-
-      showToast(
-        "Archivo adjuntado",
-        "El pedido médico se cargó correctamente.",
-        "success",
-        2500,
+      input.classList.add(
+        "pointer-events-none",
       );
     }
 
+    /*
+     * Selección de archivo
+     */
     input.addEventListener("change", () => {
       if (input.files?.[0]) {
         handleFile(input.files[0]);
@@ -765,20 +916,22 @@ import cotizacionData from "../../data/cotizacion.json";
       }
     });
 
-    removeBtn?.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    /*
+     * Eliminar archivo
+     */
+    removeBtn?.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-      clearFile();
+        clearFile();
+      },
+    );
 
-      showToast(
-        "Archivo eliminado",
-        "Podés seleccionar otro archivo cuando quieras.",
-        "info",
-        2500,
-      );
-    });
-
+    /*
+     * Drag & Drop
+     */
     [
       "dragenter",
       "dragover",
@@ -787,9 +940,9 @@ import cotizacionData from "../../data/cotizacion.json";
     ].forEach((eventName) => {
       dropZone.addEventListener(
         eventName,
-        (e) => {
-          e.preventDefault();
-          e.stopPropagation();
+        (event) => {
+          event.preventDefault();
+          event.stopPropagation();
         },
         false,
       );
@@ -827,85 +980,107 @@ import cotizacionData from "../../data/cotizacion.json";
 
     dropZone.addEventListener(
       "drop",
-      (e: DragEvent) => {
-        const files = e.dataTransfer?.files;
+      (event: DragEvent) => {
+        const files =
+          event.dataTransfer?.files;
 
-        if (!files || files.length === 0) return;
+        if (
+          !files ||
+          files.length === 0
+        ) {
+          return;
+        }
 
         const file = files[0];
 
-        const dataTransfer = new DataTransfer();
+        const dataTransfer =
+          new DataTransfer();
 
         dataTransfer.items.add(file);
 
-        input.files = dataTransfer.files;
+        input.files =
+          dataTransfer.files;
 
         handleFile(file);
       },
     );
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    /*
+     * Submit
+     */
+    form.addEventListener(
+      "submit",
+      (event) => {
+        event.preventDefault();
 
-      if (!input.files?.[0]) {
-        showToast(
-          "Falta adjuntar el pedido médico",
-          "Seleccioná el archivo antes de enviar la solicitud.",
-          "warning",
-        );
+        /*
+         * El pedido médico es obligatorio.
+         */
+        if (!input.files?.[0]) {
+          showToast(
+            "Falta adjuntar el pedido médico",
+            "Seleccioná el archivo antes de enviar la solicitud.",
+            "warning",
+          );
 
-        return;
-      }
+          return;
+        }
 
-      const submitButton = document.getElementById(
-        "submit-form",
-      ) as HTMLButtonElement | null;
-
-      if (submitButton) {
-        submitButton.disabled = true;
-
-        submitButton.classList.add(
-          "opacity-70",
-          "cursor-not-allowed",
-        );
-      }
-
-      /*
-       * Simulación del envío.
-       *
-       * Cuando conectes el backend, este setTimeout debe
-       * reemplazarse por el fetch correspondiente y el
-       * toast de éxito debe ejecutarse únicamente después
-       * de recibir una respuesta exitosa.
-       */
-      setTimeout(() => {
-        showToast(
-          "Solicitud enviada",
-          "Nos contactaremos con vos a la brevedad.",
-          "success",
-          5000,
-        );
-
-        form.reset();
-
-        clearFile();
+        const submitButton =
+          document.getElementById(
+            "submit-form",
+          ) as HTMLButtonElement | null;
 
         if (submitButton) {
-          submitButton.disabled = false;
+          submitButton.disabled = true;
 
-          submitButton.classList.remove(
+          submitButton.classList.add(
             "opacity-70",
             "cursor-not-allowed",
           );
         }
-      }, 500);
-    });
+
+        /*
+         * SIMULACIÓN DEL ENVÍO
+         *
+         * Cuando conectes el backend, reemplazá
+         * este bloque por tu fetch/API.
+         *
+         * El toast de éxito debería mostrarse
+         * únicamente cuando el servidor responda OK.
+         */
+        setTimeout(() => {
+          showToast(
+            "Solicitud enviada",
+            "Nos contactaremos con vos a la brevedad.",
+            "success",
+            5000,
+          );
+
+          form.reset();
+
+          clearFile();
+
+          if (submitButton) {
+            submitButton.disabled = false;
+
+            submitButton.classList.remove(
+              "opacity-70",
+              "cursor-not-allowed",
+            );
+          }
+        }, 500);
+      },
+    );
   }
 
+  /*
+   * Astro
+   */
   document.addEventListener(
     "astro:page-load",
-    setupFileInput,
+    setupCotizacion,
   );
 
-  setupFileInput();
+  setupCotizacion();
 </script>
