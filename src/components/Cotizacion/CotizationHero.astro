@@ -33,7 +33,7 @@ import cotizacionData from "../../data/cotizacion.json";
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-delay="600"
-      class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-main/10"
+      class="bg-bg p-8 md:p-10 rounded-2xl shadow-xl border border-main/10"
     >
       <h3 class="text-2xl font-bold text-theme mb-1">
         {cotizacionData.formTitulo}
@@ -87,7 +87,7 @@ import cotizacionData from "../../data/cotizacion.json";
                 <div class="flex-1 overflow-hidden">
                   <span
                     id="file-name"
-                    class="block max-w-[80%] flex-1 truncate text-main font-semibold text-xs"
+                    class="block max-w-[80%] flex-1 truncate text-theme font-semibold text-xs"
                   ></span>
 
                   <span
@@ -127,13 +127,13 @@ import cotizacionData from "../../data/cotizacion.json";
           <input
             type="text"
             placeholder="Obra Social / Prepaga (Opcional)"
-            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
 
           <input
             type="text"
             placeholder="Nº de Afiliado (Opcional)"
-            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
         </div>
 
@@ -142,7 +142,7 @@ import cotizacionData from "../../data/cotizacion.json";
           <input
             type="text"
             placeholder="Nombre completo (Opcional)"
-            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
         </div>
 
@@ -151,13 +151,13 @@ import cotizacionData from "../../data/cotizacion.json";
           <input
             type="tel"
             placeholder="Teléfono / WhatsApp (Opcional)"
-            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
 
           <input
             type="email"
             placeholder="Correo electrónico (Opcional)"
-            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+            class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
         </div>
 
@@ -165,7 +165,7 @@ import cotizacionData from "../../data/cotizacion.json";
         <div>
           <textarea
             placeholder="Tu mensaje / Asunto... (Opcional)"
-            class="w-full border border-main/20 p-3.5 rounded-lg min-h-[100px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-white"
+            class="w-full border border-main/20 p-3.5 rounded-lg min-h-[100px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           ></textarea>
         </div>
 
@@ -173,7 +173,7 @@ import cotizacionData from "../../data/cotizacion.json";
         <button
           id="submit-form"
           type="submit"
-          class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-1 active:scale-[0.99]"
+          class="w-full bg-accent text-bg font-bold py-3.5 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent/20 text-sm mt-1 active:scale-[0.99]"
         >
           {cotizacionData.formBotonTexto}
         </button>
@@ -195,69 +195,88 @@ import cotizacionData from "../../data/cotizacion.json";
 </section>
 
 <!-- =========================================================
-     TOAST CONTAINER
+     TOAST
      ========================================================= -->
 
 <div
   id="toast-container"
-  class="fixed top-0 left-0 right-0 z-[99999] pointer-events-none flex justify-center px-4 pt-4 sm:pt-6"
+  class="fixed inset-x-0 top-0 z-[99999] pointer-events-none flex justify-center px-3 pt-3 sm:px-4 sm:pt-5"
   aria-live="polite"
   aria-atomic="true"
 ></div>
 
 <style>
-  /* =========================================================
-     TOAST
-     ========================================================= */
-
+  /*
+   * El contenedor no necesita fondo.
+   * El fondo pertenece al toast.
+   */
   #toast-container {
     isolation: isolate;
   }
 
   .toast {
-    position: relative;
-
-    width: min(100%, 430px);
+    width: min(100%, 440px);
 
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 13px;
+    gap: 12px;
 
-    padding: 14px 14px 17px;
+    /*
+     * IMPORTANTE:
+     * El color viene del theme de Tailwind:
+     * --color-bg -> bg-bg
+     */
+    background-color: var(--color-bg);
 
-    border: 1px solid rgba(0, 0, 0, 0.09);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-main) 20%,
+        transparent
+      );
+
     border-radius: 16px;
 
-    background: #ffffff;
-
     box-shadow:
-      0 20px 45px rgba(0, 0, 0, 0.15),
-      0 6px 15px rgba(0, 0, 0, 0.08);
+      0 20px 45px color-mix(
+        in srgb,
+        var(--color-theme) 16%,
+        transparent
+      ),
+      0 6px 18px color-mix(
+        in srgb,
+        var(--color-theme) 8%,
+        transparent
+      );
+
+    padding: 13px 13px 16px;
+
+    position: relative;
+    overflow: hidden;
 
     pointer-events: auto;
 
     opacity: 0;
-    transform: translateY(-25px) scale(0.96);
 
-    animation: toast-enter 0.42s
-      cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    transform: translateY(-24px) scale(0.97);
 
-    overflow: hidden;
+    animation:
+      toast-enter 0.4s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      forwards;
   }
 
   .toast.is-leaving {
-    animation: toast-leave 0.3s
-      cubic-bezier(0.4, 0, 1, 1) forwards;
+    animation:
+      toast-leave 0.28s
+      cubic-bezier(0.4, 0, 1, 1)
+      forwards;
   }
 
-  /* =========================================================
-     ICON
-     ========================================================= */
-
   .toast-icon {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
     display: flex;
     align-items: center;
@@ -266,16 +285,23 @@ import cotizacionData from "../../data/cotizacion.json";
     flex-shrink: 0;
 
     border-radius: 12px;
+
+    /*
+     * Usa el color accent del theme.
+     */
+    background-color: color-mix(
+      in srgb,
+      var(--color-accent) 12%,
+      var(--color-bg)
+    );
+
+    color: var(--color-accent);
   }
 
   .toast-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
   }
-
-  /* =========================================================
-     CONTENT
-     ========================================================= */
 
   .toast-content {
     min-width: 0;
@@ -284,7 +310,7 @@ import cotizacionData from "../../data/cotizacion.json";
   .toast-title {
     margin: 0;
 
-    color: #171717;
+    color: var(--color-theme);
 
     font-size: 14px;
     font-weight: 700;
@@ -294,20 +320,15 @@ import cotizacionData from "../../data/cotizacion.json";
   .toast-message {
     margin: 3px 0 0;
 
-    color: #666666;
+    color: var(--color-muted);
 
     font-size: 12px;
-    font-weight: 400;
     line-height: 1.45;
   }
 
-  /* =========================================================
-     CLOSE BUTTON
-     ========================================================= */
-
   .toast-close {
-    width: 30px;
-    height: 30px;
+    width: 31px;
+    height: 31px;
 
     display: flex;
     align-items: center;
@@ -321,7 +342,8 @@ import cotizacionData from "../../data/cotizacion.json";
     border-radius: 8px;
 
     background: transparent;
-    color: #8a8a8a;
+
+    color: var(--color-muted);
 
     cursor: pointer;
 
@@ -332,8 +354,8 @@ import cotizacionData from "../../data/cotizacion.json";
   }
 
   .toast-close:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: #222222;
+    background-color: var(--color-surface);
+    color: var(--color-theme);
   }
 
   .toast-close:active {
@@ -345,10 +367,6 @@ import cotizacionData from "../../data/cotizacion.json";
     height: 17px;
   }
 
-  /* =========================================================
-     PROGRESS BAR
-     ========================================================= */
-
   .toast-progress {
     position: absolute;
 
@@ -358,93 +376,62 @@ import cotizacionData from "../../data/cotizacion.json";
     width: 100%;
     height: 3px;
 
+    background-color: var(--color-accent);
+
     transform-origin: left;
 
-    animation: toast-progress var(--toast-duration) linear
-      forwards;
+    animation:
+      toast-progress
+      var(--toast-duration)
+      linear forwards;
   }
 
-  /* =========================================================
-     SUCCESS
-     ========================================================= */
-
-  .toast-success {
-    border-color: rgba(34, 197, 94, 0.2);
-  }
-
+  /*
+   * SUCCESS
+   *
+   * No usamos verde:
+   * mantenemos el branding SeAMeD.
+   */
   .toast-success .toast-icon {
-    background: #ecfdf3;
-    color: #16a34a;
+    background-color: color-mix(
+      in srgb,
+      var(--color-accent) 12%,
+      var(--color-bg)
+    );
+
+    color: var(--color-accent);
   }
 
-  .toast-success .toast-progress {
-    background: #22c55e;
-  }
-
-  /* =========================================================
-     ERROR
-     ========================================================= */
-
-  .toast-error {
-    border-color: rgba(239, 68, 68, 0.2);
-  }
-
-  .toast-error .toast-icon {
-    background: #fef2f2;
-    color: #dc2626;
-  }
-
-  .toast-error .toast-progress {
-    background: #ef4444;
-  }
-
-  /* =========================================================
-     WARNING
-     ========================================================= */
-
-  .toast-warning {
-    border-color: rgba(245, 158, 11, 0.2);
-  }
-
+  /*
+   * ERROR / WARNING
+   *
+   * Mantienen el sistema visual del sitio.
+   */
+  .toast-error .toast-icon,
   .toast-warning .toast-icon {
-    background: #fffbeb;
-    color: #d97706;
+    background-color: color-mix(
+      in srgb,
+      var(--color-theme) 8%,
+      var(--color-bg)
+    );
+
+    color: var(--color-theme);
   }
 
+  .toast-error .toast-progress,
   .toast-warning .toast-progress {
-    background: #f59e0b;
+    background-color: var(--color-main);
   }
-
-  /* =========================================================
-     INFO
-     ========================================================= */
-
-  .toast-info {
-    border-color: rgba(59, 130, 246, 0.2);
-  }
-
-  .toast-info .toast-icon {
-    background: #eff6ff;
-    color: #2563eb;
-  }
-
-  .toast-info .toast-progress {
-    background: #3b82f6;
-  }
-
-  /* =========================================================
-     ANIMATIONS
-     ========================================================= */
 
   @keyframes toast-enter {
     0% {
       opacity: 0;
-      transform: translateY(-25px) scale(0.96);
+      transform: translateY(-24px) scale(0.97);
     }
 
     60% {
       opacity: 1;
-      transform: translateY(3px) scale(1.005);
+      transform: translateY(2px) scale(1.005);
     }
 
     100% {
@@ -457,17 +444,11 @@ import cotizacionData from "../../data/cotizacion.json";
     0% {
       opacity: 1;
       transform: translateY(0) scale(1);
-      max-height: 100px;
-      margin-bottom: 0;
     }
 
     100% {
       opacity: 0;
-      transform: translateY(-18px) scale(0.96);
-      max-height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      margin-bottom: -10px;
+      transform: translateY(-18px) scale(0.97);
     }
   }
 
@@ -481,30 +462,20 @@ import cotizacionData from "../../data/cotizacion.json";
     }
   }
 
-  /* =========================================================
-     MOBILE
-     ========================================================= */
-
   @media (max-width: 640px) {
     #toast-container {
       padding-top: 12px;
-      padding-left: 12px;
-      padding-right: 12px;
     }
 
     .toast {
       width: 100%;
-      max-width: 430px;
-
-      grid-template-columns: auto minmax(0, 1fr) auto;
+      max-width: 440px;
 
       gap: 10px;
 
-      padding: 13px 12px 16px;
+      padding: 12px 11px 15px;
 
       border-radius: 15px;
-
-      transform: translateY(-20px) scale(0.97);
     }
 
     .toast-icon {
@@ -531,28 +502,7 @@ import cotizacionData from "../../data/cotizacion.json";
       width: 30px;
       height: 30px;
     }
-
-    @keyframes toast-enter {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.97);
-      }
-
-      60% {
-        opacity: 1;
-        transform: translateY(2px) scale(1.005);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
   }
-
-  /* =========================================================
-     REDUCED MOTION
-     ========================================================= */
 
   @media (prefers-reduced-motion: reduce) {
     .toast,
@@ -571,16 +521,7 @@ import cotizacionData from "../../data/cotizacion.json";
   type ToastType =
     | "success"
     | "error"
-    | "warning"
-    | "info";
-
-  function escapeHtml(value: string): string {
-    const element = document.createElement("div");
-
-    element.textContent = value;
-
-    return element.innerHTML;
-  }
+    | "warning";
 
   function showToast(
     title: string,
@@ -589,26 +530,28 @@ import cotizacionData from "../../data/cotizacion.json";
     duration = 5000,
   ) {
     const container =
-      document.getElementById("toast-container");
+      document.getElementById(
+        "toast-container",
+      );
 
     if (!container) return;
 
-    /*
-     * Si ya hay un toast visible, lo cerramos antes
-     * de mostrar el nuevo.
-     */
     const currentToast =
-      container.querySelector(".toast:not(.is-leaving)");
+      container.querySelector(
+        ".toast:not(.is-leaving)",
+      );
 
     if (currentToast) {
-      currentToast.classList.add("is-leaving");
+      currentToast.classList.add(
+        "is-leaving",
+      );
 
       setTimeout(() => {
         currentToast.remove();
-      }, 300);
+      }, 280);
     }
 
-    const icons: Record<ToastType, string> = {
+    const icons = {
       success: `
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -657,32 +600,19 @@ import cotizacionData from "../../data/cotizacion.json";
           <path d="M12 17h.01"></path>
         </svg>
       `,
-
-      info: `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M12 16v-4"></path>
-          <path d="M12 8h.01"></path>
-        </svg>
-      `,
     };
 
-    const toast = document.createElement("div");
+    const toast =
+      document.createElement("div");
 
-    toast.className = `toast toast-${type}`;
+    toast.className =
+      `toast toast-${type}`;
 
     toast.setAttribute(
       "role",
-      type === "error" ? "alert" : "status",
+      type === "error"
+        ? "alert"
+        : "status",
     );
 
     toast.style.setProperty(
@@ -697,11 +627,11 @@ import cotizacionData from "../../data/cotizacion.json";
 
       <div class="toast-content">
         <p class="toast-title">
-          ${escapeHtml(title)}
+          ${title}
         </p>
 
         <p class="toast-message">
-          ${escapeHtml(message)}
+          ${message}
         </p>
       </div>
 
@@ -730,10 +660,11 @@ import cotizacionData from "../../data/cotizacion.json";
 
     container.appendChild(toast);
 
-    let timeout: ReturnType<typeof setTimeout> | null =
-      null;
-
     let removed = false;
+
+    let timeout:
+      ReturnType<typeof setTimeout> | null =
+        null;
 
     function removeToast() {
       if (removed) return;
@@ -744,66 +675,100 @@ import cotizacionData from "../../data/cotizacion.json";
         clearTimeout(timeout);
       }
 
-      toast.classList.add("is-leaving");
+      toast.classList.add(
+        "is-leaving",
+      );
 
       setTimeout(() => {
         toast.remove();
-      }, 300);
+      }, 280);
     }
 
     toast
       .querySelector(".toast-close")
-      ?.addEventListener("click", removeToast);
+      ?.addEventListener(
+        "click",
+        removeToast,
+      );
 
-    timeout = setTimeout(removeToast, duration);
+    timeout = setTimeout(
+      removeToast,
+      duration,
+    );
   }
 
   function setupCotizacion() {
-    const input = document.getElementById(
-      "receta",
-    ) as HTMLInputElement | null;
+    const input =
+      document.getElementById(
+        "receta",
+      ) as HTMLInputElement | null;
 
     const dropZone =
-      document.getElementById("drop-zone");
+      document.getElementById(
+        "drop-zone",
+      );
 
     const uploadPrompt =
-      document.getElementById("upload-prompt");
+      document.getElementById(
+        "upload-prompt",
+      );
 
     const fileUploaded =
-      document.getElementById("file-uploaded");
+      document.getElementById(
+        "file-uploaded",
+      );
 
     const fileName =
-      document.getElementById("file-name");
+      document.getElementById(
+        "file-name",
+      );
 
     const fileSize =
-      document.getElementById("file-size");
+      document.getElementById(
+        "file-size",
+      );
 
     const removeBtn =
-      document.getElementById("remove-file");
+      document.getElementById(
+        "remove-file",
+      );
 
     const fileError =
-      document.getElementById("file-error");
+      document.getElementById(
+        "file-error",
+      );
 
-    const form = document.getElementById(
-      "cotizacion-form",
-    ) as HTMLFormElement | null;
+    const form =
+      document.getElementById(
+        "cotizacion-form",
+      ) as HTMLFormElement | null;
 
-    if (!input || !dropZone || !form) return;
-
-    /*
-     * Astro puede ejecutar astro:page-load varias veces.
-     * Evitamos registrar los listeners nuevamente.
-     */
-    if (form.dataset.initialized === "true") {
+    if (
+      !input ||
+      !dropZone ||
+      !form
+    ) {
       return;
     }
 
-    form.dataset.initialized = "true";
+    if (
+      form.dataset.initialized ===
+      "true"
+    ) {
+      return;
+    }
+
+    form.dataset.initialized =
+      "true";
 
     const MAX_SIZE_MB = 25;
 
-    function formatBytes(bytes: number): string {
-      if (bytes === 0) return "0 Bytes";
+    function formatBytes(
+      bytes: number,
+    ): string {
+      if (bytes === 0) {
+        return "0 Bytes";
+      }
 
       const k = 1024;
 
@@ -814,7 +779,8 @@ import cotizacionData from "../../data/cotizacion.json";
       ];
 
       const i = Math.floor(
-        Math.log(bytes) / Math.log(k),
+        Math.log(bytes) /
+          Math.log(k),
       );
 
       return (
@@ -829,12 +795,17 @@ import cotizacionData from "../../data/cotizacion.json";
       );
     }
 
-    function showError(message: string) {
+    function showError(
+      message: string,
+    ) {
       if (!fileError) return;
 
-      fileError.textContent = message;
+      fileError.textContent =
+        message;
 
-      fileError.classList.remove("hidden");
+      fileError.classList.remove(
+        "hidden",
+      );
     }
 
     function clearError() {
@@ -842,7 +813,9 @@ import cotizacionData from "../../data/cotizacion.json";
 
       fileError.textContent = "";
 
-      fileError.classList.add("hidden");
+      fileError.classList.add(
+        "hidden",
+      );
     }
 
     function clearFile() {
@@ -852,22 +825,33 @@ import cotizacionData from "../../data/cotizacion.json";
         "pointer-events-none",
       );
 
-      uploadPrompt?.classList.remove("hidden");
+      uploadPrompt?.classList.remove(
+        "hidden",
+      );
 
       if (fileUploaded) {
-        fileUploaded.classList.remove("grid");
-        fileUploaded.classList.add("hidden");
+        fileUploaded.classList.remove(
+          "grid",
+        );
+
+        fileUploaded.classList.add(
+          "hidden",
+        );
       }
 
       clearError();
     }
 
-    function handleFile(file: File) {
+    function handleFile(
+      file: File,
+    ) {
       clearError();
 
       if (
         file.size >
-        MAX_SIZE_MB * 1024 * 1024
+        MAX_SIZE_MB *
+          1024 *
+          1024
       ) {
         showError(
           `El archivo supera el límite de ${MAX_SIZE_MB} MB.`,
@@ -885,19 +869,29 @@ import cotizacionData from "../../data/cotizacion.json";
       }
 
       if (fileName) {
-        fileName.textContent = file.name;
+        fileName.textContent =
+          file.name;
       }
 
       if (fileSize) {
         fileSize.textContent =
-          formatBytes(file.size);
+          formatBytes(
+            file.size,
+          );
       }
 
-      uploadPrompt?.classList.add("hidden");
+      uploadPrompt?.classList.add(
+        "hidden",
+      );
 
       if (fileUploaded) {
-        fileUploaded.classList.remove("hidden");
-        fileUploaded.classList.add("grid");
+        fileUploaded.classList.remove(
+          "hidden",
+        );
+
+        fileUploaded.classList.add(
+          "grid",
+        );
       }
 
       input.classList.add(
@@ -905,20 +899,21 @@ import cotizacionData from "../../data/cotizacion.json";
       );
     }
 
-    /*
-     * Selección de archivo
-     */
-    input.addEventListener("change", () => {
-      if (input.files?.[0]) {
-        handleFile(input.files[0]);
-      } else {
-        clearFile();
-      }
-    });
+    input.addEventListener(
+      "change",
+      () => {
+        if (
+          input.files?.[0]
+        ) {
+          handleFile(
+            input.files[0],
+          );
+        } else {
+          clearFile();
+        }
+      },
+    );
 
-    /*
-     * Eliminar archivo
-     */
     removeBtn?.addEventListener(
       "click",
       (event) => {
@@ -929,26 +924,28 @@ import cotizacionData from "../../data/cotizacion.json";
       },
     );
 
-    /*
-     * Drag & Drop
-     */
     [
       "dragenter",
       "dragover",
       "dragleave",
       "drop",
-    ].forEach((eventName) => {
-      dropZone.addEventListener(
-        eventName,
-        (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-        },
-        false,
-      );
-    });
+    ].forEach(
+      (eventName) => {
+        dropZone.addEventListener(
+          eventName,
+          (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          },
+          false,
+        );
+      },
+    );
 
-    ["dragenter", "dragover"].forEach(
+    [
+      "dragenter",
+      "dragover",
+    ].forEach(
       (eventName) => {
         dropZone.addEventListener(
           eventName,
@@ -963,7 +960,10 @@ import cotizacionData from "../../data/cotizacion.json";
       },
     );
 
-    ["dragleave", "drop"].forEach(
+    [
+      "dragleave",
+      "drop",
+    ].forEach(
       (eventName) => {
         dropZone.addEventListener(
           eventName,
@@ -982,7 +982,8 @@ import cotizacionData from "../../data/cotizacion.json";
       "drop",
       (event: DragEvent) => {
         const files =
-          event.dataTransfer?.files;
+          event.dataTransfer
+            ?.files;
 
         if (
           !files ||
@@ -996,7 +997,9 @@ import cotizacionData from "../../data/cotizacion.json";
         const dataTransfer =
           new DataTransfer();
 
-        dataTransfer.items.add(file);
+        dataTransfer.items.add(
+          file,
+        );
 
         input.files =
           dataTransfer.files;
@@ -1005,18 +1008,14 @@ import cotizacionData from "../../data/cotizacion.json";
       },
     );
 
-    /*
-     * Submit
-     */
     form.addEventListener(
       "submit",
       (event) => {
         event.preventDefault();
 
-        /*
-         * El pedido médico es obligatorio.
-         */
-        if (!input.files?.[0]) {
+        if (
+          !input.files?.[0]
+        ) {
           showToast(
             "Falta adjuntar el pedido médico",
             "Seleccioná el archivo antes de enviar la solicitud.",
@@ -1032,7 +1031,8 @@ import cotizacionData from "../../data/cotizacion.json";
           ) as HTMLButtonElement | null;
 
         if (submitButton) {
-          submitButton.disabled = true;
+          submitButton.disabled =
+            true;
 
           submitButton.classList.add(
             "opacity-70",
@@ -1041,13 +1041,9 @@ import cotizacionData from "../../data/cotizacion.json";
         }
 
         /*
-         * SIMULACIÓN DEL ENVÍO
-         *
-         * Cuando conectes el backend, reemplazá
-         * este bloque por tu fetch/API.
-         *
-         * El toast de éxito debería mostrarse
-         * únicamente cuando el servidor responda OK.
+         * Acá simulamos el envío.
+         * Reemplazá este bloque por tu fetch/API
+         * cuando conectes el backend.
          */
         setTimeout(() => {
           showToast(
@@ -1062,7 +1058,8 @@ import cotizacionData from "../../data/cotizacion.json";
           clearFile();
 
           if (submitButton) {
-            submitButton.disabled = false;
+            submitButton.disabled =
+              false;
 
             submitButton.classList.remove(
               "opacity-70",
@@ -1074,9 +1071,6 @@ import cotizacionData from "../../data/cotizacion.json";
     );
   }
 
-  /*
-   * Astro
-   */
   document.addEventListener(
     "astro:page-load",
     setupCotizacion,
