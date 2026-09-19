@@ -109,6 +109,7 @@ import cotizacionData from "../../data/cotizacion.json";
 
             <input
               id="receta"
+              name="receta"
               type="file"
               class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-0"
               accept=".pdf,image/png,image/jpeg,image/webp"
@@ -119,19 +120,23 @@ import cotizacionData from "../../data/cotizacion.json";
           <p
             id="file-error"
             class="hidden text-xs font-semibold text-red-500 mt-1"
-          ></p>
+            role="alert"
+          >
+          </p>
         </div>
 
         <!-- Campos: Obra Social y Afiliado -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
+            name="obraSocial"
             placeholder="Obra Social / Prepaga (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
 
           <input
             type="text"
+            name="afiliado"
             placeholder="Nº de Afiliado (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
@@ -141,6 +146,7 @@ import cotizacionData from "../../data/cotizacion.json";
         <div>
           <input
             type="text"
+            name="nombre"
             placeholder="Nombre completo (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
@@ -150,12 +156,14 @@ import cotizacionData from "../../data/cotizacion.json";
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="tel"
+            name="telefono"
             placeholder="Teléfono / WhatsApp (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
 
           <input
             type="email"
+            name="email"
             placeholder="Correo electrónico (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
@@ -164,6 +172,7 @@ import cotizacionData from "../../data/cotizacion.json";
         <!-- Campo: Mensaje -->
         <div>
           <textarea
+            name="mensaje"
             placeholder="Tu mensaje / Asunto... (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg min-h-[100px] resize-none focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           ></textarea>
@@ -195,7 +204,11 @@ import cotizacionData from "../../data/cotizacion.json";
 </section>
 
 <!-- =========================================================
-     TOAST
+     TOAST (persistente)
+
+     El toast vive siempre en el DOM, dentro del template.
+     Por eso los estilos scoped de Astro SÍ le aplican.
+     JS solo cambia el texto, data-type y la clase is-visible.
      ========================================================= -->
 
 <div
@@ -203,17 +216,82 @@ import cotizacionData from "../../data/cotizacion.json";
   class="fixed inset-x-0 top-0 z-[99999] pointer-events-none flex justify-center px-3 pt-3 sm:px-4 sm:pt-5"
   aria-live="polite"
   aria-atomic="true"
-></div>
+>
+  <div id="toast" class="toast" data-type="success" role="status">
+    <div class="toast-icon">
+      <svg
+        data-icon="success"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M20 6 9 17l-5-5"></path>
+      </svg>
+
+      <svg
+        data-icon="error"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="m15 9-6 6"></path>
+        <path d="m9 9 6 6"></path>
+      </svg>
+
+      <svg
+        data-icon="warning"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path
+          d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+        ></path>
+        <path d="M12 9v4"></path>
+        <path d="M12 17h.01"></path>
+      </svg>
+    </div>
+
+    <div class="toast-content">
+      <p id="toast-title" class="toast-title"></p>
+      <p id="toast-message" class="toast-message"></p>
+    </div>
+
+    <button
+      id="toast-close"
+      type="button"
+      class="toast-close"
+      aria-label="Cerrar notificación"
+    >
+      <X class="w-4 h-4" />
+    </button>
+
+    <div class="toast-progress"></div>
+  </div>
+</div>
 
 <style>
-  /*
-   * El contenedor no necesita fondo.
-   * El fondo pertenece al toast.
-   */
   #toast-container {
     isolation: isolate;
   }
 
+  /* ---------- Toast: estado base (oculto, solo opacidad/transform) ---------- */
   .toast {
     width: min(100%, 440px);
 
@@ -222,58 +300,42 @@ import cotizacionData from "../../data/cotizacion.json";
     align-items: center;
     gap: 12px;
 
-    /*
-     * IMPORTANTE:
-     * El color viene del theme de Tailwind:
-     * --color-bg -> bg-bg
-     */
     background-color: var(--color-bg);
 
-    border: 1px solid
-      color-mix(
-        in srgb,
-        var(--color-main) 20%,
-        transparent
-      );
-
+    border: 1px solid color-mix(in srgb, var(--color-main) 20%, transparent);
     border-radius: 16px;
 
     box-shadow:
-      0 20px 45px color-mix(
-        in srgb,
-        var(--color-theme) 16%,
-        transparent
-      ),
-      0 6px 18px color-mix(
-        in srgb,
-        var(--color-theme) 8%,
-        transparent
-      );
+      0 20px 45px color-mix(in srgb, var(--color-theme) 16%, transparent),
+      0 6px 18px color-mix(in srgb, var(--color-theme) 8%, transparent);
 
     padding: 13px 13px 16px;
 
     position: relative;
     overflow: hidden;
 
-    pointer-events: auto;
-
     opacity: 0;
-
     transform: translateY(-24px) scale(0.97);
+    pointer-events: none;
 
-    animation:
-      toast-enter 0.4s
-      cubic-bezier(0.22, 1, 0.36, 1)
-      forwards;
+    transition:
+      opacity 0.3s ease,
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .toast.is-leaving {
-    animation:
-      toast-leave 0.28s
-      cubic-bezier(0.4, 0, 1, 1)
-      forwards;
+  /* ---------- Toast: visible ---------- */
+  .toast.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
   }
 
+  /* El botón de cerrar no debe ser enfocable con el toast oculto */
+  .toast:not(.is-visible) .toast-close {
+    visibility: hidden;
+  }
+
+  /* ---------- Icono (se muestra el svg que corresponde a data-type) ---------- */
   .toast-icon {
     width: 42px;
     height: 42px;
@@ -286,9 +348,6 @@ import cotizacionData from "../../data/cotizacion.json";
 
     border-radius: 12px;
 
-    /*
-     * Usa el color accent del theme.
-     */
     background-color: color-mix(
       in srgb,
       var(--color-accent) 12%,
@@ -298,20 +357,26 @@ import cotizacionData from "../../data/cotizacion.json";
     color: var(--color-accent);
   }
 
-  .toast-icon svg {
+  .toast-icon > svg {
+    display: none;
     width: 21px;
     height: 21px;
   }
 
+  .toast[data-type="success"] .toast-icon > svg[data-icon="success"],
+  .toast[data-type="error"] .toast-icon > svg[data-icon="error"],
+  .toast[data-type="warning"] .toast-icon > svg[data-icon="warning"] {
+    display: block;
+  }
+
+  /* ---------- Contenido ---------- */
   .toast-content {
     min-width: 0;
   }
 
   .toast-title {
     margin: 0;
-
     color: var(--color-theme);
-
     font-size: 14px;
     font-weight: 700;
     line-height: 1.35;
@@ -319,13 +384,12 @@ import cotizacionData from "../../data/cotizacion.json";
 
   .toast-message {
     margin: 3px 0 0;
-
     color: var(--color-muted);
-
     font-size: 12px;
     line-height: 1.45;
   }
 
+  /* ---------- Cerrar ---------- */
   .toast-close {
     width: 31px;
     height: 31px;
@@ -342,7 +406,6 @@ import cotizacionData from "../../data/cotizacion.json";
     border-radius: 8px;
 
     background: transparent;
-
     color: var(--color-muted);
 
     cursor: pointer;
@@ -362,14 +425,9 @@ import cotizacionData from "../../data/cotizacion.json";
     transform: scale(0.9);
   }
 
-  .toast-close svg {
-    width: 17px;
-    height: 17px;
-  }
-
+  /* ---------- Barra de progreso (se reinicia cada vez que aparece) ---------- */
   .toast-progress {
     position: absolute;
-
     left: 0;
     bottom: 0;
 
@@ -379,36 +437,16 @@ import cotizacionData from "../../data/cotizacion.json";
     background-color: var(--color-accent);
 
     transform-origin: left;
-
-    animation:
-      toast-progress
-      var(--toast-duration)
-      linear forwards;
+    transform: scaleX(0);
   }
 
-  /*
-   * SUCCESS
-   *
-   * No usamos verde:
-   * mantenemos el branding SeAMeD.
-   */
-  .toast-success .toast-icon {
-    background-color: color-mix(
-      in srgb,
-      var(--color-accent) 12%,
-      var(--color-bg)
-    );
-
-    color: var(--color-accent);
+  .toast.is-visible .toast-progress {
+    animation: toast-progress var(--toast-duration, 5000ms) linear forwards;
   }
 
-  /*
-   * ERROR / WARNING
-   *
-   * Mantienen el sistema visual del sitio.
-   */
-  .toast-error .toast-icon,
-  .toast-warning .toast-icon {
+  /* ---------- Variantes ---------- */
+  .toast[data-type="error"] .toast-icon,
+  .toast[data-type="warning"] .toast-icon {
     background-color: color-mix(
       in srgb,
       var(--color-theme) 8%,
@@ -418,38 +456,9 @@ import cotizacionData from "../../data/cotizacion.json";
     color: var(--color-theme);
   }
 
-  .toast-error .toast-progress,
-  .toast-warning .toast-progress {
+  .toast[data-type="error"] .toast-progress,
+  .toast[data-type="warning"] .toast-progress {
     background-color: var(--color-main);
-  }
-
-  @keyframes toast-enter {
-    0% {
-      opacity: 0;
-      transform: translateY(-24px) scale(0.97);
-    }
-
-    60% {
-      opacity: 1;
-      transform: translateY(2px) scale(1.005);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes toast-leave {
-    0% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translateY(-18px) scale(0.97);
-    }
   }
 
   @keyframes toast-progress {
@@ -470,22 +479,18 @@ import cotizacionData from "../../data/cotizacion.json";
     .toast {
       width: 100%;
       max-width: 440px;
-
       gap: 10px;
-
       padding: 12px 11px 15px;
-
       border-radius: 15px;
     }
 
     .toast-icon {
       width: 38px;
       height: 38px;
-
       border-radius: 11px;
     }
 
-    .toast-icon svg {
+    .toast-icon > svg {
       width: 19px;
       height: 19px;
     }
@@ -506,22 +511,30 @@ import cotizacionData from "../../data/cotizacion.json";
 
   @media (prefers-reduced-motion: reduce) {
     .toast,
-    .toast.is-leaving {
-      animation: none;
+    .toast.is-visible {
       transform: none;
+      transition: opacity 0.2s ease;
     }
 
-    .toast-progress {
+    .toast.is-visible .toast-progress {
       animation: none;
     }
   }
 </style>
 
 <script>
-  type ToastType =
-    | "success"
-    | "error"
-    | "warning";
+  type ToastType = "success" | "error" | "warning";
+
+  let toastTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  function hideToast() {
+    if (toastTimeout) {
+      clearTimeout(toastTimeout);
+      toastTimeout = null;
+    }
+
+    document.getElementById("toast")?.classList.remove("is-visible");
+  }
 
   function showToast(
     title: string,
@@ -529,552 +542,244 @@ import cotizacionData from "../../data/cotizacion.json";
     type: ToastType = "success",
     duration = 5000,
   ) {
-    const container =
-      document.getElementById(
-        "toast-container",
-      );
+    const toast = document.getElementById("toast");
+    const titleEl = document.getElementById("toast-title");
+    const messageEl = document.getElementById("toast-message");
 
-    if (!container) return;
+    if (!toast || !titleEl || !messageEl) return;
 
-    const currentToast =
-      container.querySelector(
-        ".toast:not(.is-leaving)",
-      );
-
-    if (currentToast) {
-      currentToast.classList.add(
-        "is-leaving",
-      );
-
-      setTimeout(() => {
-        currentToast.remove();
-      }, 280);
+    if (toastTimeout) {
+      clearTimeout(toastTimeout);
     }
 
-    const icons = {
-      success: `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M20 6 9 17l-5-5"></path>
-        </svg>
-      `,
+    // Reinicia la animación de la barra si ya estaba visible
+    toast.classList.remove("is-visible");
+    void toast.offsetWidth;
 
-      error: `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="m15 9-6 6"></path>
-          <path d="m9 9 6 6"></path>
-        </svg>
-      `,
+    toast.dataset.type = type;
+    toast.setAttribute("role", type === "error" ? "alert" : "status");
+    toast.style.setProperty("--toast-duration", `${duration}ms`);
 
-      warning: `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
-          <path d="M12 9v4"></path>
-          <path d="M12 17h.01"></path>
-        </svg>
-      `,
-    };
+    titleEl.textContent = title;
+    messageEl.textContent = message;
 
-    const toast =
-      document.createElement("div");
+    toast.classList.add("is-visible");
 
-    toast.className =
-      `toast toast-${type}`;
-
-    toast.setAttribute(
-      "role",
-      type === "error"
-        ? "alert"
-        : "status",
-    );
-
-    toast.style.setProperty(
-      "--toast-duration",
-      `${duration}ms`,
-    );
-
-    toast.innerHTML = `
-      <div class="toast-icon">
-        ${icons[type]}
-      </div>
-
-      <div class="toast-content">
-        <p class="toast-title">
-          ${title}
-        </p>
-
-        <p class="toast-message">
-          ${message}
-        </p>
-      </div>
-
-      <button
-        type="button"
-        class="toast-close"
-        aria-label="Cerrar notificación"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M18 6 6 18"></path>
-          <path d="m6 6 12 12"></path>
-        </svg>
-      </button>
-
-      <div class="toast-progress"></div>
-    `;
-
-    container.appendChild(toast);
-
-    let removed = false;
-
-    let timeout:
-      ReturnType<typeof setTimeout> | null =
-        null;
-
-    function removeToast() {
-      if (removed) return;
-
-      removed = true;
-
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-
-      toast.classList.add(
-        "is-leaving",
-      );
-
-      setTimeout(() => {
-        toast.remove();
-      }, 280);
-    }
-
-    toast
-      .querySelector(".toast-close")
-      ?.addEventListener(
-        "click",
-        removeToast,
-      );
-
-    timeout = setTimeout(
-      removeToast,
-      duration,
-    );
+    toastTimeout = setTimeout(hideToast, duration);
   }
 
   function setupCotizacion() {
-    const input =
-      document.getElementById(
-        "receta",
-      ) as HTMLInputElement | null;
+    const input = document.getElementById("receta") as HTMLInputElement | null;
+    const dropZone = document.getElementById("drop-zone");
+    const uploadPrompt = document.getElementById("upload-prompt");
+    const fileUploaded = document.getElementById("file-uploaded");
+    const fileName = document.getElementById("file-name");
+    const fileSize = document.getElementById("file-size");
+    const removeBtn = document.getElementById("remove-file");
+    const fileError = document.getElementById("file-error");
+    const toastClose = document.getElementById("toast-close");
+    const form = document.getElementById(
+      "cotizacion-form",
+    ) as HTMLFormElement | null;
 
-    const dropZone =
-      document.getElementById(
-        "drop-zone",
-      );
+    if (!input || !dropZone || !form) return;
 
-    const uploadPrompt =
-      document.getElementById(
-        "upload-prompt",
-      );
-
-    const fileUploaded =
-      document.getElementById(
-        "file-uploaded",
-      );
-
-    const fileName =
-      document.getElementById(
-        "file-name",
-      );
-
-    const fileSize =
-      document.getElementById(
-        "file-size",
-      );
-
-    const removeBtn =
-      document.getElementById(
-        "remove-file",
-      );
-
-    const fileError =
-      document.getElementById(
-        "file-error",
-      );
-
-    const form =
-      document.getElementById(
-        "cotizacion-form",
-      ) as HTMLFormElement | null;
-
-    if (
-      !input ||
-      !dropZone ||
-      !form
-    ) {
-      return;
-    }
-
-    if (
-      form.dataset.initialized ===
-      "true"
-    ) {
-      return;
-    }
-
-    form.dataset.initialized =
-      "true";
+    if (form.dataset.initialized === "true") return;
+    form.dataset.initialized = "true";
 
     const MAX_SIZE_MB = 25;
 
-    function formatBytes(
-      bytes: number,
-    ): string {
-      if (bytes === 0) {
-        return "0 Bytes";
-      }
+    const ALLOWED_TYPES = [
+      "application/pdf",
+      "image/png",
+      "image/jpeg",
+      "image/webp",
+    ];
+
+    function formatBytes(bytes: number): string {
+      if (bytes === 0) return "0 Bytes";
 
       const k = 1024;
+      const sizes = ["Bytes", "KB", "MB"];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-      const sizes = [
-        "Bytes",
-        "KB",
-        "MB",
-      ];
-
-      const i = Math.floor(
-        Math.log(bytes) /
-          Math.log(k),
-      );
-
-      return (
-        parseFloat(
-          (
-            bytes /
-            Math.pow(k, i)
-          ).toFixed(2),
-        ) +
-        " " +
-        sizes[i]
-      );
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
     }
 
-    function showError(
-      message: string,
-    ) {
+    function showError(message: string) {
       if (!fileError) return;
 
-      fileError.textContent =
-        message;
-
-      fileError.classList.remove(
-        "hidden",
-      );
+      fileError.textContent = message;
+      fileError.classList.remove("hidden");
     }
 
     function clearError() {
       if (!fileError) return;
 
       fileError.textContent = "";
-
-      fileError.classList.add(
-        "hidden",
-      );
+      fileError.classList.add("hidden");
     }
 
     function clearFile() {
-      input.value = "";
+      input!.value = "";
+      input!.classList.remove("pointer-events-none");
 
-      input.classList.remove(
-        "pointer-events-none",
-      );
-
-      uploadPrompt?.classList.remove(
-        "hidden",
-      );
+      uploadPrompt?.classList.remove("hidden");
 
       if (fileUploaded) {
-        fileUploaded.classList.remove(
-          "grid",
-        );
-
-        fileUploaded.classList.add(
-          "hidden",
-        );
+        fileUploaded.classList.remove("grid");
+        fileUploaded.classList.add("hidden");
       }
 
       clearError();
     }
 
-    function handleFile(
-      file: File,
-    ) {
+    function rejectFile(title: string, message: string) {
+      // Primero limpiamos y después mostramos el error,
+      // si no clearFile() borraría el mensaje al instante.
+      clearFile();
+      showError(message);
+      showToast(title, message, "error");
+    }
+
+    function handleFile(file: File) {
       clearError();
 
-      if (
-        file.size >
-        MAX_SIZE_MB *
-          1024 *
-          1024
-      ) {
-        showError(
-          `El archivo supera el límite de ${MAX_SIZE_MB} MB.`,
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        rejectFile(
+          "Formato no permitido",
+          "Adjuntá un archivo PDF, JPG o PNG.",
         );
+        return;
+      }
 
-        clearFile();
-
-        showToast(
+      if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+        rejectFile(
           "Archivo demasiado grande",
           `El archivo no puede superar los ${MAX_SIZE_MB} MB.`,
-          "error",
+        );
+        return;
+      }
+
+      if (fileName) fileName.textContent = file.name;
+      if (fileSize) fileSize.textContent = formatBytes(file.size);
+
+      uploadPrompt?.classList.add("hidden");
+
+      if (fileUploaded) {
+        fileUploaded.classList.remove("hidden");
+        fileUploaded.classList.add("grid");
+      }
+
+      input!.classList.add("pointer-events-none");
+    }
+
+    input.addEventListener("change", () => {
+      if (input.files?.[0]) {
+        handleFile(input.files[0]);
+      } else {
+        clearFile();
+      }
+    });
+
+    removeBtn?.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      clearFile();
+    });
+
+    toastClose?.addEventListener("click", hideToast);
+
+    // Drag & drop
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+        },
+        false,
+      );
+    });
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        () => dropZone.classList.add("border-accent", "bg-accent/10"),
+        false,
+      );
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      dropZone.addEventListener(
+        eventName,
+        () => dropZone.classList.remove("border-accent", "bg-accent/10"),
+        false,
+      );
+    });
+
+    dropZone.addEventListener("drop", (event: DragEvent) => {
+      const file = event.dataTransfer?.files?.[0];
+
+      if (!file) return;
+
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      input.files = dataTransfer.files;
+
+      handleFile(file);
+    });
+
+    // Envío
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!input.files?.[0]) {
+        showToast(
+          "Falta adjuntar el pedido médico",
+          "Seleccioná el archivo antes de enviar la solicitud.",
+          "warning",
         );
 
         return;
       }
 
-      if (fileName) {
-        fileName.textContent =
-          file.name;
+      const submitButton = document.getElementById(
+        "submit-form",
+      ) as HTMLButtonElement | null;
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.classList.add("opacity-70", "cursor-not-allowed");
       }
 
-      if (fileSize) {
-        fileSize.textContent =
-          formatBytes(
-            file.size,
-          );
-      }
-
-      uploadPrompt?.classList.add(
-        "hidden",
-      );
-
-      if (fileUploaded) {
-        fileUploaded.classList.remove(
-          "hidden",
+      /*
+       * Simulación del envío.
+       * Cuando conectes el backend:
+       *   const data = new FormData(form);
+       *   await fetch("/api/cotizacion", { method: "POST", body: data });
+       */
+      setTimeout(() => {
+        showToast(
+          "Solicitud enviada",
+          "Nos contactaremos con vos a la brevedad.",
+          "success",
+          5000,
         );
 
-        fileUploaded.classList.add(
-          "grid",
-        );
-      }
-
-      input.classList.add(
-        "pointer-events-none",
-      );
-    }
-
-    input.addEventListener(
-      "change",
-      () => {
-        if (
-          input.files?.[0]
-        ) {
-          handleFile(
-            input.files[0],
-          );
-        } else {
-          clearFile();
-        }
-      },
-    );
-
-    removeBtn?.addEventListener(
-      "click",
-      (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
+        form.reset();
         clearFile();
-      },
-    );
-
-    [
-      "dragenter",
-      "dragover",
-      "dragleave",
-      "drop",
-    ].forEach(
-      (eventName) => {
-        dropZone.addEventListener(
-          eventName,
-          (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-          },
-          false,
-        );
-      },
-    );
-
-    [
-      "dragenter",
-      "dragover",
-    ].forEach(
-      (eventName) => {
-        dropZone.addEventListener(
-          eventName,
-          () => {
-            dropZone.classList.add(
-              "border-accent",
-              "bg-accent/10",
-            );
-          },
-          false,
-        );
-      },
-    );
-
-    [
-      "dragleave",
-      "drop",
-    ].forEach(
-      (eventName) => {
-        dropZone.addEventListener(
-          eventName,
-          () => {
-            dropZone.classList.remove(
-              "border-accent",
-              "bg-accent/10",
-            );
-          },
-          false,
-        );
-      },
-    );
-
-    dropZone.addEventListener(
-      "drop",
-      (event: DragEvent) => {
-        const files =
-          event.dataTransfer
-            ?.files;
-
-        if (
-          !files ||
-          files.length === 0
-        ) {
-          return;
-        }
-
-        const file = files[0];
-
-        const dataTransfer =
-          new DataTransfer();
-
-        dataTransfer.items.add(
-          file,
-        );
-
-        input.files =
-          dataTransfer.files;
-
-        handleFile(file);
-      },
-    );
-
-    form.addEventListener(
-      "submit",
-      (event) => {
-        event.preventDefault();
-
-        if (
-          !input.files?.[0]
-        ) {
-          showToast(
-            "Falta adjuntar el pedido médico",
-            "Seleccioná el archivo antes de enviar la solicitud.",
-            "warning",
-          );
-
-          return;
-        }
-
-        const submitButton =
-          document.getElementById(
-            "submit-form",
-          ) as HTMLButtonElement | null;
 
         if (submitButton) {
-          submitButton.disabled =
-            true;
-
-          submitButton.classList.add(
-            "opacity-70",
-            "cursor-not-allowed",
-          );
+          submitButton.disabled = false;
+          submitButton.classList.remove("opacity-70", "cursor-not-allowed");
         }
-
-        /*
-         * Acá simulamos el envío.
-         * Reemplazá este bloque por tu fetch/API
-         * cuando conectes el backend.
-         */
-        setTimeout(() => {
-          showToast(
-            "Solicitud enviada",
-            "Nos contactaremos con vos a la brevedad.",
-            "success",
-            5000,
-          );
-
-          form.reset();
-
-          clearFile();
-
-          if (submitButton) {
-            submitButton.disabled =
-              false;
-
-            submitButton.classList.remove(
-              "opacity-70",
-              "cursor-not-allowed",
-            );
-          }
-        }, 500);
-      },
-    );
+      }, 500);
+    });
   }
 
-  document.addEventListener(
-    "astro:page-load",
-    setupCotizacion,
-  );
+  document.addEventListener("astro:page-load", setupCotizacion);
 
   setupCotizacion();
 </script>
