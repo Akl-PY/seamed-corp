@@ -16,17 +16,22 @@
     "@astrojs/vercel": "^10.0.8",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",
+    "@supabase/supabase-js": "^2.117.1",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "aos": "^2.3.4",
     "astro": "^6.4.2",
+    "cloudinary": "^2.11.0",
     "lucide-astro": "^0.556.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "tailwindcss": "^4.3.0"
+    "resend": "^6.28.1",
+    "tailwindcss": "^4.3.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@types/aos": "^3.0.8"
+    "@types/aos": "^3.0.8",
+    "@types/node": "^26.6.2"
   }
 }

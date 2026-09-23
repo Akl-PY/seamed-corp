@@ -130,7 +130,7 @@ const iconPaths: Record<string, string> = {
           {
             wppData.opciones?.map((opt) => {
               const pathData = iconPaths[opt.iconType] || iconPaths.cart;
-              const linkUrl = `https://wa.me/${opt.phoneNumber}/?text=${encodeURIComponent(opt.defaultText)}`;
+              const linkUrl = `https://wa.me/${opt.phoneNumber}/?text=${encodeURIComponent(opt.defaultText)} `;
 
               return (
                 <a

@@ -109,7 +109,7 @@ import cotizacionData from "../../data/cotizacion.json";
 
             <input
               id="receta"
-              name="receta"
+              name="archivo"
               type="file"
               class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-0"
               accept=".pdf,image/png,image/jpeg,image/webp"
@@ -129,14 +129,14 @@ import cotizacionData from "../../data/cotizacion.json";
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
-            name="obraSocial"
+            name="obra_social"
             placeholder="Obra Social / Prepaga (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
 
           <input
             type="text"
-            name="afiliado"
+            name="num_afiliado"
             placeholder="Nº de Afiliado (Opcional)"
             class="w-full border border-main/20 p-3.5 rounded-lg focus:ring-2 focus:ring-accent/50 outline-none transition-all text-sm bg-bg"
           />
@@ -732,7 +732,7 @@ import cotizacionData from "../../data/cotizacion.json";
     });
 
     // Envío
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!input.files?.[0]) {
@@ -754,6 +754,19 @@ import cotizacionData from "../../data/cotizacion.json";
         submitButton.classList.add("opacity-70", "cursor-not-allowed");
       }
 
+      const formData = new FormData(form);
+      const response = await fetch("/api/cotizacion", {
+        method: "POST",
+        body: formData,
+      })
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ?? "Ocurrió un error"
+        );
+      }
       /*
        * Simulación del envío.
        * Cuando conectes el backend:

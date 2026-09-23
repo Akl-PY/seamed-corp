@@ -1,28 +1,28 @@
-@import "tailwindcss";
+  @import "tailwindcss";
 
-root{
-  color:#110944
-}
-@theme {
-  /* Colores base estructurados para SeAMeD S.A. */
-  --color-main: #00A9CE ;
-  --color-theme:#3B5998;          /* Gris corporativo */
-  --color-bg: #FFFFFF;          /* Fondo blanco puro para optimizar el renderizado inicial */
+  root{
+    color:#110944
+  }
+  @theme {
+    /* Colores base estructurados para SeAMeD S.A. */
+    --color-main: #00A9CE ;
+    --color-theme:#3B5998;          /* Gris corporativo */
+    --color-bg: #FFFFFF;          /* Fondo blanco puro para optimizar el renderizado inicial */
 
-  /* Componentes y tokens de soporte para la UI de la landing */
-  --color-brand-gray: #7A7A7A;  /* Gris corporativo del logotipo ("EQUIPAMIENTO E INSUMOS MEDICOS") */
-  --color-accent: #00A9CE;      /* Variante cian con mayor contraste para estados hover/active y enlaces */
-  --color-muted: #4B5563;       /* Gris secundario para bajadas, subtítulos y meta-información */
-  --color-surface: #F9FAFB;     /* Fondo gris sutil para romper secciones y colocar cards de autoridad */
-}
+    /* Componentes y tokens de soporte para la UI de la landing */
+    --color-brand-gray: #7A7A7A;  /* Gris corporativo del logotipo ("EQUIPAMIENTO E INSUMOS MEDICOS") */
+    --color-accent: #00A9CE;      /* Variante cian con mayor contraste para estados hover/active y enlaces */
+    --color-muted: #4B5563;       /* Gris secundario para bajadas, subtítulos y meta-información */
+    --color-surface: #F9FAFB;     /* Fondo gris sutil para romper secciones y colocar cards de autoridad */
+  }
 
-:root {
-  scroll-behavior: smooth;
-}
+  :root {
+    scroll-behavior: smooth;
+  }
 
-body {
-  width: 100%;
-  background-color: var(--color-bg);
-  color: var(--color-main);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11"; /* Optimización opcional si usás fuentes tipo Inter */
-}
+  body {
+    width: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-main);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11"; /* Optimización opcional si usás fuentes tipo Inter */
+  }

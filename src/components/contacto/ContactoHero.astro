@@ -63,7 +63,7 @@ const mainChannels = contactData.canales.filter((c) => c.mostrarEnPrincipal);
                 value: p,
                 href: p.startsWith("351 898")
                   ? "tel:03518980811"
-                  : `https://wa.me/549${p.replace(/\s|-/g, "")}`,
+                  : `https://wa.me/549${p.replace(/\s|-/g, "")} `,
               })),
               ...opt.emails.map((e) => ({ value: e, href: `mailto:${e}` })),
             ];
