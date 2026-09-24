@@ -13,18 +13,18 @@
     },
     {
       "title": "Insumos y Repuestos",
-      "description": "Cánulas, máscaras, filtros y descartables",
+      "description": "Máscaras, cánulas, filtros y descartables",
       "badge": "Stock disponible",
       "phoneNumber": "5493516772000",
-      "defaultText": "Hola! Necesito consultar por stock de insumos y descartables.",
+      "defaultText": "Hola! Necesito consultar por stock de insumos y descartables.\n",
       "iconType": "box"
     },
     {
-      "title": "Atención a Pacientes / Soporte",
-      "description": "Asistencia técnica y seguimiento de servicios",
-      "badge": "Asistencia",
-      "phoneNumber": "5493515226545",
-      "defaultText": "Hola! Necesito asistencia o soporte técnico con un equipo.",
+      "title": "Atención administrativa",
+      "description": "Consulta por facturación y pagos de servicios",
+      "badge": "Administración",
+      "phoneNumber": "5493515226190",
+      "defaultText": "Hola! Necesito realizar consultas administrativas.\n",
       "iconType": "support"
     }
   ]
