@@ -5,21 +5,21 @@
       "id": "vent-v1",
       "name": "Glucómetro",
       "category": "Diabetes",
-      "description": "El glucómetro Maverick GL-1 destaca principalmente por incorporar tecnología de función de voz y conectividad Bluetooth",
+      "description": "El glucómetro Maverick GL-1 destaca principalmente por incorporar tecnología de función de voz y conectividad Bluetooth.\n",
       "imageKey": "glucometro"
     },
     {
       "id": "conc-5l",
       "name": "Oxímetro de pulso de mesa",
       "category": "Atención Domiciliaria",
-      "description": "Monitor continuo hospitalario y clínico diseñado para medir la saturación de oxígeno arterial (SpO2) y la frecuencia cardíaca.",
+      "description": "Monitor continuo hospitalario y clínico diseñado para medir la saturación de oxígeno arterial (SpO2) y la frecuencia cardíaca.\n",
       "imageKey": "oximetro"
     },
     {
       "id": "CPAP",
       "name": "CPAP con humidificador incorporado",
       "category": "Apnea del Sueño",
-      "description": "Dispositivo de presión positiva continua en la vía aérea (CPAP de presión fija) diseñado para el tratamiento de la Apnea Obstructiva del Sueño (AOS).",
+      "description": "Dispositivo de presión positiva continua en la vía aérea (CPAP de presión fija) diseñado para el tratamiento de la Apnea Obstructiva del Sueño (AOS).\n",
       "imageKey": "CPAP"
     }
   ]
