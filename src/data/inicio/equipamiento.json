@@ -3,23 +3,23 @@
   "equipos": [
     {
       "id": "vent-v1",
-      "name": "Ventilador Mecánico V1",
-      "category": "Cuidados Críticos",
-      "description": "Ventilación invasiva y no invasiva con monitoreo avanzado de parámetros vitales.",
+      "name": "Glucómetro",
+      "category": "Diabetes",
+      "description": "El glucómetro Maverick GL-1 destaca principalmente por incorporar tecnología de función de voz y conectividad Bluetooth",
       "imageKey": "glucometro"
     },
     {
       "id": "conc-5l",
-      "name": "Concentrador de Oxígeno 5L",
+      "name": "Oxímetro de pulso de mesa",
       "category": "Atención Domiciliaria",
-      "description": "Flujo continuo y silencioso, diseñado para uso nocturno prolongado y alto rendimiento.",
+      "description": "Monitor continuo hospitalario y clínico diseñado para medir la saturación de oxígeno arterial (SpO2) y la frecuencia cardíaca.",
       "imageKey": "oximetro"
     },
     {
-      "id": "cpap-auto",
-      "name": "CPAP Auto-ajustable Premium",
+      "id": "CPAP",
+      "name": "CPAP con humidificador incorporado",
       "category": "Apnea del Sueño",
-      "description": "Algoritmo de presión adaptativo, humidificador integrado y registro de datos de cumplimiento.",
+      "description": "Dispositivo de presión positiva continua en la vía aérea (CPAP de presión fija) diseñado para el tratamiento de la Apnea Obstructiva del Sueño (AOS).",
       "imageKey": "CPAP"
     }
   ]
