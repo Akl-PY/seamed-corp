@@ -8,7 +8,7 @@
       "description": "Consultas por compra o alquiler de equipos médicos",
       "badge": "Respuesta rápida",
       "phoneNumber": "5493515226545",
-      "defaultText": "Hola! Quisiera realizar una consulta sobre equipamiento médico.",
+      "defaultText": "Hola! Quisiera realizar una consulta sobre equipamiento médico.\n",
       "iconType": "cart"
     },
     {
